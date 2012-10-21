@@ -1,0 +1,16 @@
+default: &default
+  app_key: <%= ENV['tbop_app_key'] %>
+  app_secret: <%= ENV['tbop_app_secret'] %>
+  oauth2_site: <%= ENV['tbop_oauth2_site'] || 'https://oauth.tbsandbox.com' %>
+  api_site: <%= ENV['tbop_api_site'] || 'http://gw.api.tbsandbox.com/router/rest' %>
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  oauth2_site: <%= ENV['tbop_oauth2_site'] || 'https://oauth.taobao.com' %>
+  api_site: <%= ENV['tbop_api_site'] || 'http://gw.api.taobao.com/router/rest' %>
