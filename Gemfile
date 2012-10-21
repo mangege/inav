@@ -39,3 +39,10 @@ gem 'jquery-rails'
 
 # To use debugger
 # gem 'debugger'
+
+gem "rest-client", "~> 1.6.7"
+gem "oauth2", "~> 0.8.0"
+
+group :development do
+  gem "magic_encoding", "~> 0.0.2"
+end
