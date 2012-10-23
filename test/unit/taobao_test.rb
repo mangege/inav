@@ -2,7 +2,7 @@
 require 'test_helper'
 
 class TaobaoTest < ActiveSupport::TestCase
-  test "测试装载taobao目录下文件" do
+  test "应该正常require taobao目录下文件" do
     assert_nothing_raised do
       Taobao
     end

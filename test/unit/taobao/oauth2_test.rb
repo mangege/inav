@@ -6,7 +6,7 @@ class Taobao::OAuth2Test < ActiveSupport::TestCase
     @client = Taobao::OAuth2.oauth2_client
   end
 
-  test "测试配置文件" do
+  test "参数应该和TAOBAO_CONFIG相同" do
     assert_equal @client.site, TAOBAO_CONFIG[:oauth2_site]
     assert_equal @client.id, TAOBAO_CONFIG[:app_key]
     assert_equal @client.secret, TAOBAO_CONFIG[:app_secret]

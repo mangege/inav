@@ -2,7 +2,7 @@
 class Taobao::HttpSign
   class << self
     def sign(hash)
-      hash = hash.to_options
+      hash = hash.with_indifferent_access
       #TODO 删除图片类型
       hash.delete(:sign)
       default_params!(hash)
