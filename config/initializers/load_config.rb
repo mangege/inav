@@ -1,7 +1,14 @@
 # -*- encoding : utf-8 -*-
-TAOBAO_CONFIG = YAML::load(ERB.new(IO.read(File.join(Rails.root, 'config', 'taobao.yml'))).result)[Rails.env].to_options
-TAOBAO_CONFIG.assert_valid_keys(:app_key, :app_secret, :oauth2_site, :api_site)
-TAOBAO_CONFIG.each do |k, v|
-  raise(ArgumentError, "淘宝配置#{k}不能为空") if v.nil?
-  TAOBAO_CONFIG[k] = v.strip if v.is_a? String
+class LoadConfig
+  def self.process!(hash, keys)
+    keys.concat(hash.keys).uniq.each do |key|
+      val = hash[key]
+      raise(ArgumentError, "配置#{key}不能为空") if val.nil?
+      hash[key] = val.strip if val.respond_to?(:strip)
+    end
+    hash
+  end
 end
+
+TAOBAO_CONFIG = YAML::load(ERB.new(IO.read(File.join(Rails.root, 'config', 'taobao.yml'))).result)[Rails.env].with_indifferent_access
+LoadConfig.process!(TAOBAO_CONFIG, %w[app_key app_secret oauth2_site api_site])

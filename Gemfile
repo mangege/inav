@@ -46,3 +46,7 @@ gem "oauth2", "~> 0.8.0"
 group :development do
   gem "magic_encoding", "~> 0.0.2"
 end
+
+group :test do
+  gem 'simplecov', :require => false
+end
