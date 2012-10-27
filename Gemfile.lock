@@ -31,6 +31,11 @@ GEM
     arel (3.0.2)
     builder (3.0.4)
     erubis (2.7.0)
+    factory_girl (4.1.0)
+      activesupport (>= 3.0.0)
+    factory_girl_rails (4.1.0)
+      factory_girl (~> 4.1.0)
+      railties (>= 3.0.0)
     faraday (0.8.4)
       multipart-post (~> 1.1)
     hike (1.2.1)
@@ -105,6 +110,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  factory_girl_rails (~> 4.0)
   jquery-rails
   magic_encoding (~> 0.0.2)
   mysql2

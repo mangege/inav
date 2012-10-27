@@ -7,7 +7,7 @@ class Taobao::HttpSignTest < ActiveSupport::TestCase
     @hash = default_hash
   end
 
-  test "#sign 应该有默认参数" do
+  test "::sign 应该有默认参数" do
     hash = Taobao::HttpSign.sign({})
     assert_equal hash[:sign_method], 'md5'
     assert_equal hash[:v], '2.0'
@@ -17,7 +17,7 @@ class Taobao::HttpSignTest < ActiveSupport::TestCase
     assert( Time.now - Time.parse(hash[:timestamp]) < 60 )
   end
 
-  test "#sign 应该可以覆盖默认参数" do
+  test "::sign 应该可以覆盖默认参数" do
     hash_dup = @hash.dup
     hash = Taobao::HttpSign.sign(hash_dup)
     assert_equal hash[:method], @hash[:method]
@@ -30,12 +30,12 @@ class Taobao::HttpSignTest < ActiveSupport::TestCase
     assert_equal hash[:nick], @hash[:nick]
   end
 
-  test "#sign 签名结果应该正确,和淘宝文档示例值相同" do
+  test "::sign 签名结果应该正确,和淘宝文档示例值相同" do
     hash = Taobao::HttpSign.sign(@hash)
     assert_equal hash[:sign], '5029C3055D51555112B60B33000122D5'
   end
 
-  test "#sign 结果应该不包含app_secret" do
+  test "::sign 结果应该不包含app_secret" do
     hash = Taobao::HttpSign.sign(@hash)
     assert !hash.key?(:app_secret)
     assert !hash.key?('app_secret')
@@ -46,7 +46,7 @@ class Taobao::HttpSignTest < ActiveSupport::TestCase
     assert !hash.key?('app_secret')
   end
 
-  test "#sign 签名前应该删除sign" do
+  test "::sign 签名前应该删除sign" do
     @hash[:sign] = 'test'
     hash = Taobao::HttpSign.sign(@hash)
     assert_equal hash[:sign], '5029C3055D51555112B60B33000122D5'

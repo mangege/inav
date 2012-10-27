@@ -11,6 +11,22 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 0) do
+ActiveRecord::Schema.define(:version => 20121027094600) do
+
+  create_table "users", :force => true do |t|
+    t.integer  "taobao_user_id"
+    t.string   "taobao_user_nick"
+    t.string   "access_token"
+    t.string   "refresh_token"
+    t.integer  "expires_in"
+    t.integer  "re_expires_in"
+    t.integer  "r1_expires_in"
+    t.integer  "r2_expires_in"
+    t.integer  "w1_expires_in"
+    t.integer  "w2_expires_in"
+    t.datetime "oauth2_updated_at"
+    t.datetime "created_at",        :null => false
+    t.datetime "updated_at",        :null => false
+  end
 
 end
