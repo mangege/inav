@@ -1,5 +1,8 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
+  has_one :shop
+  has_many :seller_cats
+
   OAUTH2_ATTS = [:taobao_user_nick, :access_token, :refresh_token,
     :expires_in, :re_expires_in, :r1_expires_in, :r2_expires_in, :w1_expires_in, :w2_expires_in, :oauth2_updated_at]
   attr_accessible(*OAUTH2_ATTS)
