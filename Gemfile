@@ -49,6 +49,7 @@ end
 
 group :test do
   gem 'simplecov', :require => false
+  gem "webmock", "~> 1.8.11"
 end
 
 group :development, :test do

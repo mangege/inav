@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= render_page_title %></title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
+
+    <div class="page flyouts">
+      <div class="navigation-bar">
+        <div class="navigation-bar-inner">
+          <div class="brand">
+            <a href="/"><span class="metro-ui-logo place-left"></span></a>
+            <a href="/"><span class="name">商品分类导航管理</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="page-region">
+        <div class="page-region-content">
+          <%= yield %>
+        </div>
+      </div>
+
+      <div class="header-bar">
+        <div class="header-bar-inner bg-color-darken" style="padding: 10px 10px 5px;">
+          <p class="tertiary-text fg-color-white">2012, iNav © by <a class="fg-color-blueLight" href="http://mangege.com" target="_blank">CaoXiaohua</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</body>
+</html>

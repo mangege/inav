@@ -1,0 +1,551 @@
+/*
+ * Metro UI CSS v 0.1.4
+ * Copyright 2012 Sergey Pimenov
+ * Licensed under the MIT Lilcense
+ *
+ * responsive.less
+ */
+/*
+ * Metro UI CSS v 0.1.4
+ * Copyright 2012 Sergey Pimenov
+ * Licensed under the MIT Lilcense
+ *
+ * Variables.less
+ */
+.fg-color-blue {
+  color: #2d89ef !important;
+}
+.fg-color-blueLight {
+  color: #44a3aa !important;
+}
+.fg-color-blueDark {
+  color: #0a5ac2 !important;
+}
+.fg-color-green {
+  color: #00a300 !important;
+}
+.fg-color-greenLight {
+  color: #99b433 !important;
+}
+.fg-color-greenDark {
+  color: #005200 !important;
+}
+.fg-color-red {
+  color: #b91d47 !important;
+}
+.fg-color-yellow {
+  color: #ffc40d !important;
+}
+.fg-color-orange {
+  color: #e3a21a !important;
+}
+.fg-color-orangeDark {
+  color: #da532c !important;
+}
+.fg-color-pink {
+  color: #c3325f !important;
+}
+.fg-color-pinkDark {
+  color: #9f00a7 !important;
+}
+.fg-color-purple {
+  color: #603cba !important;
+}
+.fg-color-darken {
+  color: #1d1d1d !important;
+}
+.fg-color-white {
+  color: #ffffff !important;
+}
+.fg-color-grayDark {
+  color: #525252 !important;
+}
+.bg-color-blue {
+  background-color: #2d89ef !important;
+}
+.bg-color-blueLight {
+  background-color: #44a3aa !important;
+}
+.bg-color-blueDark {
+  background-color: #0a5ac2 !important;
+}
+.bg-color-green {
+  background-color: #00a300 !important;
+}
+.bg-color-greenLight {
+  background-color: #99b433 !important;
+}
+.bg-color-greenDark {
+  background-color: #005200 !important;
+}
+.bg-color-red {
+  background-color: #b91d47 !important;
+}
+.bg-color-yellow {
+  background-color: #ffc40d !important;
+}
+.bg-color-orange {
+  background-color: #e3a21a !important;
+}
+.bg-color-orangeDark {
+  background-color: #da532c !important;
+}
+.bg-color-pink {
+  background-color: #c3325f !important;
+}
+.bg-color-pinkDark {
+  background-color: #9f00a7 !important;
+}
+.bg-color-purple {
+  background-color: #603cba !important;
+}
+.bg-color-darken {
+  background-color: #1d1d1d !important;
+}
+.bg-color-white {
+  background-color: #ffffff !important;
+}
+.bg-color-grayDark {
+  background-color: #525252 !important;
+}
+[class*=border-color] {
+  border: 2px solid;
+}
+.border-color-blue {
+  border-color: #2d89ef !important;
+}
+.border-color-blueLight {
+  border-color: #44a3aa !important;
+}
+.border-color-blueDark {
+  border-color: #0a5ac2 !important;
+}
+.border-color-green {
+  border-color: #00a300 !important;
+}
+.border-color-greenLight {
+  border-color: #99b433 !important;
+}
+.border-color-greenDark {
+  border-color: #005200 !important;
+}
+.border-color-red {
+  border-color: #b91d47 !important;
+}
+.border-color-yellow {
+  border-color: #ffc40d !important;
+}
+.border-color-orange {
+  border-color: #e3a21a !important;
+}
+.border-color-orangeDark {
+  border-color: #da532c !important;
+}
+.border-color-pink {
+  border-color: #c3325f !important;
+}
+.border-color-pinkDark {
+  border-color: #9f00a7 !important;
+}
+.border-color-purple {
+  border-color: #603cba !important;
+}
+.border-color-darken {
+  border-color: #1d1d1d !important;
+}
+.border-color-white {
+  border-color: #ffffff !important;
+}
+.border-color-grayDark {
+  border-color: #525252 !important;
+}
+/*
+ * Metro UI CSS v 0.1.4
+ * Copyright 2012 Sergey Pimenov
+ * Licensed under the MIT Lilcense
+ *
+ * responsive.less
+ */
+/* Large desktop */
+@media (min-width: 1200px) {
+  
+}
+@media (min-width: 980px) {
+  .navigation-bar .navigation-bar-inner .menu-pull {
+    display: none;
+  }
+  .navigation-bar .navigation-bar-inner  > ul {
+    display: block !important;
+  }
+}
+/*
+ * Metro UI CSS v 0.1.4
+ * Copyright 2012 Sergey Pimenov
+ * Licensed under the MIT Lilcense
+ *
+ * responsive.less
+ */
+/* Portrait tablet to landscape and desktop */
+@media (min-width: 768px) and (max-width: 979px) {
+  .span1 {
+    width: 42px;
+  }
+  .span2 {
+    width: 104px;
+  }
+  .span3 {
+    width: 166px;
+  }
+  .span4 {
+    width: 228px;
+  }
+  .span5 {
+    width: 290px;
+  }
+  .span6 {
+    width: 352px;
+  }
+  .span7 {
+    width: 414px;
+  }
+  .span8 {
+    width: 476px;
+  }
+  .span9 {
+    width: 538px;
+  }
+  .span10 {
+    width: 600px;
+  }
+  .span11 {
+    width: 662px;
+  }
+  .span12 {
+    width: 724px;
+  }
+  .offset1 {
+    margin-left: 62px;
+  }
+  .offset2 {
+    margin-left: 124px;
+  }
+  .offset3 {
+    margin-left: 186px;
+  }
+  .offset4 {
+    margin-left: 248px;
+  }
+  .offset5 {
+    margin-left: 310px;
+  }
+  .offset6 {
+    margin-left: 372px;
+  }
+  .offset7 {
+    margin-left: 434px;
+  }
+  .offset8 {
+    margin-left: 496px;
+  }
+  .offset9 {
+    margin-left: 558px;
+  }
+  .offset10 {
+    margin-left: 620px;
+  }
+  .offset11 {
+    margin-left: 682px;
+  }
+  .offset12 {
+    margin-left: 744px;
+  }
+  .navigation-bar .navigation-bar-inner .menu-pull {
+    display: block;
+  }
+  .navigation-bar .navigation-bar-inner .brand {
+    float: none;
+    width: 100%;
+  }
+  .navigation-bar .navigation-bar-inner  > ul {
+    display: none;
+    float: none;
+  }
+  .navigation-bar .navigation-bar-inner  > ul  > li {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .navigation-bar .navigation-bar-inner  > ul  > li.brand {
+    width: auto;
+  }
+  .navigation-bar .navigation-bar-inner  > ul  > li .dropdown-menu {
+    position: relative;
+    width: 100%;
+    border: 0;
+  }
+}
+/*
+ * Metro UI CSS v 0.1.4
+ * Copyright 2012 Sergey Pimenov
+ * Licensed under the MIT Lilcense
+ *
+ * responsive.less
+ */
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+  body {
+    padding-right: 10px;
+    padding-left: 10px !important;
+  }
+  [class*="span"],
+  .hero-unit {
+    float: none;
+    display: block;
+    width: 100%;
+    margin-left: 0;
+    margin-right: 0;
+  }
+  [class*="offset"],
+  .hero-unit {
+    margin-left: 0;
+  }
+  table thead tr th {
+    font-size: 9pt;
+  }
+  table tbody tr td {
+    font-size: 10pt;
+  }
+  h1 {
+    font-size: 30pt;
+  }
+  h2 {
+    font-size: 16pt;
+  }
+  .navigation-bar .navigation-bar-inner .menu-pull {
+    display: block;
+  }
+  .navigation-bar .navigation-bar-inner .brand {
+    float: none;
+    width: 100%;
+  }
+  .navigation-bar .navigation-bar-inner  > ul {
+    display: none;
+    float: none;
+  }
+  .navigation-bar .navigation-bar-inner  > ul  > li {
+    display: block;
+    float: none;
+    width: 100%;
+    margin-left: 0;
+    padding-left: 0;
+  }
+  .navigation-bar .navigation-bar-inner  > ul  > li.brand {
+    width: auto;
+  }
+  .navigation-bar .navigation-bar-inner  > ul  > li .dropdown-menu {
+    position: relative;
+    width: 100%;
+    border: 0;
+  }
+}
+/*
+ * Metro UI CSS v 0.1.4
+ * Copyright 2012 Sergey Pimenov
+ * Licensed under the MIT Lilcense
+ *
+ * responsive.less
+ */
+/* Landscape phones and down */
+@media (max-width: 480px) {
+  .page.secondary .page-back {
+    width: 24px;
+    height: 24px;
+    left: 0px !important;
+  }
+  .page.secondary .page-header .page-header-content {
+    height: 60px;
+    min-height: 50px;
+  }
+  .page.secondary .page-header .page-header-content h1 {
+    left: 40px;
+  }
+  .page.secondary .page-region .page-region-content {
+    padding-left: 0 ;
+  }
+  .page.fixed-header .page-header {
+    position: relative !important;
+  }
+  .page.fixed-header .page-header .page-header-content .user-login {
+    float: right;
+    margin: 35px 44px 0 0;
+    cursor: pointer;
+  }
+  .page.fixed-header .page-header .page-header-content .user-login .avatar {
+    float: right;
+    border: 1px #ccc solid;
+    width: 40px;
+    height: 40px;
+  }
+  .page.fixed-header .page-header .page-header-content .user-login .avatar img {
+    width: 100%;
+    height: 100%;
+  }
+  .page.fixed-header .page-header .page-header-content .user-login .name {
+    float: left;
+    margin: 0px 10px;
+    text-align: right;
+  }
+  .page.fixed-header .page-header .page-header-content .user-login .name .first-name {
+    font-family: "Segoe UI Light", "Open Sans", sans-serif, sans;
+    font-size: 14pt;
+    display: block;
+    margin: 0;
+  }
+  .page.fixed-header .page-header .page-header-content .user-login .name .last-name {
+    font-family: "Open Sans", sans-serif, sans;
+    font-size: 8pt;
+    display: block;
+    margin: 0;
+  }
+  .page.fixed-header .page-header .page-header-content h1 {
+    left: 0;
+  }
+  .page.fixed-header .page-region {
+    padding-top: 20px;
+  }
+  .horizontal-menu {
+    height: auto;
+  }
+  .horizontal-menu  > ul {
+    width: 100%;
+    display: block;
+    height: auto;
+  }
+  .horizontal-menu  > ul  > li {
+    width: 100%;
+    float: none;
+    display: block;
+    position: relative;
+    border-bottom: 1px #1e1e1e solid;
+  }
+  .horizontal-menu  > ul  > li:last-child {
+    border-bottom: 1px transparent solid;
+  }
+  .horizontal-menu  > ul  > li a {
+    width: 100%;
+    float: none;
+  }
+  .horizontal-menu  > ul li ul {
+    position: relative;
+    width: 100%;
+    border: 0;
+    left: 10px;
+  }
+  .tile {
+    width: 120px;
+    height: 120px;
+  }
+  .tile.double {
+    width: 250px;
+  }
+  .tile.double .tile-content {
+    width: 250px;
+  }
+  .tile.triple {
+    width: 380px;
+  }
+  .tile.triple .tile-content {
+    width: 380px;
+  }
+  .tile.quadro {
+    width: 510px;
+  }
+  .tile.quadro .tile-content {
+    width: 510px;
+  }
+  .tile.double-vertical {
+    height: 250px;
+  }
+  .tile.double-vertical .tile-content {
+    height: 210px;
+  }
+  .tile.triple-vertical {
+    height: 380px;
+  }
+  .tile.triple-vertical .tile-content {
+    height: 340px;
+  }
+  .tile.quadro-vertical {
+    height: 510px;
+  }
+  .tile.quadro-vertical .tile-content {
+    height: 470px;
+  }
+  .tile .tile-content {
+    width: 120px;
+    height: 90px;
+    padding: 5px 10px;
+  }
+  .tile .tile-content.icon {
+    padding-top: 20px;
+    display: table-cell !important;
+    vertical-align: middle !important;
+    text-align: center;
+  }
+  .tile .tile-content.icon img {
+    width: 48px;
+    height: 48px;
+  }
+  .tile .brand  > .badge,
+  .tile .tile-status  > .badge {
+    width: 26px;
+    height: 28px;
+    right: 0;
+    font-size: 9pt;
+  }
+  .tile .brand  > .name,
+  .tile .tile-status  > .name {
+    margin-left: 10px;
+  }
+  .tile .brand  > .icon,
+  .tile .tile-status  > .icon {
+    width: 24px;
+    height: 24px;
+    margin: 5px 10px;
+  }
+  .tile .brand  > .text,
+  .tile .tile-status  > .text {
+    left: 40px;
+    right: 40px;
+    font-size: 8pt;
+  }
+  .tile-group {
+    max-width: 400px;
+    float: none;
+  }
+  table thead tr th {
+    font-size: 8pt;
+  }
+  table tbody tr td {
+    font-size: 9pt;
+    padding: 2px 5px;
+  }
+  h1 {
+    font-size: 26pt;
+    line-height: 18px;
+  }
+  h2 {
+    font-size: 16pt;
+    line-height: 16px;
+  }
+  h3 {
+    font-size: 13pt;
+    line-height: 16px;
+  }
+  h3 {
+    font-size: 13pt;
+    line-height: 14px;
+  }
+}

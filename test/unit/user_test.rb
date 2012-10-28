@@ -76,22 +76,6 @@ class UserTest < ActiveSupport::TestCase
   end
 
   private
-  def default_oauth2_hash
-    {"w2_expires_in"=>0,
-      "taobao_user_id"=>263685215,
-      "taobao_user_nick"=>
-    "%E5%95%86%E5%AE%B6%E6%B5%8B%E8%AF%95%E5%B8%90%E5%8F%B752",
-      "w1_expires_in"=>1800,
-      "re_expires_in"=>0,
-      "r2_expires_in"=>0,
-      "expires_in"=>86400,
-      "token_type"=>"Bearer",
-      "refresh_token"=>"6200e1909ca29b04685c49d67f5ZZ3675347c0c6d5abccd263685215",
-      "access_token"=>"6200819d9366af1383023a19907ZZf9048e4c14fd56333b263685215",
-      "r1_expires_in"=>1800,
-      "oauth2_updated_at" => Time.now}
-  end
-
   def default_keys
     keys = [:taobao_user_id]
     keys.concat([:taobao_user_nick, :access_token, :refresh_token,

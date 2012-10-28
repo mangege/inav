@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
-class Taobao::HttpSign
+module Taobao
+class HttpSign
   class << self
     def sign(hash)
       hash = hash.with_indifferent_access
@@ -30,4 +31,5 @@ class Taobao::HttpSign
       hash
     end
   end
+end
 end
