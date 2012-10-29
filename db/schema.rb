@@ -11,7 +11,34 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121027094600) do
+ActiveRecord::Schema.define(:version => 20121028151601) do
+
+  create_table "seller_cats", :force => true do |t|
+    t.string   "cat_type"
+    t.integer  "cid"
+    t.integer  "parent_cid"
+    t.string   "name"
+    t.string   "pic_url"
+    t.integer  "sort_order"
+    t.integer  "user_id"
+    t.integer  "priority"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
+
+  create_table "shops", :force => true do |t|
+    t.integer  "sid"
+    t.integer  "cid"
+    t.string   "title"
+    t.string   "desc"
+    t.string   "bulletin"
+    t.string   "pic_path"
+    t.datetime "created"
+    t.datetime "modified"
+    t.integer  "user_id"
+    t.datetime "created_at", :null => false
+    t.datetime "updated_at", :null => false
+  end
 
   create_table "users", :force => true do |t|
     t.integer  "taobao_user_id"

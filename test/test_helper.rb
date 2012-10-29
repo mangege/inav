@@ -29,7 +29,7 @@ class ActiveSupport::TestCase
   end
 
   #oauth2
-  def run_webmock
+  def oauth2_webmock
     stub_request(:post, "#{TAOBAO_CONFIG[:oauth2_site]}/token").to_return(body: default_oauth2_hash.to_json, status: 200,
                                                                          headers: {'Content-Type' => 'application/json'})
   end

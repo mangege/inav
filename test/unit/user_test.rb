@@ -75,6 +75,13 @@ class UserTest < ActiveSupport::TestCase
     assert_equal new_hash.slice(*keys), user.attributes.slice(*keys)
   end
 
+  test "#oauth2_expired 应该根据是否过期返回一个boolean值" do
+    user = FactoryGirl.build(:user, oauth2_updated_at: Time.now-100, expires_in: 10)
+    assert user.oauth2_expired?
+    user = FactoryGirl.build(:user, oauth2_updated_at: Time.now-100, expires_in: 1000)
+    assert !user.oauth2_expired?
+  end
+
   private
   def default_keys
     keys = [:taobao_user_id]

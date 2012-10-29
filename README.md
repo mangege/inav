@@ -13,6 +13,10 @@ Dev Note
 * 淘宝沙箱文档 http://www.tbsandbox.com/doc/
 * 沙箱的app_key与正式环境的app_key不一样
 * 沙箱的oauth2 callback url可以单独设置. `开发者中心 -> 沙箱环境管理`
+* `rake test:remotes` 连接淘宝API服务器进行远程测试
+  + 只运行`test/remote/`目录下的测试
+  + `rake test` 不会运行此类测试, `rake test:all`才会运行
+  + 需要先在开发环境登录 sandbox_c_1 用户并授权, 如果需要换成其它用户,请修改`lib/tasks/remote_testing.rb`文件
 
 TODO
 ---
