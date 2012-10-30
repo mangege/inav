@@ -6,7 +6,7 @@ class UserSessionsControllerTest < ActionController::TestCase
   #   assert true
   # end
   setup do
-    oauth2_webmock
+    stub_oauth2_token
   end
 
   test "#new 未登录应该重定向到授权页" do

@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateSellerCats < ActiveRecord::Migration
   def change
     create_table :seller_cats do |t|

@@ -3,7 +3,7 @@ require 'test_helper'
 
 class Taobao::OAuth2Test < ActiveSupport::TestCase
   setup do
-    oauth2_webmock
+    stub_oauth2_token
     @client = Taobao::OAuth2.oauth2_client
   end
 

@@ -31,9 +31,27 @@ class ActiveSupport::TestCase
   end
 
   #oauth2
-  def oauth2_webmock
+  def stub_oauth2_token
     stub_request(:post, "#{TAOBAO_CONFIG[:oauth2_site]}/token").to_return(body: default_oauth2_hash.to_json, status: 200,
                                                                          headers: {'Content-Type' => 'application/json'})
+  end
+
+  def stub_api_get(body)
+    stub_api_get_request.to_return(body: body, status: 200)
+  end
+
+  def stub_api_post(body)
+    stub_api_post_request.to_return(body: body, status: 200)
+  end
+
+  def stub_api_get_request
+    url_reg = Regexp.new( Regexp.escape(TAOBAO_CONFIG[:api_site]) + ".*", 'i')
+    stub_request(:get, url_reg)
+  end
+
+  def stub_api_post_request
+    url = TAOBAO_CONFIG[:api_site]
+    stub_request(:post, url)
   end
 
   def default_oauth2_hash

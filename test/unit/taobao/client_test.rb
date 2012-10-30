@@ -21,9 +21,9 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     }
 }
     EOS
-    url_reg = Regexp.new( Regexp.escape(TAOBAO_CONFIG[:api_site]) + ".*", 'i')
-    stub_request(:any, url_reg).to_return(body: body, status: 200)
+    stub_api_get(body)
     Taobao::Client.execute(params)
+    url_reg = Regexp.new( Regexp.escape(TAOBAO_CONFIG[:api_site]) + ".*", 'i')
     assert_requested :get, url_reg
 
   end
@@ -41,9 +41,9 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     }
 }
     EOS
-    url = TAOBAO_CONFIG[:api_site]
-    stub_request(:any, url).to_return(body: body, status: 200)
+    stub_api_post(body)
     Taobao::Client.execute(params)
+    url = TAOBAO_CONFIG[:api_site]
     assert_requested :post, url
   end
 
@@ -60,8 +60,7 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     }
 }
     EOS
-    url = TAOBAO_CONFIG[:api_site]
-    stub_request(:any, url).to_return(body: body, status: 200)
+    stub_api_post(body)
     result = Taobao::Client.execute(params)
     assert result.is_a?(Hash)
   end
@@ -72,8 +71,7 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     body = <<-EOS
 {"error_response":{"code":560,"msg":"Remote service error","sub_code":"isv.user-not-exist:invalid-nick","sub_msg":"根据用户昵称:asandbox_c_1查询不到对应的用户信息"}}
     EOS
-    url = TAOBAO_CONFIG[:api_site]
-    stub_request(:any, url).to_return(body: body, status: 200)
+    stub_api_post(body)
     assert_raise Taobao::ResponseError do
       Taobao::Client.execute(params)
     end
@@ -85,8 +83,7 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     body = <<-EOS
 {}
     EOS
-    url = TAOBAO_CONFIG[:api_site]
-    stub_request(:any, url).to_return(body: body, status: 200)
+    stub_api_post(body)
     assert_raise Taobao::UnknownError do
       Taobao::Client.execute(params)
     end
@@ -98,8 +95,7 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     body = <<-EOS
 {}
     EOS
-    url = TAOBAO_CONFIG[:api_site]
-    stub_request(:any, url).to_return(body: body, status: 500)
+    stub_api_post_request.to_return(body: body, status: 500)
     assert_raise RestClient::InternalServerError do
       Taobao::Client.execute(params)
     end
