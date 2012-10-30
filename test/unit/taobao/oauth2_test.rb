@@ -15,7 +15,7 @@ class Taobao::OAuth2Test < ActiveSupport::TestCase
 
   test "#result 结果应该齐全不为空" do
     result = Taobao::OAuth2.result(code: 1).with_indifferent_access
-    User::OAUTH2_ATTS.dup.push(:taobao_user_id).each do |key|
+    User::TAOBAO_KEYS.each do |key|
       assert_not_nil result[key], key
     end
   end
