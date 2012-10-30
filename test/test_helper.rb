@@ -1,11 +1,13 @@
 # -*- encoding : utf-8 -*-
 ENV["RAILS_ENV"] = "test"
+
+require 'simplecov'
+SimpleCov.start 'rails'
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
-require 'simplecov'
 require 'webmock/test_unit'
 
-SimpleCov.start 'rails'
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.(yml|csv) for all tests in alphabetical order.
