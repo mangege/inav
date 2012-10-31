@@ -29,4 +29,12 @@ class User < ActiveRecord::Base
   def oauth2_expired?
     oauth2_updated_at + expires_in < Time.now
   end
+
+  def find_or_create_shop
+    if shop.nil?
+      self.shop = Shop.taobao_shop_get(taobao_user_nick)
+      self.shop.save!
+    end
+    shop
+  end
 end

@@ -42,7 +42,8 @@ gem 'jquery-rails'
 
 gem "rest-client", "~> 1.6.7"
 gem "oauth2", "~> 0.8.0"
-gem "thin"
+gem "thin", "~> 1.5.0"
+gem "rails-i18n", "~> 0.7.0"
 
 group :development do
   gem "magic_encoding", "~> 0.0.2"
@@ -51,6 +52,7 @@ end
 group :test do
   gem 'simplecov', :require => false
   gem "webmock", "~> 1.8.11"
+  gem "mocha", "~> 0.12.7", :require => false
 end
 
 group :development, :test do

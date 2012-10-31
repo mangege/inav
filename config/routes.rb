@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 Inav::Application.routes.draw do
+  root :to => "main#index"
+
   resources :user_sessions, :only => [:new] do
     collection do
       match 'callback'

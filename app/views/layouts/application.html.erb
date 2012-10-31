@@ -1,14 +1,42 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Inav</title>
-  <%= stylesheet_link_tag    "application", :media => "all" %>
-  <%= javascript_include_tag "application" %>
-  <%= csrf_meta_tags %>
-</head>
-<body>
+  <head>
+    <title><%= render_page_title %></title>
+    <%= stylesheet_link_tag    "application", :media => "all" %>
+    <%= javascript_include_tag "application" %>
+    <%= csrf_meta_tags %>
+  </head>
+  <body>
 
-<%= yield %>
+    <div class="page with-sidebar">
+      <div class="navigation-bar">
+        <div class="navigation-bar-inner">
+          <div class="brand">
+            <a href="/"><span class="metro-ui-logo place-left"></span></a>
+            <a href="/"><span class="name">商品分类导航管理</span></a>
+          </div>
+        </div>
+      </div>
+
+       <div class="page-sidebar" >
+         <ul>
+           <li><%= link_to "管理首页", '#' %></li>
+           <li><%= link_to "分类管理", '#' %></li>
+           <li><%= link_to "商品管理", '#' %></li>
+           <li><%= link_to "导航设置", '#' %></li>
+           <li><%= link_to "更新管理", '#' %></li>
+         </ul>
+       </div>
+
+      <div class="page-region">
+        <div class="page-region-content">
+          <%= yield %>
+        </div>
+      </div>
+
+      <%= render 'commons/footer' %>
+    </div>
+  </div>
 
 </body>
 </html>
