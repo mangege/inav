@@ -1,6 +1,26 @@
 # -*- encoding : utf-8 -*-
 class SellerCat < ActiveRecord::Base
   belongs_to :user
-  attr_accessible :cat_type, :cid, :name, :parent_cid, :pic_url, :sort_order, :user_id, :priority
+  TAOBAO_KEYS = %w[type cid parent_cid name pic_url sort_order]
+  TAOBAO_ACCESSIBLE_KEYS = TAOBAO_KEYS.dup.tap{|t| t.delete 'type'; t.push 'cat_type'}
+  attr_accessible(*TAOBAO_ACCESSIBLE_KEYS, as: :taobao)
   validates :user_id, :cid, :name, :parent_cid, presence: true
+  validates :cid, uniqueness: true
+
+  def self.taobao_sellercats_list_get(nick)
+    params = {}
+    params[:method] = 'taobao.sellercats.list.get'
+    params[:fields] = TAOBAO_KEYS.join(',')
+    params[:nick] = nick
+
+    result_hash = Taobao::Client.execute(params)
+    seller_cats = []
+    result_hash['seller_cats']['seller_cat'].each do |cat_hash|
+      cat_hash['cat_type'] = cat_hash.delete('type')
+      seller_cat = self.new
+      seller_cat.assign_attributes( cat_hash.slice(*TAOBAO_ACCESSIBLE_KEYS), as: :taobao )
+      seller_cats << seller_cat
+    end
+    seller_cats
+  end
 end

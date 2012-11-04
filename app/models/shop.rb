@@ -13,7 +13,7 @@ class Shop < ActiveRecord::Base
   def self.taobao_shop_get(nick)
     params = {}
     params[:method] = 'taobao.shop.get'
-    params[:fields] = 'sid,cid,title,desc,bulletin,pic_path,created,modified'
+    params[:fields] = TAOBAO_KEYS.join(',')
     params[:nick] = nick
     result_hash = Taobao::Client.execute(params)
 
