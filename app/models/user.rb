@@ -37,4 +37,16 @@ class User < ActiveRecord::Base
     end
     shop
   end
+
+  def seller_cats_with_sync
+    #TODO check
+    if false
+      seller_cats = SellerCat.taobao_sellercats_list_get(taobao_user_nick)
+      seller_cats.each do |seller_cat|
+        seller_cat.user = self
+        seller_cat.save!
+      end
+    end
+    self.seller_cats.parent.include_sub
+  end
 end

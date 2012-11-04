@@ -6,6 +6,10 @@ class SellerCat < ActiveRecord::Base
   attr_accessible(*TAOBAO_ACCESSIBLE_KEYS, as: :taobao)
   validates :user_id, :cid, :name, :parent_cid, presence: true
   validates :cid, uniqueness: true
+  has_many :sub_seller_cats, primary_key: :cid, foreign_key: :parent_cid, class_name: :SellerCat
+
+  scope :parent, where(parent_cid: 0)
+  scope :include_sub, includes(:sub_seller_cats)
 
   def self.taobao_sellercats_list_get(nick)
     params = {}

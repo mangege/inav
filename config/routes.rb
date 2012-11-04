@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 Inav::Application.routes.draw do
+
   root :to => "main#index"
 
   resources :user_sessions, :only => [:new] do
@@ -9,6 +10,8 @@ Inav::Application.routes.draw do
       get 'oauth2_expired'
     end
   end
+
+  resources :seller_cats, :only => [:index]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
