@@ -1,4 +1,9 @@
 <tr>
   <td><i class="icon-share-2 place-left"></i><%= sub_seller_cat.name %></td>
+  <td>
+    <div class="input-control text span2">
+      <%= text_field_tag "priorities[#{sub_seller_cat.id}]", sub_seller_cat.priority %>
+    </div>
+  </td>
   <td>查看</td>
 </tr>

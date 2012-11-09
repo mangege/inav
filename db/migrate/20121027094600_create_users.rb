@@ -2,7 +2,7 @@
 class CreateUsers < ActiveRecord::Migration
   def change
     create_table :users do |t|
-      t.integer :taobao_user_id
+      t.integer :taobao_user_id, limit: 8
       t.string :taobao_user_nick
       t.string :access_token
       t.string :refresh_token

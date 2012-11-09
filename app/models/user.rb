@@ -2,6 +2,7 @@
 class User < ActiveRecord::Base
   has_one :shop
   has_many :seller_cats
+  has_many :items
 
   TAOBAO_KEYS = %w[taobao_user_id taobao_user_nick access_token refresh_token
     expires_in re_expires_in r1_expires_in r2_expires_in w1_expires_in w2_expires_in oauth2_updated_at]
@@ -47,6 +48,21 @@ class User < ActiveRecord::Base
         seller_cat.save!
       end
     end
-    self.seller_cats.parent.include_sub
+    self.seller_cats.parent_cats.include_sub_seller_cats
+  end
+
+  def items_with_sync
+    #TODO check
+    if true
+      num_iids = []
+      num_iids.concat( Item.taobao_items_onsale_get(access_token) )
+      num_iids.concat( Item.taobao_items_inventory_get(access_token) )
+      items = Item.taobao_items_list_get(num_iids)
+      items.each do |item|
+        item.user_id = id
+        item.save!
+      end
+    end
+    self.items
   end
 end

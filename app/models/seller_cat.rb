@@ -8,8 +8,11 @@ class SellerCat < ActiveRecord::Base
   validates :cid, uniqueness: true
   has_many :sub_seller_cats, primary_key: :cid, foreign_key: :parent_cid, class_name: :SellerCat
 
-  scope :parent, where(parent_cid: 0)
-  scope :include_sub, includes(:sub_seller_cats)
+  scope :parent_cats, where(parent_cid: 0)
+  scope :sub_cats, where('parent_cid <> 0')
+  scope :include_sub_seller_cats, includes(:sub_seller_cats)
+  scope :taobao_order, order('sort_order ASC') #TODO sort_order等于0貌似不需要显示
+  #TODO priority 默认值
 
   def self.taobao_sellercats_list_get(nick)
     params = {}

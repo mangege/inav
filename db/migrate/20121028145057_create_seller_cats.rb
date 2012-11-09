@@ -3,8 +3,8 @@ class CreateSellerCats < ActiveRecord::Migration
   def change
     create_table :seller_cats do |t|
       t.string :cat_type
-      t.integer :cid
-      t.integer :parent_cid
+      t.integer :cid, limit: 8
+      t.integer :parent_cid, limit: 8
       t.string :name
       t.string :pic_url
       t.integer :sort_order

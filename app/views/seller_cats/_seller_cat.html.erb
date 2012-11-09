@@ -1,5 +1,10 @@
 <tr>
   <td><%= seller_cat.name %></td>
+  <td>
+    <div class="input-control text span2">
+      <%= text_field_tag "priorities[#{seller_cat.id}]", seller_cat.priority %>
+    </div>
+  </td>
   <td>查看</td>
 </tr>
 <%= render :partial => "sub_seller_cat", :collection => seller_cat.sub_seller_cats %>

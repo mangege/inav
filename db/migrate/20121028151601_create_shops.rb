@@ -2,8 +2,8 @@
 class CreateShops < ActiveRecord::Migration
   def change
     create_table :shops do |t|
-      t.integer :sid
-      t.integer :cid
+      t.integer :sid, limit: 8
+      t.integer :cid, limit: 8
       t.string :title
       t.string :desc
       t.string :bulletin

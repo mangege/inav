@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,24 +11,38 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121028151601) do
+ActiveRecord::Schema.define(:version => 20121109073127) do
+
+  create_table "items", :force => true do |t|
+    t.string   "detail_url"
+    t.integer  "num_iid",        :limit => 8
+    t.string   "title"
+    t.text     "item_desc"
+    t.string   "seller_cids"
+    t.integer  "approve_status"
+    t.datetime "modified"
+    t.datetime "created"
+    t.integer  "user_id"
+    t.datetime "created_at",                  :null => false
+    t.datetime "updated_at",                  :null => false
+  end
 
   create_table "seller_cats", :force => true do |t|
     t.string   "cat_type"
-    t.integer  "cid"
-    t.integer  "parent_cid"
+    t.integer  "cid",        :limit => 8
+    t.integer  "parent_cid", :limit => 8
     t.string   "name"
     t.string   "pic_url"
     t.integer  "sort_order"
     t.integer  "user_id"
     t.integer  "priority"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "shops", :force => true do |t|
-    t.integer  "sid"
-    t.integer  "cid"
+    t.integer  "sid",        :limit => 8
+    t.integer  "cid",        :limit => 8
     t.string   "title"
     t.string   "desc"
     t.string   "bulletin"
@@ -36,12 +50,12 @@ ActiveRecord::Schema.define(:version => 20121028151601) do
     t.datetime "created"
     t.datetime "modified"
     t.integer  "user_id"
-    t.datetime "created_at", :null => false
-    t.datetime "updated_at", :null => false
+    t.datetime "created_at",              :null => false
+    t.datetime "updated_at",              :null => false
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "taobao_user_id"
+    t.integer  "taobao_user_id",    :limit => 8
     t.string   "taobao_user_nick"
     t.string   "access_token"
     t.string   "refresh_token"
@@ -52,8 +66,8 @@ ActiveRecord::Schema.define(:version => 20121028151601) do
     t.integer  "w1_expires_in"
     t.integer  "w2_expires_in"
     t.datetime "oauth2_updated_at"
-    t.datetime "created_at",        :null => false
-    t.datetime "updated_at",        :null => false
+    t.datetime "created_at",                     :null => false
+    t.datetime "updated_at",                     :null => false
   end
 
 end

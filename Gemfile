@@ -1,5 +1,5 @@
-#source 'https://rubygems.org'
-source 'http://ruby.taobao.org'
+source 'https://rubygems.org'
+#source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.8'
 
@@ -20,7 +20,7 @@ group :assets do
 
   gem 'uglifier', '>= 1.0.3'
 
-  gem 'metro-ui-rails-cn', '~> 0.1.5'
+  gem 'metro-ui-rails-cn', '~> 0.1.6'
 end
 
 gem 'jquery-rails'
@@ -44,6 +44,7 @@ gem "rest-client", "~> 1.6.7"
 gem "oauth2", "~> 0.8.0"
 gem "thin", "~> 1.5.0"
 gem "rails-i18n", "~> 0.7.0"
+gem "enumerize", "~> 0.5.0"
 
 group :development do
   gem "magic_encoding", "~> 0.0.2"
