@@ -29,3 +29,14 @@ html, body {
   margin-top: 0;
   margin-left: 0;
 }
+
+.app-layout .page-sidebar {
+  width: 160px;
+}
+.app-layout.with-sidebar .page-region {
+  margin-left: 160px;
+}
+.app-layout.with-sidebar .page-region .page-region-content {
+  padding-right: 20px;
+  padding-bottom: 46px;
+}

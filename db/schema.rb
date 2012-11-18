@@ -29,15 +29,15 @@ ActiveRecord::Schema.define(:version => 20121109073127) do
 
   create_table "seller_cats", :force => true do |t|
     t.string   "cat_type"
-    t.integer  "cid",        :limit => 8
-    t.integer  "parent_cid", :limit => 8
-    t.string   "name"
+    t.integer  "cid",        :limit => 8,                :null => false
+    t.integer  "parent_cid", :limit => 8,                :null => false
+    t.string   "name",                                   :null => false
     t.string   "pic_url"
     t.integer  "sort_order"
-    t.integer  "user_id"
-    t.integer  "priority"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.integer  "user_id",                                :null => false
+    t.integer  "priority",                :default => 0
+    t.datetime "created_at",                             :null => false
+    t.datetime "updated_at",                             :null => false
   end
 
   create_table "shops", :force => true do |t|
@@ -55,8 +55,8 @@ ActiveRecord::Schema.define(:version => 20121109073127) do
   end
 
   create_table "users", :force => true do |t|
-    t.integer  "taobao_user_id",    :limit => 8
-    t.string   "taobao_user_nick"
+    t.integer  "taobao_user_id",         :limit => 8, :null => false
+    t.string   "taobao_user_nick",                    :null => false
     t.string   "access_token"
     t.string   "refresh_token"
     t.integer  "expires_in"
@@ -66,8 +66,10 @@ ActiveRecord::Schema.define(:version => 20121109073127) do
     t.integer  "w1_expires_in"
     t.integer  "w2_expires_in"
     t.datetime "oauth2_updated_at"
-    t.datetime "created_at",                     :null => false
-    t.datetime "updated_at",                     :null => false
+    t.datetime "seller_cats_updated_at"
+    t.datetime "items_updated_at"
+    t.datetime "created_at",                          :null => false
+    t.datetime "updated_at",                          :null => false
   end
 
 end

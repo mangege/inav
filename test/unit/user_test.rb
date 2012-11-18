@@ -101,6 +101,102 @@ class UserTest < ActiveSupport::TestCase
     assert_equal user.find_or_create_shop.id, shop.id
   end
 
+  test "#seller_cats_with_sync 默认不强制同步" do
+    user = FactoryGirl.create(:user, seller_cats_updated_at: Time.now)
+    SellerCat.expects(:taobao_sellercats_list_get).never
+    user.seller_cats_with_sync
+  end
+
+  test "#seller_cats_with_sync force_sync为true时强制同步" do
+    user = FactoryGirl.create(:user, seller_cats_updated_at: Time.now)
+    SellerCat.expects(:taobao_sellercats_list_get).returns([]).once
+    user.seller_cats_with_sync(force_sync: true)
+  end
+
+  test "#seller_cats_with_sync seller_cats_updated_at为空则进行同步" do
+    user = FactoryGirl.create(:user, seller_cats_updated_at: nil)
+    SellerCat.expects(:taobao_sellercats_list_get).returns([]).once
+    user.seller_cats_with_sync
+  end
+
+  test "#seller_cats_with_sync seller_cats_updated_at在6小时前则进行同步" do
+    user = FactoryGirl.create(:user, seller_cats_updated_at: 7.hour.ago)
+    SellerCat.expects(:taobao_sellercats_list_get).returns([]).once
+    user.seller_cats_with_sync
+  end
+
+  test "#seller_cats_with_sync seller_cats_updated_at在6小时内则不进行同步" do
+    user = FactoryGirl.create(:user, seller_cats_updated_at: 5.hour.ago)
+    SellerCat.expects(:taobao_sellercats_list_get).returns([]).never
+    user.seller_cats_with_sync
+  end
+
+  test "#seller_cats_with_sync 数据库的记录不存在同步数据里应该删除" do
+    user = FactoryGirl.create(:user)
+    FactoryGirl.create_list(:seller_cat, 3, user: user)
+    assert_equal 3, user.seller_cats.count
+    not_deleted_id = user.seller_cats.last.id
+    SellerCat.stubs(:taobao_sellercats_list_get).returns([user.seller_cats.last])
+
+    assert_difference "SellerCat.count", -2 do
+      user.seller_cats_with_sync
+    end
+    assert_equal [not_deleted_id], user.seller_cats.reload.map(&:id)
+  end
+
+  test "#seller_cats_with_sync 数据库的记录存在同步数据里应该不处理" do
+    user = FactoryGirl.create(:user)
+    FactoryGirl.create_list(:seller_cat, 3, user: user)
+    assert_equal 3, user.seller_cats.count
+    ids = user.seller_cats.map(&:id)
+    SellerCat.stubs(:taobao_sellercats_list_get).returns(user.seller_cats)
+
+    assert_difference "SellerCat.count", 0 do
+      user.seller_cats_with_sync
+    end
+    assert_equal Set.new(ids), Set.new( user.seller_cats.reload.map(&:id) )
+  end
+
+  test "#seller_cats_with_sync 同步数据不存在数据库里应该创建" do
+    user = FactoryGirl.create(:user)
+    FactoryGirl.create_list(:seller_cat, 3, user: user)
+    new_seller_cat = FactoryGirl.build(:seller_cat, user: nil)
+    new_cid = new_seller_cat.cid
+    SellerCat.stubs(:taobao_sellercats_list_get).returns(user.seller_cats.dup.push(new_seller_cat))
+
+    assert !user.seller_cats.reload.map(&:cid).include?(new_cid)
+    assert_difference "SellerCat.count", 1 do
+      user.seller_cats_with_sync
+    end
+    assert user.seller_cats.reload.map(&:cid).include?(new_cid)
+  end
+
+  test "#seller_cats_with_sync 同步完成后应该更新seller_cats_updated_at" do
+    user = FactoryGirl.create(:user)
+    assert_nil user.seller_cats_updated_at
+
+    SellerCat.stubs(:taobao_sellercats_list_get).returns([])
+    user.seller_cats_with_sync
+    user.reload
+    assert 1.minute > (Time.now - user.seller_cats_updated_at)
+
+    old_time = user.seller_cats_updated_at
+    user.seller_cats_with_sync(force_sync: true)
+    assert user.seller_cats_updated_at > old_time
+  end
+
+  test "#seller_cats_with_sync 返回结果应该都是父分类" do
+    user = FactoryGirl.create(:user, seller_cats_updated_at: Time.now)
+    parent_seller_cat = FactoryGirl.create(:seller_cat, user: user)
+    FactoryGirl.create_list(:sub_seller_cat, 3, parent_seller_cat: parent_seller_cat, user: user)
+    user.reload
+
+    assert user.seller_cats_with_sync.count > 0
+    user.seller_cats_with_sync.each do |seller_cat|
+      assert seller_cat.parent?
+    end
+  end
+
   private
   def default_keys
     keys = [:taobao_user_id]

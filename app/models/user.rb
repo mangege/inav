@@ -39,16 +39,29 @@ class User < ActiveRecord::Base
     shop
   end
 
-  def seller_cats_with_sync
-    #TODO check
-    if false
-      seller_cats = SellerCat.taobao_sellercats_list_get(taobao_user_nick)
-      seller_cats.each do |seller_cat|
-        seller_cat.user = self
-        seller_cat.save!
+  def seller_cats_with_sync(options = {})
+    force_sync = options[:force_sync] || false
+    if force_sync || seller_cats_updated_at.nil? || seller_cats_updated_at < 6.hour.ago
+      remote_seller_cats = SellerCat.taobao_sellercats_list_get(taobao_user_nick)
+      db_ids = seller_cats.pluck(:cid)
+      remote_ids = remote_seller_cats.map(&:cid)
+      intersection_ids = db_ids & remote_ids
+      User.transaction do
+        delete_ids = db_ids - intersection_ids
+        seller_cats.where(cid:  delete_ids).delete_all
+
+        create_ids = remote_ids - intersection_ids
+        remote_seller_cats.each do |seller_cat|
+          if create_ids.include?(seller_cat.cid)
+            seller_cat.user = self
+            seller_cat.save!
+          end
+        end
+        self.seller_cats_updated_at = Time.now
+        save!
       end
     end
-    self.seller_cats.parent_cats.include_sub_seller_cats
+    self.seller_cats.parent_cats.include_sub_seller_cats.taobao_order
   end
 
   def items_with_sync

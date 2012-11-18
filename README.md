@@ -17,6 +17,9 @@ Dev Note
   + 只运行`test/remote/`目录下的测试
   + `rake test` 不会运行此类测试, `rake test:all`才会运行
   + 需要先在开发环境登录 sandbox_c_1 用户并授权, 如果需要换成其它用户,请修改`lib/tasks/remote_testing.rb`文件
+* 自动测试运行 `guard` 即可
+  + 非Linux请参考guard文档,把rb-inotify和libnotify系统对应的库
+  + Linux下不显示通知查看文档 [https://wiki.archlinux.org/index.php/Libnotify](https://wiki.archlinux.org/index.php/Libnotify)
 
 TODO
 ---

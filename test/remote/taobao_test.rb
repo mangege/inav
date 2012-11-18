@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 require 'remote_test_helper'
 
-class TaobaoTest < ActiveSupport::TestCase
+class TaobaoTest < RemoteTestCase
   test "应该有个默认用户" do
     assert default_remote_user_attrs.is_a?(Hash)
     assert_not_nil default_remote_user_attrs['taobao_user_nick']

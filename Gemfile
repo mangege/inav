@@ -48,6 +48,15 @@ gem "enumerize", "~> 0.5.0"
 
 group :development do
   gem "magic_encoding", "~> 0.0.2"
+
+end
+
+group :auto_test do
+  #auto test http://railsgotchas.wordpress.com/2011/12/16/testing-with-spork-guard-and-testunit/
+  gem "guard-test", "~> 0.7.0"
+  gem "guard-shell", "~> 0.5.1"
+  gem 'rb-inotify', :require => false
+  #gem 'libnotify' #terminal title only
 end
 
 group :test do

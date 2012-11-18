@@ -46,4 +46,14 @@ class SellerCatTest < ActiveSupport::TestCase
       end
     end
   end
+
+  test "#parent? parent_id为0则是父分类,否则应该是子分类" do
+    seller_cat = FactoryGirl.build(:seller_cat)
+    assert seller_cat.parent?
+    assert !seller_cat.sub?
+
+    seller_cat.parent_cid = 1
+    assert !seller_cat.parent?
+    assert seller_cat.sub?
+  end
 end
