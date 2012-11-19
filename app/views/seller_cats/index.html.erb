@@ -7,7 +7,10 @@
   </tr>
     <%= render :partial => "seller_cat", :collection => @seller_cats %>
     <tr>
-      <td colspan="3" class="right"><%= submit_tag '更新' %></td>
+      <td colspan="3" class="right">
+        <%= link_to "同步", seller_cats_path(force_sync: true), class: 'button default', title: '同步你的淘宝店铺分类' %>
+        <%= submit_tag '更新', title: '更新优先级' %>
+      </td>
     </tr>
 
 </table>

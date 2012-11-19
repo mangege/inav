@@ -12,6 +12,12 @@ class SellerCatsControllerTest < ActionController::TestCase
     assert_response :success
   end
 
+  test "#index force_sync为true应该调用淘宝API" do
+    SellerCat.expects(:taobao_sellercats_list_get).returns([]).once
+    get :index, {force_sync: 'true'}
+    assert_response :success
+  end
+
   test "#update_priorities 更新成功后应该重定向到index" do
     seller_cat = FactoryGirl.create(:seller_cat, user: @controller.current_user)
 
