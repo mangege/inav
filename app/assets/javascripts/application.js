@@ -13,7 +13,3 @@
 //= require jquery
 //= require jquery_ujs
 //= require_tree .
-
-$(function(){
-  $('.notice-box button').click(function(){ $(this).closest('.notice-box').hide(); });
-});
