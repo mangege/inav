@@ -40,3 +40,8 @@ html, body {
   padding-right: 20px;
   padding-bottom: 46px;
 }
+
+.notice-box {
+  height: 110px;
+  position: relative;
+}

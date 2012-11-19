@@ -11,4 +11,18 @@ module ApplicationHelper
       "iNav"
     end
   end
+
+  def notice_class
+    if flash[:error]
+      'error'
+    elsif flash[:alert]
+      'warning'
+    else
+      'info'
+    end
+  end
+
+  def render_notice_text
+    flash[:error] || flash[:alert] || flash[:notice]
+  end
 end
