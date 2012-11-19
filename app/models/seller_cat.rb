@@ -22,6 +22,18 @@ class SellerCat < ActiveRecord::Base
     not parent?
   end
 
+  def self.update_priorities(id_priorities, user)
+    priority_ids = {}
+    id_priorities.each do |id, priority|
+      key = priority.to_i
+      priority_ids[key] ||= Set.new
+      priority_ids[key] << id
+    end
+    priority_ids.each do |priority, ids|
+      user.seller_cats.where(id: ids.to_a).update_all(priority: priority)
+    end
+  end
+
   def self.taobao_sellercats_list_get(nick)
     params = {}
     params[:method] = 'taobao.sellercats.list.get'

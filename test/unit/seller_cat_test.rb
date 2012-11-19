@@ -56,4 +56,51 @@ class SellerCatTest < ActiveSupport::TestCase
     assert !seller_cat.parent?
     assert seller_cat.sub?
   end
+
+  test "#update_priorities 应该更新对应记录的优先级" do
+    seller_cat = FactoryGirl.create(:seller_cat)
+
+    assert_equal 0, seller_cat.priority
+    SellerCat.update_priorities({seller_cat.id => 1}, seller_cat.user)
+    seller_cat.reload
+    assert_equal 1, seller_cat.priority
+  end
+
+  test "#update_priorities 多条记录应该都更新成功" do
+    user = FactoryGirl.create(:user)
+    seller_cats = FactoryGirl.create_list(:seller_cat, 3, user: user)
+
+    assert_equal [0]*3, seller_cats.map(&:priority)
+    id_priorities = {}
+    one = seller_cats[0..1]
+    two = seller_cats[2..-1]
+    one.each{|seller_cat| id_priorities[seller_cat.id] = 1}
+    two.each{|seller_cat| id_priorities[seller_cat.id] = 2}
+    
+    SellerCat.update_priorities(id_priorities, user)
+    one.each do |seller_cat|
+      seller_cat.reload
+      assert_equal 1, seller_cat.priority
+    end
+    two.each do |seller_cat|
+      seller_cat.reload
+      assert_equal 2, seller_cat.priority
+    end
+  end
+
+  test "#update_priorities 只更新用户对应的记录,忽略非当前用户的更新" do
+    user = FactoryGirl.create(:user)
+    user2 = FactoryGirl.create(:user)
+    seller_cat = FactoryGirl.create(:seller_cat, user: user)
+    seller_cat2 = FactoryGirl.create(:seller_cat, user: user2)
+
+    assert_equal 0, seller_cat.priority
+    assert_equal 0, seller_cat2.priority
+
+    SellerCat.update_priorities({seller_cat.id => 1, seller_cat2.id => 1}, user)
+    seller_cat.reload
+    seller_cat2.reload
+    assert_equal 1, seller_cat.priority
+    assert_equal 0, seller_cat2.priority
+  end
 end

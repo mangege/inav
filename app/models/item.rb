@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
   belongs_to :user
   TAOBAO_KEYS = %w[detail_url num_iid title desc seller_cids approve_status modified created]

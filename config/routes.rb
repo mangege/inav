@@ -11,7 +11,11 @@ Inav::Application.routes.draw do
     end
   end
 
-  resources :seller_cats, :only => [:index]
+  resources :seller_cats, :only => [:index] do
+    collection do
+      put 'update_priorities'
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

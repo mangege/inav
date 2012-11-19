@@ -1,9 +1,14 @@
+<%= form_tag(update_priorities_seller_cats_path, method: :put) do %>
 <table class="bordered">
   <tr>
     <td>分类名称</td>
     <td class="span3">优先级</td>
     <td class="span2">操作</td>
   </tr>
-  <%= render :partial => "seller_cat", :collection => @seller_cats %>
+    <%= render :partial => "seller_cat", :collection => @seller_cats %>
+    <tr>
+      <td colspan="3" class="right"><%= submit_tag '更新' %></td>
+    </tr>
 
 </table>
+<% end %>
