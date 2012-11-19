@@ -12,36 +12,3 @@
  *= require_self
  *= require_tree .
  */
-html, body {
-  height: 100%;
-}
-
-.flyouts .page-region-content {
-  margin: 0 50px;
-}
-.header-bar {
-  position: fixed;
-  left: 0;
-  bottom: 0;
-  width: 100%;
-}
-.page-sidebar {
-  margin-top: 0;
-  margin-left: 0;
-}
-
-.app-layout .page-sidebar {
-  width: 160px;
-}
-.app-layout.with-sidebar .page-region {
-  margin-left: 160px;
-}
-.app-layout.with-sidebar .page-region .page-region-content {
-  padding-right: 20px;
-  padding-bottom: 46px;
-}
-
-.notice-box {
-  height: 110px;
-  position: relative;
-}
