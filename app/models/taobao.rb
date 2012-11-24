@@ -2,6 +2,9 @@
 module Taobao
   autoload(:OAuth2, 'taobao/oauth2')
   autoload(:HttpSign, 'taobao/http_sign')
+  autoload(:Client, 'taobao/client')
+  autoload(:Collection, 'taobao/collection')
+  autoload(:Api, 'taobao/api')
 
   class Error < StandardError ; end
   class ClientError < Error

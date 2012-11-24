@@ -1,0 +1,8 @@
+      def <%= api['name'].gsub('.', '_') %>(params)
+        params['method'] = '<%= api['name'] %>'
+<%= request_param_codes(api) %>
+        result_hash = Client.execute(params)
+<%= response_param_codes(api) %>
+        result_hash
+      end
+
