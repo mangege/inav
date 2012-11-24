@@ -82,25 +82,6 @@ class UserTest < ActiveSupport::TestCase
     assert !user.oauth2_expired?
   end
 
-  test "#find_or_create_shop 用户没有shop时应该从api拿并保存" do
-    shop = FactoryGirl.build(:shop, user: nil)
-    assert shop.new_record?
-
-    Shop.expects(:taobao_shop_get).returns(shop)
-    user = FactoryGirl.create(:user)
-    shop2 = user.find_or_create_shop
-    
-    shop.reload
-    assert !shop.new_record?
-    assert_equal shop.id, shop2.id
-  end
-
-  test "#find_or_create_shop 用户有shop时应该直接读数据库" do
-    shop = FactoryGirl.create(:shop)
-    user = shop.user
-    assert_equal user.find_or_create_shop.id, shop.id
-  end
-
   test "#seller_cats_with_sync 默认不强制同步" do
     user = FactoryGirl.create(:user, seller_cats_updated_at: Time.now)
     SellerCat.expects(:taobao_sellercats_list_get).never

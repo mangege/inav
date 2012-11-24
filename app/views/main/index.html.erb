@@ -2,18 +2,18 @@
 <table class="bordered striped">
   <tr>
     <td>店铺地址</td>
-    <td><%= link_to @shop.title, @shop.shop_url, target: '_blank' %></td>
+    <td><%= link_to @shop.tb_title, @shop.shop_url, target: '_blank' %></td>
   </tr>
   <tr>
     <td>店铺描述</td>
-    <td><%= sanitize(@shop.desc) %></td>
+    <td><%= sanitize(@shop.tb_desc) %></td>
   </tr>
   <tr>
     <td>店铺公告</td>
-    <td><%= sanitize(@shop.bulletin) %></td>
+    <td><%= sanitize(@shop.tb_bulletin) %></td>
   </tr>
   <tr>
     <td>开店时间</td>
-    <td><%= l @shop.created %></td>
+    <td><%= l @shop.tb_created %></td>
   </tr>
 </table>

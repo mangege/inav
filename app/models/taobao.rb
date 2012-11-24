@@ -5,6 +5,7 @@ module Taobao
   autoload(:Client, 'taobao/client')
   autoload(:Collection, 'taobao/collection')
   autoload(:Api, 'taobao/api')
+  autoload(:Field, 'taobao/field')
 
   class Error < StandardError ; end
   class ClientError < Error

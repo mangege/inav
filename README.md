@@ -20,6 +20,7 @@ Dev Note
 * 自动测试运行 `guard` 即可
   + 非Linux请参考guard文档,把rb-inotify和libnotify系统对应的库
   + Linux下不显示通知查看文档 [https://wiki.archlinux.org/index.php/Libnotify](https://wiki.archlinux.org/index.php/Libnotify)
+* Model的淘宝数据字段约定以`tb_`开头
 
 TODO
 ---

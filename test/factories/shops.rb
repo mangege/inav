@@ -3,14 +3,14 @@
 
 FactoryGirl.define do
   factory :shop do
-    sid 1
-    cid 1
-    title "MyString"
-    desc "MyString"
-    bulletin "MyString"
-    pic_path "MyString"
-    created "2012-10-28 23:16:01"
-    modified "2012-10-28 23:16:01"
+    tb_sid 1
+    tb_cid 1
+    tb_title "MyString"
+    tb_desc "MyString"
+    tb_bulletin "MyString"
+    tb_pic_path "MyString"
+    tb_created "2012-10-28 23:16:01"
+    tb_modified "2012-10-28 23:16:01"
     user
   end
 end

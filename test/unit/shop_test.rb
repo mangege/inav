@@ -7,11 +7,11 @@ class ShopTest < ActiveSupport::TestCase
   # end
 
   test "#shop_url shop+sid.taobao.com即店铺地址" do
-    shop = FactoryGirl.build(:shop, sid: 123456)
+    shop = FactoryGirl.build(:shop, tb_sid: 123456)
     assert_equal 'http://shop123456.taobao.com', shop.shop_url
   end
 
-  test "::taobao_shop_get 值应该正确" do
+  test "::taobao_sync 值应该正确" do
     body = <<-EOS
 {
     "shop_get_response": {
@@ -35,20 +35,19 @@ class ShopTest < ActiveSupport::TestCase
 }
     EOS
     stub_api_get(body)
-    shop = Shop.taobao_shop_get('csuky')
-    assert shop.is_a?(Shop)
+    user = FactoryGirl.create(:user, taobao_user_nick: 'csuky')
+    shop = nil
+    assert_nil user.shop
+    assert_difference "Shop.count" do
+      shop = Shop.taobao_sync(user)
+    end
+    user.reload
+    assert_not_nil user.shop
 
     body_hash = MultiJson.load(body)
-    Shop::TAOBAO_KEYS.each do |field|
+    Shop.taobao_columns.each do |field|
       assert_not_nil shop.send(field), field
-      assert_equal shop.send(field), body_hash['shop_get_response']['shop'][field]
-    end
-
-    shop.user_id = FactoryGirl.create(:user)
-    assert shop.save
-    shop.reload
-    Shop::TAOBAO_KEYS.each do |field|
-      assert_equal shop.send(field), body_hash['shop_get_response']['shop'][field]
+      assert_equal shop.send(field), body_hash['shop_get_response']['shop'][field[3..-1]]
     end
   end
 end

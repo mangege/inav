@@ -1,24 +1,27 @@
 # -*- encoding : utf-8 -*-
 class Shop < ActiveRecord::Base
   belongs_to :user
-  TAOBAO_KEYS = %w[bulletin cid created desc modified pic_path sid title]
-  attr_accessible(*TAOBAO_KEYS, as: :taobao)
-  validates :sid, :title, :user_id, presence: true
+  validates :tb_sid, :tb_title, :user_id, presence: true
   validates :user_id, uniqueness: true
 
   def shop_url
-    "http://shop#{sid}.taobao.com"
+    "http://shop#{tb_sid}.taobao.com"
   end
 
-  def self.taobao_shop_get(nick)
+  #TODO 6小时更新一次
+  def self.taobao_sync(user)
     params = {}
-    params[:method] = 'taobao.shop.get'
-    params[:fields] = TAOBAO_KEYS.join(',')
-    params[:nick] = nick
-    result_hash = Taobao::Client.execute(params)
+    params[:fields] = taobao_fields.join(',')
+    params[:nick] = user.taobao_user_nick
+    result_hash = Taobao::Api.taobao_shop_get(params)
+    taobao_find_or_create(result_hash['shop'], user)
+  end
 
-    shop = Shop.new
-    shop.assign_attributes( result_hash['shop'].slice(*TAOBAO_KEYS) ,as: :taobao)
+  def self.taobao_find_or_create(taobao_attrs, user)
+    shop = find_or_initialize_by_tb_sid(taobao_attrs['sid'])
+    shop.assign_taobao_attrs(taobao_attrs)
+    shop.user = user
+    shop.save!
     shop
   end
 end

@@ -23,6 +23,7 @@ ActiveRecord::Schema.define(:version => 20121121132403) do
     t.string   "title"
     t.string   "seller_cids"
     t.integer  "approve_status"
+    t.datetime "desc_modified"
     t.datetime "modified"
     t.integer  "user_id"
     t.datetime "created_at",                  :null => false
@@ -43,17 +44,17 @@ ActiveRecord::Schema.define(:version => 20121121132403) do
   end
 
   create_table "shops", :force => true do |t|
-    t.integer  "sid",        :limit => 8
-    t.integer  "cid",        :limit => 8
-    t.string   "title"
-    t.string   "desc"
-    t.string   "bulletin"
-    t.string   "pic_path"
-    t.datetime "created"
-    t.datetime "modified"
+    t.integer  "tb_sid",      :limit => 8
+    t.integer  "tb_cid",      :limit => 8
+    t.string   "tb_title"
+    t.string   "tb_desc"
+    t.string   "tb_bulletin"
+    t.string   "tb_pic_path"
+    t.datetime "tb_created"
+    t.datetime "tb_modified"
     t.integer  "user_id"
-    t.datetime "created_at",              :null => false
-    t.datetime "updated_at",              :null => false
+    t.datetime "created_at",               :null => false
+    t.datetime "updated_at",               :null => false
   end
 
   create_table "users", :force => true do |t|

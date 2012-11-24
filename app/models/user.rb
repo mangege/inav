@@ -31,14 +31,6 @@ class User < ActiveRecord::Base
     oauth2_updated_at + expires_in < Time.now
   end
 
-  def find_or_create_shop
-    if shop.nil?
-      self.shop = Shop.taobao_shop_get(taobao_user_nick)
-      self.shop.save!
-    end
-    shop
-  end
-
   def seller_cats_with_sync(options = {})
     force_sync = options[:force_sync] || false
     if force_sync || seller_cats_updated_at.nil? || seller_cats_updated_at < 6.hour.ago
