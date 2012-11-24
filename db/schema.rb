@@ -1,4 +1,4 @@
-# -*- encoding : utf-8 -*-
+# encoding: UTF-8
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -11,17 +11,19 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121109073127) do
+ActiveRecord::Schema.define(:version => 20121121132403) do
+
+  create_table "item_descs", :primary_key => "item_id", :force => true do |t|
+    t.text "content", :limit => 16777215
+  end
 
   create_table "items", :force => true do |t|
     t.string   "detail_url"
     t.integer  "num_iid",        :limit => 8
     t.string   "title"
-    t.text     "item_desc"
     t.string   "seller_cids"
     t.integer  "approve_status"
     t.datetime "modified"
-    t.datetime "created"
     t.integer  "user_id"
     t.datetime "created_at",                  :null => false
     t.datetime "updated_at",                  :null => false

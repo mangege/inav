@@ -5,11 +5,10 @@ class CreateItems < ActiveRecord::Migration
       t.string :detail_url
       t.integer :num_iid, limit: 8
       t.string :title
-      t.text :item_desc
       t.string :seller_cids
       t.integer :approve_status
+      t.datetime :desc_modified
       t.datetime :modified
-      t.datetime :created
       t.integer :user_id
 
       t.timestamps
