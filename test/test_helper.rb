@@ -81,4 +81,9 @@ class ActiveSupport::TestCase
     yield result if block_given?
     result
   end
+
+  def read_mock_data(filename)
+    fullpath = File.join(Rails.root, '/test/mocks/', filename)
+    File.read(fullpath)
+  end
 end

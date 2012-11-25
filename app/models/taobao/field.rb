@@ -15,7 +15,9 @@ module Taobao
       end
 
       def taobao_columns
-        self.column_names.select{|cn| cn =~ /^tb_/}
+        columns = self.column_names.select{|cn| cn =~ /^tb_/}
+        yield columns if block_given?
+        columns
       end
 
       def from_taobao_attrs(attrs_hash, options = {})

@@ -2,7 +2,6 @@
 class CreateItems < ActiveRecord::Migration
   def change
     create_table :items do |t|
-      t.string :tb_detail_url
       t.integer :tb_num_iid, limit: 8
       t.string :tb_title
       t.string :tb_seller_cids
