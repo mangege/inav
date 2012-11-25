@@ -2,16 +2,15 @@
 class Item < ActiveRecord::Base
   belongs_to :user
   has_one :item_desc, dependent: :destroy, autosave: true
-  delegate :content, to: :item_desc, allow_nil: true
-  TAOBAO_KEYS = %w[detail_url num_iid title desc seller_cids approve_status modified created]
-  TAOBAO_ACCESSIBLE_KEYS = TAOBAO_KEYS.dup.tap{|t| t.delete 'desc'; t.push 'content'}
-  attr_accessible(*TAOBAO_ACCESSIBLE_KEYS, as: :taobao)
-  validates :user_id, :detail_url, :num_iid, :title, :approve_status, presence: true
+  validates :user_id, :tb_detail_url, :tb_num_iid, :tb_title, :tb_approve_status, presence: true
 
   extend Enumerize
-  enumerize :approve_status, in: {onsale: 0, instock: 1}
+  enumerize :tb_approve_status, in: {onsale: 0, instock: 1}
 
-  def content=(desc_content)
+  def tb_desc
+    item_desc.try(:content)
+  end
+  def tb_desc=(desc_content)
     self.item_desc || build_item_desc
     self.item_desc.content = desc_content
   end
