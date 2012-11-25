@@ -70,4 +70,15 @@ class ActiveSupport::TestCase
       "r1_expires_in"=>1800,
       "oauth2_updated_at" => Time.now}
   end
+
+  def to_taobao_hash(obj)
+    result = {}
+    columns = obj.taobao_columns
+    columns.each do |column_name|
+      new_name = column_name[3..-1]
+      result[new_name] = obj.send(column_name)
+    end
+    yield result if block_given?
+    result
+  end
 end

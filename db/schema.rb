@@ -31,16 +31,16 @@ ActiveRecord::Schema.define(:version => 20121121132403) do
   end
 
   create_table "seller_cats", :force => true do |t|
-    t.string   "cat_type"
-    t.integer  "cid",        :limit => 8,                :null => false
-    t.integer  "parent_cid", :limit => 8,                :null => false
-    t.string   "name",                                   :null => false
-    t.string   "pic_url"
-    t.integer  "sort_order"
-    t.integer  "user_id",                                :null => false
-    t.integer  "priority",                :default => 0
-    t.datetime "created_at",                             :null => false
-    t.datetime "updated_at",                             :null => false
+    t.string   "tb_type"
+    t.integer  "tb_cid",        :limit => 8,                :null => false
+    t.integer  "tb_parent_cid", :limit => 8,                :null => false
+    t.string   "tb_name",                                   :null => false
+    t.string   "tb_pic_url"
+    t.integer  "tb_sort_order"
+    t.integer  "user_id",                                   :null => false
+    t.integer  "priority",                   :default => 0
+    t.datetime "created_at",                                :null => false
+    t.datetime "updated_at",                                :null => false
   end
 
   create_table "shops", :force => true do |t|

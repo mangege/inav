@@ -1,21 +1,18 @@
 # -*- encoding : utf-8 -*-
 class SellerCat < ActiveRecord::Base
   belongs_to :user
-  belongs_to :parent_seller_cat, primary_key: :cid, foreign_key: :parent_cid, class_name: :SellerCat
-  has_many :sub_seller_cats, primary_key: :cid, foreign_key: :parent_cid, class_name: :SellerCat, dependent: :destroy
-  TAOBAO_KEYS = %w[type cid parent_cid name pic_url sort_order]
-  TAOBAO_ACCESSIBLE_KEYS = TAOBAO_KEYS.dup.tap{|t| t.delete 'type'; t.push 'cat_type'}
-  attr_accessible(*TAOBAO_ACCESSIBLE_KEYS, as: :taobao)
-  validates :user_id, :cid, :name, :parent_cid, presence: true
-  validates :cid, uniqueness: true
+  belongs_to :parent_seller_cat, primary_key: :tb_cid, foreign_key: :tb_parent_cid, class_name: :SellerCat
+  has_many :sub_seller_cats, primary_key: :tb_cid, foreign_key: :tb_parent_cid, class_name: :SellerCat, dependent: :destroy
+  validates :user_id, :tb_cid, :tb_name, :tb_parent_cid, presence: true
+  validates :tb_cid, uniqueness: true
 
-  scope :parent_cats, where(parent_cid: 0)
-  scope :sub_cats, where('parent_cid <> 0')
+  scope :parent_cats, where(tb_parent_cid: 0)
+  scope :sub_cats, where('tb_parent_cid <> 0')
   scope :include_sub_seller_cats, includes(:sub_seller_cats)
-  scope :taobao_order, order('sort_order ASC') #TODO sort_order等于0貌似不需要显示
+  scope :taobao_order, order('tb_sort_order ASC') #TODO sort_order等于0貌似不需要显示
 
   def parent?
-    parent_cid == 0
+    tb_parent_cid == 0
   end
 
   def sub?
@@ -34,20 +31,43 @@ class SellerCat < ActiveRecord::Base
     end
   end
 
-  def self.taobao_sellercats_list_get(nick)
+  def self.taobao_list_sync(user)
     params = {}
-    params[:method] = 'taobao.sellercats.list.get'
-    params[:fields] = TAOBAO_KEYS.join(',')
-    params[:nick] = nick
+    params[:fields] = taobao_fields.join(',')
+    params[:nick] = user.taobao_user_nick
+    result_hash = Taobao::Api.taobao_sellercats_list_get(params)
 
-    result_hash = Taobao::Client.execute(params)
-    seller_cats = []
-    result_hash['seller_cats']['seller_cat'].each do |cat_hash|
-      cat_hash['cat_type'] = cat_hash.delete('type')
-      seller_cat = self.new
-      seller_cat.assign_attributes( cat_hash.slice(*TAOBAO_ACCESSIBLE_KEYS), as: :taobao )
-      seller_cats << seller_cat
+    db_ids = user.seller_cats.pluck(:tb_cid)
+    taobao_ids = result_hash['seller_cats'].map{|a| a['cid']}
+    deleted_ids = db_ids - taobao_ids
+    update_ids = db_ids & taobao_ids
+    create_ids = taobao_ids - update_ids
+    self.transaction do
+      user.seller_cats.where(tb_cid: deleted_ids).delete_all
+      result_hash['seller_cats'].each do |taobao_attrs|
+        cid = taobao_attrs['cid']
+        if update_ids.include?(cid)
+          taobao_db_update(taobao_attrs)
+        elsif create_ids.include?(cid)
+          taobao_db_create(taobao_attrs, user)
+        end
+      end
     end
-    seller_cats
+    user.seller_cats
+  end
+
+  def self.taobao_db_update(taobao_attrs)
+    seller_cat = self.find_by_tb_cid(taobao_attrs['cid'])
+    seller_cat.assign_taobao_attrs(taobao_attrs)
+    seller_cat.save!
+    seller_cat
+  end
+
+  def self.taobao_db_create(taobao_attrs, user)
+    seller_cat = self.new
+    seller_cat.user = user
+    seller_cat.assign_taobao_attrs(taobao_attrs)
+    seller_cat.save!
+    seller_cat
   end
 end

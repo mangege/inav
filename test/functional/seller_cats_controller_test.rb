@@ -7,13 +7,13 @@ class SellerCatsControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    SellerCat.stubs(:taobao_sellercats_list_get).returns([])
+    SellerCat.stubs(:taobao_list_sync).returns([])
     get :index
     assert_response :success
   end
 
   test "#index force_sync为true应该调用淘宝API" do
-    SellerCat.expects(:taobao_sellercats_list_get).returns([]).once
+    SellerCat.expects(:taobao_list_sync).returns([]).once
     get :index, {force_sync: 'true'}
     assert_response :success
   end

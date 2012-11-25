@@ -3,9 +3,9 @@
 
 FactoryGirl.define do
   factory :seller_cat do
-    sequence(:cid)
-    parent_cid 0
-    sequence(:name) {|n | "cat name #{n}"}
+    sequence(:tb_cid)
+    tb_parent_cid 0
+    sequence(:tb_name) {|n | "cat name #{n}"}
     user
   end
 

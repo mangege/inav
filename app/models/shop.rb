@@ -14,10 +14,10 @@ class Shop < ActiveRecord::Base
     params[:fields] = taobao_fields.join(',')
     params[:nick] = user.taobao_user_nick
     result_hash = Taobao::Api.taobao_shop_get(params)
-    taobao_find_or_create(result_hash['shop'], user)
+    taobao_db_update_or_create(result_hash['shop'], user)
   end
 
-  def self.taobao_find_or_create(taobao_attrs, user)
+  def self.taobao_db_update_or_create(taobao_attrs, user)
     shop = find_or_initialize_by_tb_sid(taobao_attrs['sid'])
     shop.assign_taobao_attrs(taobao_attrs)
     shop.user = user
