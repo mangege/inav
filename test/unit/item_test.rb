@@ -135,6 +135,66 @@ class ItemTest < ActiveSupport::TestCase
     Item.taobao_inventory_sync(user)
   end
 
+  test "::taobao_db_update_desc 描述不存在应该新建" do
+    item = FactoryGirl.create(:item)
+    moch_taobao_attrs = {'num_iid' => item.tb_num_iid, 'desc' => 'desc test', 'modified' => Time.now}
+
+    assert_nil item.tb_desc
+    Item.taobao_db_update_desc(moch_taobao_attrs)
+    item.reload
+    assert_equal 'desc test', item.tb_desc
+  end
+
+  test "::taobao_db_update_desc 描述存在应该更新" do
+    item = FactoryGirl.create(:item)
+    FactoryGirl.create(:item_desc, item_id: item.id)
+    moch_desc = 'desc mock'
+    assert_not_equal moch_desc, item.tb_desc
+    moch_taobao_attrs = {'num_iid' => item.tb_num_iid, 'desc' => moch_desc, 'modified' => Time.now}
+    Item.taobao_db_update_desc(moch_taobao_attrs)
+    item.reload
+    assert_equal moch_desc, item.tb_desc
+  end
+
+  test "::taobao_db_update_desc 应该更新desc_modified" do
+    item = FactoryGirl.create(:item)
+    desc_modified = 1.day.ago
+    moch_taobao_attrs = {'num_iid' => item.tb_num_iid, 'desc' => 'desc test', 'modified' => desc_modified}
+
+    assert_not_equal desc_modified.to_i, item.tb_modified.to_i
+    assert_not_equal desc_modified.to_i, item.desc_modified.to_i
+    Item.taobao_db_update_desc(moch_taobao_attrs)
+    item.reload
+    assert_not_equal desc_modified.to_i, item.tb_modified.to_i
+    assert_equal desc_modified.to_i, item.desc_modified.to_i
+  end
+
+  test "::taobao_desc_sync 应该正常调用API" do
+    body = read_mock_data('items_list_get_response.json')
+    stub_api_get(body)
+
+    item = FactoryGirl.create(:item, tb_num_iid: 1497925687)
+    new_desc = 'top七修测试desc'
+    assert_not_equal new_desc, item.tb_desc
+    Item.taobao_desc_sync(item.user)
+    item.reload
+    assert_equal new_desc, item.tb_desc
+  end
+
+  test "::taobao_desc_sync sync_type one应该只调用API一次" do
+    Taobao::Api.stubs(:taobao_items_list_get).returns({'items' => []}).once
+    user = FactoryGirl.create(:user)
+    FactoryGirl.create_list(:item, 30, user_id: user.id)
+    Item.taobao_desc_sync(user, sync_type: :one)
+  end
+
+  test "::taobao_desc_sync sync_type all应该只调用API两次" do
+    Taobao::Api.stubs(:taobao_items_list_get).returns({'items' => []}).twice
+    user = FactoryGirl.create(:user)
+    FactoryGirl.create_list(:item, 30, user_id: user.id)
+    Item.taobao_desc_sync(user)
+  end
+
   private
   def mock_taobao_items_onsale_get_result(item, total_results = nil)
     items = []

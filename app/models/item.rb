@@ -4,6 +4,8 @@ class Item < ActiveRecord::Base
   has_one :item_desc, dependent: :destroy, autosave: true
   validates :user_id, :tb_num_iid, :tb_title, :tb_approve_status, presence: true
 
+  scope :desc_expired, where('desc_modified IS NULL OR desc_modified < tb_modified')
+
   extend Enumerize
   enumerize :tb_approve_status, in: {onsale: 0, instock: 1}
 
@@ -39,27 +41,31 @@ class Item < ActiveRecord::Base
     taobao_list_sync(:onsale, user, options)
   end
 
+  #sync_type: one, all
   def self.taobao_inventory_sync(user, options = {})
     taobao_list_sync(:inventory, user, options)
   end
 
-  def self.taobao_items_list_get(num_iids)
+  def self.taobao_desc_sync(user, options = {})
+    sync_type = options[:sync_type] || :all
     params = {}
-    params[:method] = 'taobao.items.list.get'
-    params[:fields] = TAOBAO_KEYS.join(',')
+    params[:fields] = 'num_iid, desc, modified'
 
-    items = []
+    num_iids = nil
+    if sync_type == :one
+      num_iids = user.items.desc_expired.limit(1).pluck(:tb_num_iid)
+    else
+      num_iids = user.items.desc_expired.pluck(:tb_num_iid)
+    end
     num_iids.each_slice(20) do |batch_num_iids|
       params[:num_iids] = batch_num_iids.join(',')
-      result_hash = Taobao::Client.execute(params)
-      result_hash['items']['item'].each do |item_hash|
-        item_hash['content'] = item_hash.delete('desc')
-        item = self.new
-        item.assign_attributes( item_hash.slice(*TAOBAO_ACCESSIBLE_KEYS), as: :taobao )
-        items << item
-      end if result_hash['items']
+      result_hash = Taobao::Api.taobao_items_list_get(params)
+      result_hash['items'].each do |taobao_attrs|
+        taobao_db_update_desc(taobao_attrs)
+      end
     end
-    items
+
+    user.items
   end
 
   def self.taobao_item_update(access_token, item)
@@ -80,6 +86,16 @@ class Item < ActiveRecord::Base
     item.user = user
     item.save!
     item
+  end
+
+  def self.taobao_db_update_desc(taobao_attrs)
+    desc_modified = taobao_attrs['modified']
+    item = find_by_tb_num_iid(taobao_attrs['num_iid'])
+    unless item.nil?
+      item.desc_modified = desc_modified
+      item.tb_desc = taobao_attrs['desc']
+      item.save!
+    end
   end
 
   def self.taobao_has_next?(result_hash, sync_type, params)
