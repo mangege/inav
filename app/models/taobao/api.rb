@@ -40,7 +40,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['users'] = result_hash['users']['user']
+        result_hash['users'] = ( result_hash['users'].nil? ? [] : result_hash['users']['user'] )
 
         result_hash
       end
@@ -62,7 +62,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['item_cats'] = result_hash['item_cats']['item_cat']
+        result_hash['item_cats'] = ( result_hash['item_cats'].nil? ? [] : result_hash['item_cats']['item_cat'] )
 
         result_hash
       end
@@ -73,9 +73,9 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['item_cats'] = result_hash['item_cats']['item_cat']
-        result_hash['item_props'] = result_hash['item_props']['item_prop']
-        result_hash['prop_values'] = result_hash['prop_values']['prop_value']
+        result_hash['item_cats'] = ( result_hash['item_cats'].nil? ? [] : result_hash['item_cats']['item_cat'] )
+        result_hash['item_props'] = ( result_hash['item_props'].nil? ? [] : result_hash['item_props']['item_prop'] )
+        result_hash['prop_values'] = ( result_hash['prop_values'].nil? ? [] : result_hash['prop_values']['prop_value'] )
 
         result_hash
       end
@@ -86,7 +86,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['item_props'] = result_hash['item_props']['item_prop']
+        result_hash['item_props'] = ( result_hash['item_props'].nil? ? [] : result_hash['item_props']['item_prop'] )
 
         result_hash
       end
@@ -100,7 +100,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['prop_values'] = result_hash['prop_values']['prop_value']
+        result_hash['prop_values'] = ( result_hash['prop_values'].nil? ? [] : result_hash['prop_values']['prop_value'] )
 
         result_hash
       end
@@ -117,7 +117,7 @@ module Taobao
         params['method'] = 'taobao.aftersale.get'
 
         result_hash = Client.execute(params)
-        result_hash['after_sales'] = result_hash['after_sales']['after_sale']
+        result_hash['after_sales'] = ( result_hash['after_sales'].nil? ? [] : result_hash['after_sales']['after_sale'] )
 
         result_hash
       end
@@ -138,7 +138,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['anchor_modules'] = result_hash['anchor_modules']['ids_module']
+        result_hash['anchor_modules'] = ( result_hash['anchor_modules'].nil? ? [] : result_hash['anchor_modules']['ids_module'] )
 
         result_hash
       end
@@ -325,7 +325,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['skus'] = result_hash['skus']['sku']
+        result_hash['skus'] = ( result_hash['skus'].nil? ? [] : result_hash['skus']['sku'] )
 
         result_hash
       end
@@ -334,7 +334,7 @@ module Taobao
         params['method'] = 'taobao.item.templates.get'
 
         result_hash = Client.execute(params)
-        result_hash['item_template_list'] = result_hash['item_template_list']['item_template']
+        result_hash['item_template_list'] = ( result_hash['item_template_list'].nil? ? [] : result_hash['item_template_list']['item_template'] )
 
         result_hash
       end
@@ -375,7 +375,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['items'] = result_hash['items']['item']
+        result_hash['items'] = ( result_hash['items'].nil? ? [] : result_hash['items']['item'] )
 
         result_hash
       end
@@ -386,7 +386,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['items'] = result_hash['items']['item']
+        result_hash['items'] = ( result_hash['items'].nil? ? [] : result_hash['items']['item'] )
 
         result_hash
       end
@@ -400,7 +400,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['items'] = result_hash['items']['item']
+        result_hash['items'] = ( result_hash['items'].nil? ? [] : result_hash['items']['item'] )
 
         result_hash
       end
@@ -411,7 +411,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['items'] = result_hash['items']['item']
+        result_hash['items'] = ( result_hash['items'].nil? ? [] : result_hash['items']['item'] )
 
         result_hash
       end
@@ -498,7 +498,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['products'] = result_hash['products']['product']
+        result_hash['products'] = ( result_hash['products'].nil? ? [] : result_hash['products']['product'] )
 
         result_hash
       end
@@ -512,7 +512,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['products'] = result_hash['products']['product']
+        result_hash['products'] = ( result_hash['products'].nil? ? [] : result_hash['products']['product'] )
 
         result_hash
       end
@@ -523,7 +523,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['skus'] = result_hash['skus']['sku']
+        result_hash['skus'] = ( result_hash['skus'].nil? ? [] : result_hash['skus']['sku'] )
 
         result_hash
       end
@@ -565,7 +565,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['cat_brand_sale_props'] = result_hash['cat_brand_sale_props']['cat_brand_sale_prop']
+        result_hash['cat_brand_sale_props'] = ( result_hash['cat_brand_sale_props'].nil? ? [] : result_hash['cat_brand_sale_props']['cat_brand_sale_prop'] )
 
         result_hash
       end
@@ -719,7 +719,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['trades'] = result_hash['trades']['trade']
+        result_hash['trades'] = ( result_hash['trades'].nil? ? [] : result_hash['trades']['trade'] )
 
         result_hash
       end
@@ -730,7 +730,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['trades'] = result_hash['trades']['trade']
+        result_hash['trades'] = ( result_hash['trades'].nil? ? [] : result_hash['trades']['trade'] )
 
         result_hash
       end
@@ -741,7 +741,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['trades'] = result_hash['trades']['trade']
+        result_hash['trades'] = ( result_hash['trades'].nil? ? [] : result_hash['trades']['trade'] )
 
         result_hash
       end
@@ -782,7 +782,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['trade_rates'] = result_hash['trade_rates']['trade_rate']
+        result_hash['trade_rates'] = ( result_hash['trade_rates'].nil? ? [] : result_hash['trade_rates']['trade_rate'] )
 
         result_hash
       end
@@ -833,7 +833,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['areas'] = result_hash['areas']['area']
+        result_hash['areas'] = ( result_hash['areas'].nil? ? [] : result_hash['areas']['area'] )
 
         result_hash
       end
@@ -864,7 +864,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['delivery_templates'] = result_hash['delivery_templates']['delivery_template']
+        result_hash['delivery_templates'] = ( result_hash['delivery_templates'].nil? ? [] : result_hash['delivery_templates']['delivery_template'] )
 
         result_hash
       end
@@ -885,7 +885,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['delivery_templates'] = result_hash['delivery_templates']['delivery_template']
+        result_hash['delivery_templates'] = ( result_hash['delivery_templates'].nil? ? [] : result_hash['delivery_templates']['delivery_template'] )
 
         result_hash
       end
@@ -930,7 +930,7 @@ module Taobao
         params['method'] = 'taobao.logistics.address.search'
 
         result_hash = Client.execute(params)
-        result_hash['addresses'] = result_hash['addresses']['address_result']
+        result_hash['addresses'] = ( result_hash['addresses'].nil? ? [] : result_hash['addresses']['address_result'] )
 
         result_hash
       end
@@ -941,7 +941,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['logistics_companies'] = result_hash['logistics_companies']['logistics_company']
+        result_hash['logistics_companies'] = ( result_hash['logistics_companies'].nil? ? [] : result_hash['logistics_companies']['logistics_company'] )
 
         result_hash
       end
@@ -1012,7 +1012,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['shippings'] = result_hash['shippings']['shipping']
+        result_hash['shippings'] = ( result_hash['shippings'].nil? ? [] : result_hash['shippings']['shipping'] )
 
         result_hash
       end
@@ -1023,7 +1023,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['shippings'] = result_hash['shippings']['shipping']
+        result_hash['shippings'] = ( result_hash['shippings'].nil? ? [] : result_hash['shippings']['shipping'] )
 
         result_hash
       end
@@ -1054,7 +1054,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['logistics_partners'] = result_hash['logistics_partners']['logistics_partner']
+        result_hash['logistics_partners'] = ( result_hash['logistics_partners'].nil? ? [] : result_hash['logistics_partners']['logistics_partner'] )
 
         result_hash
       end
@@ -1065,7 +1065,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['trace_list'] = result_hash['trace_list']['transit_step_info']
+        result_hash['trace_list'] = ( result_hash['trace_list'].nil? ? [] : result_hash['trace_list']['transit_step_info'] )
 
         result_hash
       end
@@ -1096,7 +1096,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['seller_cats'] = result_hash['seller_cats']['seller_cat']
+        result_hash['seller_cats'] = ( result_hash['seller_cats'].nil? ? [] : result_hash['seller_cats']['seller_cat'] )
 
         result_hash
       end
@@ -1144,7 +1144,7 @@ module Taobao
         params['method'] = 'taobao.shopcats.list.get'
 
         result_hash = Client.execute(params)
-        result_hash['shop_cats'] = result_hash['shop_cats']['shop_cat']
+        result_hash['shop_cats'] = ( result_hash['shop_cats'].nil? ? [] : result_hash['shop_cats']['shop_cat'] )
 
         result_hash
       end
@@ -1153,7 +1153,7 @@ module Taobao
         params['method'] = 'taobao.fenxiao.cooperation.get'
 
         result_hash = Client.execute(params)
-        result_hash['cooperations'] = result_hash['cooperations']['cooperation']
+        result_hash['cooperations'] = ( result_hash['cooperations'].nil? ? [] : result_hash['cooperations']['cooperation'] )
 
         result_hash
       end
@@ -1190,7 +1190,7 @@ module Taobao
         params['method'] = 'taobao.fenxiao.discounts.get'
 
         result_hash = Client.execute(params)
-        result_hash['discounts'] = result_hash['discounts']['discount']
+        result_hash['discounts'] = ( result_hash['discounts'].nil? ? [] : result_hash['discounts']['discount'] )
 
         result_hash
       end
@@ -1202,7 +1202,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['records'] = result_hash['records']['fenxiao_item_record']
+        result_hash['records'] = ( result_hash['records'].nil? ? [] : result_hash['records']['fenxiao_item_record'] )
 
         result_hash
       end
@@ -1213,7 +1213,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['distributors'] = result_hash['distributors']['distributor']
+        result_hash['distributors'] = ( result_hash['distributors'].nil? ? [] : result_hash['distributors']['distributor'] )
 
         result_hash
       end
@@ -1222,7 +1222,7 @@ module Taobao
         params['method'] = 'taobao.fenxiao.grades.get'
 
         result_hash = Client.execute(params)
-        result_hash['fenxiao_grades'] = result_hash['fenxiao_grades']['fenxiao_grade']
+        result_hash['fenxiao_grades'] = ( result_hash['fenxiao_grades'].nil? ? [] : result_hash['fenxiao_grades']['fenxiao_grade'] )
 
         result_hash
       end
@@ -1269,7 +1269,7 @@ module Taobao
         params['method'] = 'taobao.fenxiao.orders.get'
 
         result_hash = Client.execute(params)
-        result_hash['purchase_orders'] = result_hash['purchase_orders']['purchase_order']
+        result_hash['purchase_orders'] = ( result_hash['purchase_orders'].nil? ? [] : result_hash['purchase_orders']['purchase_order'] )
 
         result_hash
       end
@@ -1366,7 +1366,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['skus'] = result_hash['skus']['fenxiao_sku']
+        result_hash['skus'] = ( result_hash['skus'].nil? ? [] : result_hash['skus']['fenxiao_sku'] )
 
         result_hash
       end
@@ -1385,7 +1385,7 @@ module Taobao
         params['method'] = 'taobao.fenxiao.productcats.get'
 
         result_hash = Client.execute(params)
-        result_hash['productcats'] = result_hash['productcats']['product_cat']
+        result_hash['productcats'] = ( result_hash['productcats'].nil? ? [] : result_hash['productcats']['product_cat'] )
 
         result_hash
       end
@@ -1394,7 +1394,7 @@ module Taobao
         params['method'] = 'taobao.fenxiao.products.get'
 
         result_hash = Client.execute(params)
-        result_hash['products'] = result_hash['products']['fenxiao_product']
+        result_hash['products'] = ( result_hash['products'].nil? ? [] : result_hash['products']['fenxiao_product'] )
 
         result_hash
       end
@@ -1403,7 +1403,7 @@ module Taobao
         params['method'] = 'taobao.fenxiao.trademonitor.get'
 
         result_hash = Client.execute(params)
-        result_hash['trade_monitors'] = result_hash['trade_monitors']['trade_monitor']
+        result_hash['trade_monitors'] = ( result_hash['trade_monitors'].nil? ? [] : result_hash['trade_monitors']['trade_monitor'] )
 
         result_hash
       end
@@ -1414,7 +1414,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['waiting_time_list_on_days'] = result_hash['waiting_time_list_on_days']['waiting_times_on_day']
+        result_hash['waiting_time_list_on_days'] = ( result_hash['waiting_time_list_on_days'].nil? ? [] : result_hash['waiting_time_list_on_days']['waiting_times_on_day'] )
 
         result_hash
       end
@@ -1425,7 +1425,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['msgs'] = result_hash['msgs']['msg']
+        result_hash['msgs'] = ( result_hash['msgs'].nil? ? [] : result_hash['msgs']['msg'] )
 
         result_hash
       end
@@ -1436,7 +1436,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['chatpeers'] = result_hash['chatpeers']['chatpeer']
+        result_hash['chatpeers'] = ( result_hash['chatpeers'].nil? ? [] : result_hash['chatpeers']['chatpeer'] )
 
         result_hash
       end
@@ -1447,7 +1447,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['staff_eval_details'] = result_hash['staff_eval_details']['eval_detail']
+        result_hash['staff_eval_details'] = ( result_hash['staff_eval_details'].nil? ? [] : result_hash['staff_eval_details']['eval_detail'] )
 
         result_hash
       end
@@ -1458,7 +1458,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['staff_eval_stat_on_days'] = result_hash['staff_eval_stat_on_days']['staff_eval_stat_on_day']
+        result_hash['staff_eval_stat_on_days'] = ( result_hash['staff_eval_stat_on_days'].nil? ? [] : result_hash['staff_eval_stat_on_days']['staff_eval_stat_on_day'] )
 
         result_hash
       end
@@ -1469,7 +1469,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['group_member_list'] = result_hash['group_member_list']['group_member']
+        result_hash['group_member_list'] = ( result_hash['group_member_list'].nil? ? [] : result_hash['group_member_list']['group_member'] )
 
         result_hash
       end
@@ -1480,7 +1480,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['loginlogs'] = result_hash['loginlogs']['login_log']
+        result_hash['loginlogs'] = ( result_hash['loginlogs'].nil? ? [] : result_hash['loginlogs']['login_log'] )
 
         result_hash
       end
@@ -1491,7 +1491,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['non_reply_stat_on_days'] = result_hash['non_reply_stat_on_days']['non_reply_stat_on_day']
+        result_hash['non_reply_stat_on_days'] = ( result_hash['non_reply_stat_on_days'].nil? ? [] : result_hash['non_reply_stat_on_days']['non_reply_stat_on_day'] )
 
         result_hash
       end
@@ -1502,7 +1502,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['online_times_list_on_days'] = result_hash['online_times_list_on_days']['online_times_on_day']
+        result_hash['online_times_list_on_days'] = ( result_hash['online_times_list_on_days'].nil? ? [] : result_hash['online_times_list_on_days']['online_times_on_day'] )
 
         result_hash
       end
@@ -1513,7 +1513,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['reply_stat_list_on_days'] = result_hash['reply_stat_list_on_days']['reply_stat_on_day']
+        result_hash['reply_stat_list_on_days'] = ( result_hash['reply_stat_list_on_days'].nil? ? [] : result_hash['reply_stat_list_on_days']['reply_stat_on_day'] )
 
         result_hash
       end
@@ -1522,7 +1522,7 @@ module Taobao
         params['method'] = 'taobao.wangwang.eservice.streamweigths.get'
 
         result_hash = Client.execute(params)
-        result_hash['staff_stream_weights'] = result_hash['staff_stream_weights']['stream_weight']
+        result_hash['staff_stream_weights'] = ( result_hash['staff_stream_weights'].nil? ? [] : result_hash['staff_stream_weights']['stream_weight'] )
 
         result_hash
       end
@@ -1546,7 +1546,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_items'] = result_hash['taobaoke_items']['taobaoke_item']
+        result_hash['taobaoke_items'] = ( result_hash['taobaoke_items'].nil? ? [] : result_hash['taobaoke_items']['taobaoke_item'] )
 
         result_hash
       end
@@ -1560,7 +1560,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_items'] = result_hash['taobaoke_items']['taobaoke_item']
+        result_hash['taobaoke_items'] = ( result_hash['taobaoke_items'].nil? ? [] : result_hash['taobaoke_items']['taobaoke_item'] )
 
         result_hash
       end
@@ -1574,7 +1574,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_item_details'] = result_hash['taobaoke_item_details']['taobaoke_item_detail']
+        result_hash['taobaoke_item_details'] = ( result_hash['taobaoke_item_details'].nil? ? [] : result_hash['taobaoke_item_details']['taobaoke_item_detail'] )
 
         result_hash
       end
@@ -1588,7 +1588,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_items'] = result_hash['taobaoke_items']['taobaoke_item']
+        result_hash['taobaoke_items'] = ( result_hash['taobaoke_items'].nil? ? [] : result_hash['taobaoke_items']['taobaoke_item'] )
 
         result_hash
       end
@@ -1599,7 +1599,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_items'] = result_hash['taobaoke_items']['taobaoke_item']
+        result_hash['taobaoke_items'] = ( result_hash['taobaoke_items'].nil? ? [] : result_hash['taobaoke_items']['taobaoke_item'] )
 
         result_hash
       end
@@ -1633,7 +1633,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_shops'] = result_hash['taobaoke_shops']['taobaoke_shop']
+        result_hash['taobaoke_shops'] = ( result_hash['taobaoke_shops'].nil? ? [] : result_hash['taobaoke_shops']['taobaoke_shop'] )
 
         result_hash
       end
@@ -1647,7 +1647,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_shops'] = result_hash['taobaoke_shops']['taobaoke_shop']
+        result_hash['taobaoke_shops'] = ( result_hash['taobaoke_shops'].nil? ? [] : result_hash['taobaoke_shops']['taobaoke_shop'] )
 
         result_hash
       end
@@ -1661,7 +1661,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_shops'] = result_hash['taobaoke_shops']['taobaoke_shop']
+        result_hash['taobaoke_shops'] = ( result_hash['taobaoke_shops'].nil? ? [] : result_hash['taobaoke_shops']['taobaoke_shop'] )
 
         result_hash
       end
@@ -1675,7 +1675,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_items'] = result_hash['taobaoke_items']['taobaoke_item']
+        result_hash['taobaoke_items'] = ( result_hash['taobaoke_items'].nil? ? [] : result_hash['taobaoke_items']['taobaoke_item'] )
 
         result_hash
       end
@@ -1686,7 +1686,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['taobaoke_shops'] = result_hash['taobaoke_shops']['taobaoke_shop']
+        result_hash['taobaoke_shops'] = ( result_hash['taobaoke_shops'].nil? ? [] : result_hash['taobaoke_shops']['taobaoke_shop'] )
 
         result_hash
       end
@@ -1707,7 +1707,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['discard_info_list'] = result_hash['discard_info_list']['discard_info']
+        result_hash['discard_info_list'] = ( result_hash['discard_info_list'].nil? ? [] : result_hash['discard_info_list']['discard_info'] )
 
         result_hash
       end
@@ -1718,7 +1718,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['messages'] = result_hash['messages'].values.flatten(1)
+        result_hash['messages'] = ( result_hash['messages'].nil? ? [] : result_hash['messages'].values.flatten(1)  )
 
         result_hash
       end
@@ -1745,7 +1745,7 @@ module Taobao
         params['method'] = 'taobao.increment.customers.get'
 
         result_hash = Client.execute(params)
-        result_hash['app_customers'] = result_hash['app_customers']['app_customer']
+        result_hash['app_customers'] = ( result_hash['app_customers'].nil? ? [] : result_hash['app_customers']['app_customer'] )
 
         result_hash
       end
@@ -1754,7 +1754,7 @@ module Taobao
         params['method'] = 'taobao.increment.items.get'
 
         result_hash = Client.execute(params)
-        result_hash['notify_items'] = result_hash['notify_items']['notify_item']
+        result_hash['notify_items'] = ( result_hash['notify_items'].nil? ? [] : result_hash['notify_items']['notify_item'] )
 
         result_hash
       end
@@ -1763,7 +1763,7 @@ module Taobao
         params['method'] = 'taobao.increment.refunds.get'
 
         result_hash = Client.execute(params)
-        result_hash['notify_refunds'] = result_hash['notify_refunds']['notify_refund']
+        result_hash['notify_refunds'] = ( result_hash['notify_refunds'].nil? ? [] : result_hash['notify_refunds']['notify_refund'] )
 
         result_hash
       end
@@ -1772,7 +1772,7 @@ module Taobao
         params['method'] = 'taobao.increment.trades.get'
 
         result_hash = Client.execute(params)
-        result_hash['notify_trades'] = result_hash['notify_trades']['notify_trade']
+        result_hash['notify_trades'] = ( result_hash['notify_trades'].nil? ? [] : result_hash['notify_trades']['notify_trade'] )
 
         result_hash
       end
@@ -1841,7 +1841,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['tasks'] = result_hash['tasks']['task']
+        result_hash['tasks'] = ( result_hash['tasks'].nil? ? [] : result_hash['tasks']['task'] )
 
         result_hash
       end
@@ -1852,7 +1852,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['inventory_list'] = result_hash['inventory_list']['wlb_inventory']
+        result_hash['inventory_list'] = ( result_hash['inventory_list'].nil? ? [] : result_hash['inventory_list']['wlb_inventory'] )
 
         result_hash
       end
@@ -1871,7 +1871,7 @@ module Taobao
         params['method'] = 'taobao.wlb.inventorylog.query'
 
         result_hash = Client.execute(params)
-        result_hash['inventory_log_list'] = result_hash['inventory_log_list']['wlb_item_inventory_log']
+        result_hash['inventory_log_list'] = ( result_hash['inventory_log_list'].nil? ? [] : result_hash['inventory_log_list']['wlb_item_inventory_log'] )
 
         result_hash
       end
@@ -1892,7 +1892,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['rule_id_list'] = result_hash['rule_id_list'].values.flatten(1)
+        result_hash['rule_id_list'] = ( result_hash['rule_id_list'].nil? ? [] : result_hash['rule_id_list'].values.flatten(1)  )
 
         result_hash
       end
@@ -1911,7 +1911,7 @@ module Taobao
         params['method'] = 'taobao.wlb.item.authorization.query'
 
         result_hash = Client.execute(params)
-        result_hash['authorization_list'] = result_hash['authorization_list']['wlb_authorization']
+        result_hash['authorization_list'] = ( result_hash['authorization_list'].nil? ? [] : result_hash['authorization_list']['wlb_authorization'] )
 
         result_hash
       end
@@ -1922,7 +1922,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['item_inventory_batch_list'] = result_hash['item_inventory_batch_list']['wlb_item_batch_inventory']
+        result_hash['item_inventory_batch_list'] = ( result_hash['item_inventory_batch_list'].nil? ? [] : result_hash['item_inventory_batch_list']['wlb_item_batch_inventory'] )
 
         result_hash
       end
@@ -1953,7 +1953,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['item_id_list'] = result_hash['item_id_list'].values.flatten(1)
+        result_hash['item_id_list'] = ( result_hash['item_id_list'].nil? ? [] : result_hash['item_id_list'].values.flatten(1)  )
 
         result_hash
       end
@@ -1982,7 +1982,7 @@ module Taobao
         params['method'] = 'taobao.wlb.item.consignment.page.get'
 
         result_hash = Client.execute(params)
-        result_hash['wlb_consign_ments'] = result_hash['wlb_consign_ments']['wlb_consign_ment']
+        result_hash['wlb_consign_ments'] = ( result_hash['wlb_consign_ments'].nil? ? [] : result_hash['wlb_consign_ments']['wlb_consign_ment'] )
 
         result_hash
       end
@@ -2013,7 +2013,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['out_entity_item_list'] = result_hash['out_entity_item_list']['out_entity_item']
+        result_hash['out_entity_item_list'] = ( result_hash['out_entity_item_list'].nil? ? [] : result_hash['out_entity_item_list']['out_entity_item'] )
 
         result_hash
       end
@@ -2032,7 +2032,7 @@ module Taobao
         params['method'] = 'taobao.wlb.item.query'
 
         result_hash = Client.execute(params)
-        result_hash['item_list'] = result_hash['item_list']['wlb_item']
+        result_hash['item_list'] = ( result_hash['item_list'].nil? ? [] : result_hash['item_list']['wlb_item'] )
 
         result_hash
       end
@@ -2081,7 +2081,7 @@ module Taobao
         params['method'] = 'taobao.wlb.notify.message.page.get'
 
         result_hash = Client.execute(params)
-        result_hash['wlb_messages'] = result_hash['wlb_messages']['wlb_message']
+        result_hash['wlb_messages'] = ( result_hash['wlb_messages'].nil? ? [] : result_hash['wlb_messages']['wlb_message'] )
 
         result_hash
       end
@@ -2120,7 +2120,7 @@ module Taobao
         params['method'] = 'taobao.wlb.order.page.get'
 
         result_hash = Client.execute(params)
-        result_hash['order_list'] = result_hash['order_list']['wlb_order']
+        result_hash['order_list'] = ( result_hash['order_list'].nil? ? [] : result_hash['order_list']['wlb_order'] )
 
         result_hash
       end
@@ -2151,7 +2151,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['order_item_list'] = result_hash['order_item_list']['wlb_order_item']
+        result_hash['order_item_list'] = ( result_hash['order_item_list'].nil? ? [] : result_hash['order_item_list']['wlb_order_item'] )
 
         result_hash
       end
@@ -2170,7 +2170,7 @@ module Taobao
         params['method'] = 'taobao.wlb.orderschedulerule.query'
 
         result_hash = Client.execute(params)
-        result_hash['order_schedule_rule_list'] = result_hash['order_schedule_rule_list']['wlb_order_schedule_rule']
+        result_hash['order_schedule_rule_list'] = ( result_hash['order_schedule_rule_list'].nil? ? [] : result_hash['order_schedule_rule_list']['wlb_order_schedule_rule'] )
 
         result_hash
       end
@@ -2181,7 +2181,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['wlb_order_status'] = result_hash['wlb_order_status']['wlb_process_status']
+        result_hash['wlb_order_status'] = ( result_hash['wlb_order_status'].nil? ? [] : result_hash['wlb_order_status']['wlb_process_status'] )
 
         result_hash
       end
@@ -2200,7 +2200,7 @@ module Taobao
         params['method'] = 'taobao.wlb.replenish.statistics'
 
         result_hash = Client.execute(params)
-        result_hash['replenish_list'] = result_hash['replenish_list']['wlb_replenish']
+        result_hash['replenish_list'] = ( result_hash['replenish_list'].nil? ? [] : result_hash['replenish_list']['wlb_replenish'] )
 
         result_hash
       end
@@ -2209,7 +2209,7 @@ module Taobao
         params['method'] = 'taobao.wlb.subscription.query'
 
         result_hash = Client.execute(params)
-        result_hash['seller_subscription_list'] = result_hash['seller_subscription_list']['wlb_seller_subscription']
+        result_hash['seller_subscription_list'] = ( result_hash['seller_subscription_list'].nil? ? [] : result_hash['seller_subscription_list']['wlb_seller_subscription'] )
 
         result_hash
       end
@@ -2220,7 +2220,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['tms_order_list'] = result_hash['tms_order_list']['wlb_tms_order']
+        result_hash['tms_order_list'] = ( result_hash['tms_order_list'].nil? ? [] : result_hash['tms_order_list']['wlb_tms_order'] )
 
         result_hash
       end
@@ -2231,7 +2231,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['wlb_order_list'] = result_hash['wlb_order_list']['wlb_order']
+        result_hash['wlb_order_list'] = ( result_hash['wlb_order_list'].nil? ? [] : result_hash['wlb_order_list']['wlb_order'] )
 
         result_hash
       end
@@ -2270,7 +2270,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['adgroup_catmatch_list'] = result_hash['adgroup_catmatch_list']['ad_group_catmatch']
+        result_hash['adgroup_catmatch_list'] = ( result_hash['adgroup_catmatch_list'].nil? ? [] : result_hash['adgroup_catmatch_list']['ad_group_catmatch'] )
 
         result_hash
       end
@@ -2351,7 +2351,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['adgroup_list'] = result_hash['adgroup_list']['ad_group']
+        result_hash['adgroup_list'] = ( result_hash['adgroup_list'].nil? ? [] : result_hash['adgroup_list']['ad_group'] )
 
         result_hash
       end
@@ -2362,7 +2362,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['adgroup_list'] = result_hash['adgroup_list']['ad_group']
+        result_hash['adgroup_list'] = ( result_hash['adgroup_list'].nil? ? [] : result_hash['adgroup_list']['ad_group'] )
 
         result_hash
       end
@@ -2394,7 +2394,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['changed_adgroupids'] = result_hash['changed_adgroupids'].values.flatten(1)
+        result_hash['changed_adgroupids'] = ( result_hash['changed_adgroupids'].nil? ? [] : result_hash['changed_adgroupids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2405,7 +2405,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['deleted_adgroup_ids'] = result_hash['deleted_adgroup_ids'].values.flatten(1)
+        result_hash['deleted_adgroup_ids'] = ( result_hash['deleted_adgroup_ids'].nil? ? [] : result_hash['deleted_adgroup_ids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2477,7 +2477,7 @@ module Taobao
         params['method'] = 'taobao.simba.campaign.areaoptions.get'
 
         result_hash = Client.execute(params)
-        result_hash['area_options'] = result_hash['area_options']['area_option']
+        result_hash['area_options'] = ( result_hash['area_options'].nil? ? [] : result_hash['area_options']['area_option'] )
 
         result_hash
       end
@@ -2506,7 +2506,7 @@ module Taobao
         params['method'] = 'taobao.simba.campaign.channeloptions.get'
 
         result_hash = Client.execute(params)
-        result_hash['channel_options'] = result_hash['channel_options']['channel_option']
+        result_hash['channel_options'] = ( result_hash['channel_options'].nil? ? [] : result_hash['channel_options']['channel_option'] )
 
         result_hash
       end
@@ -2565,7 +2565,7 @@ module Taobao
         params['method'] = 'taobao.simba.campaigns.get'
 
         result_hash = Client.execute(params)
-        result_hash['campaigns'] = result_hash['campaigns']['campaign']
+        result_hash['campaigns'] = ( result_hash['campaigns'].nil? ? [] : result_hash['campaigns']['campaign'] )
 
         result_hash
       end
@@ -2576,7 +2576,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['changed_catmatch_ids'] = result_hash['changed_catmatch_ids'].values.flatten(1)
+        result_hash['changed_catmatch_ids'] = ( result_hash['changed_catmatch_ids'].nil? ? [] : result_hash['changed_catmatch_ids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2587,7 +2587,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['deleted_catmatch_ids'] = result_hash['deleted_catmatch_ids'].values.flatten(1)
+        result_hash['deleted_catmatch_ids'] = ( result_hash['deleted_catmatch_ids'].nil? ? [] : result_hash['deleted_catmatch_ids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2628,7 +2628,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['changed_creative_ids'] = result_hash['changed_creative_ids'].values.flatten(1)
+        result_hash['changed_creative_ids'] = ( result_hash['changed_creative_ids'].nil? ? [] : result_hash['changed_creative_ids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2639,7 +2639,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['deleted_creative_ids'] = result_hash['deleted_creative_ids'].values.flatten(1)
+        result_hash['deleted_creative_ids'] = ( result_hash['deleted_creative_ids'].nil? ? [] : result_hash['deleted_creative_ids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2661,7 +2661,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['creatives'] = result_hash['creatives']['creative']
+        result_hash['creatives'] = ( result_hash['creatives'].nil? ? [] : result_hash['creatives']['creative'] )
 
         result_hash
       end
@@ -2672,7 +2672,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['creativerecords'] = result_hash['creativerecords']['creative_record']
+        result_hash['creativerecords'] = ( result_hash['creativerecords'].nil? ? [] : result_hash['creativerecords']['creative_record'] )
 
         result_hash
       end
@@ -2681,7 +2681,7 @@ module Taobao
         params['method'] = 'taobao.simba.customers.authorized.get'
 
         result_hash = Client.execute(params)
-        result_hash['nicks'] = result_hash['nicks'].values.flatten(1)
+        result_hash['nicks'] = ( result_hash['nicks'].nil? ? [] : result_hash['nicks'].values.flatten(1)  )
 
         result_hash
       end
@@ -2692,7 +2692,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['in_category_tops'] = result_hash['in_category_tops']['in_category_top']
+        result_hash['in_category_tops'] = ( result_hash['in_category_tops'].nil? ? [] : result_hash['in_category_tops']['in_category_top'] )
 
         result_hash
       end
@@ -2703,7 +2703,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['in_category_analyses'] = result_hash['in_category_analyses']['in_category_analysis']
+        result_hash['in_category_analyses'] = ( result_hash['in_category_analyses'].nil? ? [] : result_hash['in_category_analyses']['in_category_analysis'] )
 
         result_hash
       end
@@ -2714,7 +2714,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['in_category_bases'] = result_hash['in_category_bases']['in_category_base']
+        result_hash['in_category_bases'] = ( result_hash['in_category_bases'].nil? ? [] : result_hash['in_category_bases']['in_category_base'] )
 
         result_hash
       end
@@ -2725,7 +2725,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['in_category_tops'] = result_hash['in_category_tops']['in_category_top']
+        result_hash['in_category_tops'] = ( result_hash['in_category_tops'].nil? ? [] : result_hash['in_category_tops']['in_category_top'] )
 
         result_hash
       end
@@ -2736,7 +2736,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['related_words'] = result_hash['related_words'].values.flatten(1)
+        result_hash['related_words'] = ( result_hash['related_words'].nil? ? [] : result_hash['related_words'].values.flatten(1)  )
 
         result_hash
       end
@@ -2747,7 +2747,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['top_words'] = result_hash['top_words'].values.flatten(1)
+        result_hash['top_words'] = ( result_hash['top_words'].nil? ? [] : result_hash['top_words'].values.flatten(1)  )
 
         result_hash
       end
@@ -2756,7 +2756,7 @@ module Taobao
         params['method'] = 'taobao.simba.insight.toplevelcats.get'
 
         result_hash = Client.execute(params)
-        result_hash['in_category_tops'] = result_hash['in_category_tops']['in_category_top']
+        result_hash['in_category_tops'] = ( result_hash['in_category_tops'].nil? ? [] : result_hash['in_category_tops']['in_category_top'] )
 
         result_hash
       end
@@ -2767,7 +2767,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['in_word_analyses'] = result_hash['in_word_analyses']['in_word_analysis']
+        result_hash['in_word_analyses'] = ( result_hash['in_word_analyses'].nil? ? [] : result_hash['in_word_analyses']['in_word_analysis'] )
 
         result_hash
       end
@@ -2778,7 +2778,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['in_word_bases'] = result_hash['in_word_bases']['in_word_base']
+        result_hash['in_word_bases'] = ( result_hash['in_word_bases'].nil? ? [] : result_hash['in_word_bases']['in_word_base'] )
 
         result_hash
       end
@@ -2789,7 +2789,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['in_word_categories'] = result_hash['in_word_categories']['in_word_category']
+        result_hash['in_word_categories'] = ( result_hash['in_word_categories'].nil? ? [] : result_hash['in_word_categories']['in_word_category'] )
 
         result_hash
       end
@@ -2810,7 +2810,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['changed_keyword_ids'] = result_hash['changed_keyword_ids'].values.flatten(1)
+        result_hash['changed_keyword_ids'] = ( result_hash['changed_keyword_ids'].nil? ? [] : result_hash['changed_keyword_ids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2821,7 +2821,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['deleted_keyword_ids'] = result_hash['deleted_keyword_ids'].values.flatten(1)
+        result_hash['deleted_keyword_ids'] = ( result_hash['deleted_keyword_ids'].nil? ? [] : result_hash['deleted_keyword_ids'].values.flatten(1)  )
 
         result_hash
       end
@@ -2832,7 +2832,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['keywords'] = result_hash['keywords']['keyword']
+        result_hash['keywords'] = ( result_hash['keywords'].nil? ? [] : result_hash['keywords']['keyword'] )
 
         result_hash
       end
@@ -2853,7 +2853,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['keywords'] = result_hash['keywords']['keyword']
+        result_hash['keywords'] = ( result_hash['keywords'].nil? ? [] : result_hash['keywords']['keyword'] )
 
         result_hash
       end
@@ -2865,7 +2865,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['keywords'] = result_hash['keywords']['keyword']
+        result_hash['keywords'] = ( result_hash['keywords'].nil? ? [] : result_hash['keywords']['keyword'] )
 
         result_hash
       end
@@ -2876,7 +2876,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['keywords'] = result_hash['keywords']['keyword']
+        result_hash['keywords'] = ( result_hash['keywords'].nil? ? [] : result_hash['keywords']['keyword'] )
 
         result_hash
       end
@@ -2887,7 +2887,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['keyword_qscore_list'] = result_hash['keyword_qscore_list']['keyword_qscore']
+        result_hash['keyword_qscore_list'] = ( result_hash['keyword_qscore_list'].nil? ? [] : result_hash['keyword_qscore_list']['keyword_qscore'] )
 
         result_hash
       end
@@ -2916,7 +2916,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['adgroup_place_list'] = result_hash['adgroup_place_list']['ad_group_place']
+        result_hash['adgroup_place_list'] = ( result_hash['adgroup_place_list'].nil? ? [] : result_hash['adgroup_place_list']['ad_group_place'] )
 
         result_hash
       end
@@ -2927,7 +2927,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['adgroup_place_list'] = result_hash['adgroup_place_list']['ad_group_place']
+        result_hash['adgroup_place_list'] = ( result_hash['adgroup_place_list'].nil? ? [] : result_hash['adgroup_place_list']['ad_group_place'] )
 
         result_hash
       end
@@ -2938,7 +2938,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['adgroup_place_list'] = result_hash['adgroup_place_list']['ad_group_place']
+        result_hash['adgroup_place_list'] = ( result_hash['adgroup_place_list'].nil? ? [] : result_hash['adgroup_place_list']['ad_group_place'] )
 
         result_hash
       end
@@ -2949,7 +2949,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['adgroup_place_list'] = result_hash['adgroup_place_list']['ad_group_place']
+        result_hash['adgroup_place_list'] = ( result_hash['adgroup_place_list'].nil? ? [] : result_hash['adgroup_place_list']['ad_group_place'] )
 
         result_hash
       end
@@ -2958,7 +2958,7 @@ module Taobao
         params['method'] = 'taobao.simba.nonsearch.alldemographics.get'
 
         result_hash = Client.execute(params)
-        result_hash['demographic_list'] = result_hash['demographic_list']['demographic']
+        result_hash['demographic_list'] = ( result_hash['demographic_list'].nil? ? [] : result_hash['demographic_list']['demographic'] )
 
         result_hash
       end
@@ -2967,7 +2967,7 @@ module Taobao
         params['method'] = 'taobao.simba.nonsearch.allplaces.get'
 
         result_hash = Client.execute(params)
-        result_hash['place_list'] = result_hash['place_list']['place']
+        result_hash['place_list'] = ( result_hash['place_list'].nil? ? [] : result_hash['place_list']['place'] )
 
         result_hash
       end
@@ -2978,7 +2978,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['demographic_setting_list'] = result_hash['demographic_setting_list']['demographic_setting']
+        result_hash['demographic_setting_list'] = ( result_hash['demographic_setting_list'].nil? ? [] : result_hash['demographic_setting_list']['demographic_setting'] )
 
         result_hash
       end
@@ -2989,7 +2989,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['demographic_setting_list'] = result_hash['demographic_setting_list']['demographic_setting']
+        result_hash['demographic_setting_list'] = ( result_hash['demographic_setting_list'].nil? ? [] : result_hash['demographic_setting_list']['demographic_setting'] )
 
         result_hash
       end
@@ -3160,7 +3160,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['rankeditems'] = result_hash['rankeditems']['ranked_item']
+        result_hash['rankeditems'] = ( result_hash['rankeditems'].nil? ? [] : result_hash['rankeditems']['ranked_item'] )
 
         result_hash
       end
@@ -3201,7 +3201,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['collect_items'] = result_hash['collect_items']['collect_item']
+        result_hash['collect_items'] = ( result_hash['collect_items'].nil? ? [] : result_hash['collect_items']['collect_item'] )
 
         result_hash
       end
@@ -3282,7 +3282,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['orders'] = result_hash['orders']['at_order']
+        result_hash['orders'] = ( result_hash['orders'].nil? ? [] : result_hash['orders']['at_order'] )
 
         result_hash
       end
@@ -3341,7 +3341,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['promotions'] = result_hash['promotions']['promotion']
+        result_hash['promotions'] = ( result_hash['promotions'].nil? ? [] : result_hash['promotions']['promotion'] )
 
         result_hash
       end
@@ -3352,7 +3352,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['user_tags'] = result_hash['user_tags']['user_tag']
+        result_hash['user_tags'] = ( result_hash['user_tags'].nil? ? [] : result_hash['user_tags']['user_tag'] )
 
         result_hash
       end
@@ -3361,7 +3361,7 @@ module Taobao
         params['method'] = 'taobao.promotion.activity.get'
 
         result_hash = Client.execute(params)
-        result_hash['activitys'] = result_hash['activitys']['activity']
+        result_hash['activitys'] = ( result_hash['activitys'].nil? ? [] : result_hash['activitys']['activity'] )
 
         result_hash
       end
@@ -3372,7 +3372,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['coupon_details'] = result_hash['coupon_details']['coupon_detail']
+        result_hash['coupon_details'] = ( result_hash['coupon_details'].nil? ? [] : result_hash['coupon_details']['coupon_detail'] )
 
         result_hash
       end
@@ -3381,7 +3381,7 @@ module Taobao
         params['method'] = 'taobao.promotion.coupons.get'
 
         result_hash = Client.execute(params)
-        result_hash['coupons'] = result_hash['coupons']['coupon']
+        result_hash['coupons'] = ( result_hash['coupons'].nil? ? [] : result_hash['coupons']['coupon'] )
 
         result_hash
       end
@@ -3392,7 +3392,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['item_discount_detail_list'] = result_hash['item_discount_detail_list']['limit_discount_detail']
+        result_hash['item_discount_detail_list'] = ( result_hash['item_discount_detail_list'].nil? ? [] : result_hash['item_discount_detail_list']['limit_discount_detail'] )
 
         result_hash
       end
@@ -3401,7 +3401,7 @@ module Taobao
         params['method'] = 'taobao.promotion.limitdiscount.get'
 
         result_hash = Client.execute(params)
-        result_hash['limit_discount_list'] = result_hash['limit_discount_list']['limit_discount']
+        result_hash['limit_discount_list'] = ( result_hash['limit_discount_list'].nil? ? [] : result_hash['limit_discount_list']['limit_discount'] )
 
         result_hash
       end
@@ -3410,7 +3410,7 @@ module Taobao
         params['method'] = 'taobao.promotion.meal.get'
 
         result_hash = Client.execute(params)
-        result_hash['meal_list'] = result_hash['meal_list']['meal']
+        result_hash['meal_list'] = ( result_hash['meal_list'].nil? ? [] : result_hash['meal_list']['meal'] )
 
         result_hash
       end
@@ -3421,7 +3421,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['contents'] = result_hash['contents'].values.flatten(1)
+        result_hash['contents'] = ( result_hash['contents'].nil? ? [] : result_hash['contents'].values.flatten(1)  )
 
         result_hash
       end
@@ -3432,7 +3432,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['activities'] = result_hash['activities'].values.flatten(1)
+        result_hash['activities'] = ( result_hash['activities'].nil? ? [] : result_hash['activities'].values.flatten(1)  )
 
         result_hash
       end
@@ -3513,7 +3513,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['detail_id_list'] = result_hash['detail_id_list'].values.flatten(1)
+        result_hash['detail_id_list'] = ( result_hash['detail_id_list'].nil? ? [] : result_hash['detail_id_list'].values.flatten(1)  )
 
         result_hash
       end
@@ -3534,7 +3534,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['contents'] = result_hash['contents'].values.flatten(1)
+        result_hash['contents'] = ( result_hash['contents'].nil? ? [] : result_hash['contents'].values.flatten(1)  )
 
         result_hash
       end
@@ -3563,7 +3563,7 @@ module Taobao
         params['method'] = 'taobao.ump.mbbs.get'
 
         result_hash = Client.execute(params)
-        result_hash['mbbs'] = result_hash['mbbs'].values.flatten(1)
+        result_hash['mbbs'] = ( result_hash['mbbs'].nil? ? [] : result_hash['mbbs'].values.flatten(1)  )
 
         result_hash
       end
@@ -3574,7 +3574,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['mbbs'] = result_hash['mbbs'].values.flatten(1)
+        result_hash['mbbs'] = ( result_hash['mbbs'].nil? ? [] : result_hash['mbbs'].values.flatten(1)  )
 
         result_hash
       end
@@ -3605,7 +3605,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['ranges'] = result_hash['ranges']['range']
+        result_hash['ranges'] = ( result_hash['ranges'].nil? ? [] : result_hash['ranges']['range'] )
 
         result_hash
       end
@@ -3654,7 +3654,7 @@ module Taobao
         params['method'] = 'taobao.ump.tools.get'
 
         result_hash = Client.execute(params)
-        result_hash['tools'] = result_hash['tools'].values.flatten(1)
+        result_hash['tools'] = ( result_hash['tools'].nil? ? [] : result_hash['tools'].values.flatten(1)  )
 
         result_hash
       end
@@ -3804,7 +3804,7 @@ module Taobao
         params['method'] = 'taobao.hotel.orders.search'
 
         result_hash = Client.execute(params)
-        result_hash['hotel_orders'] = result_hash['hotel_orders']['hotel_order']
+        result_hash['hotel_orders'] = ( result_hash['hotel_orders'].nil? ? [] : result_hash['hotel_orders']['hotel_order'] )
 
         result_hash
       end
@@ -3877,7 +3877,7 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['rooms'] = result_hash['rooms']['room']
+        result_hash['rooms'] = ( result_hash['rooms'].nil? ? [] : result_hash['rooms']['room'] )
 
         result_hash
       end
@@ -3886,7 +3886,7 @@ module Taobao
         params['method'] = 'taobao.hotel.rooms.update'
 
         result_hash = Client.execute(params)
-        result_hash['gids'] = result_hash['gids'].values.flatten(1)
+        result_hash['gids'] = ( result_hash['gids'].nil? ? [] : result_hash['gids'].values.flatten(1)  )
 
         result_hash
       end
@@ -3897,7 +3897,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['hotels'] = result_hash['hotels']['hotel']
+        result_hash['hotels'] = ( result_hash['hotels'].nil? ? [] : result_hash['hotels']['hotel'] )
 
         result_hash
       end
@@ -3908,7 +3908,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['hotel_orders'] = result_hash['hotel_orders']['hotel_order']
+        result_hash['hotel_orders'] = ( result_hash['hotel_orders'].nil? ? [] : result_hash['hotel_orders']['hotel_order'] )
 
         result_hash
       end
@@ -3919,7 +3919,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['room_types'] = result_hash['room_types']['room_type']
+        result_hash['room_types'] = ( result_hash['room_types'].nil? ? [] : result_hash['room_types']['room_type'] )
 
         result_hash
       end
@@ -3960,7 +3960,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['hotels'] = result_hash['hotels']['hotel']
+        result_hash['hotels'] = ( result_hash['hotels'].nil? ? [] : result_hash['hotels']['hotel'] )
 
         result_hash
       end
@@ -3979,7 +3979,7 @@ module Taobao
         params['method'] = 'taobao.picture.category.get'
 
         result_hash = Client.execute(params)
-        result_hash['picture_categories'] = result_hash['picture_categories']['picture_category']
+        result_hash['picture_categories'] = ( result_hash['picture_categories'].nil? ? [] : result_hash['picture_categories']['picture_category'] )
 
         result_hash
       end
@@ -4008,7 +4008,7 @@ module Taobao
         params['method'] = 'taobao.picture.get'
 
         result_hash = Client.execute(params)
-        result_hash['pictures'] = result_hash['pictures']['picture']
+        result_hash['pictures'] = ( result_hash['pictures'].nil? ? [] : result_hash['pictures']['picture'] )
 
         result_hash
       end
@@ -4029,7 +4029,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['references'] = result_hash['references']['reference_detail']
+        result_hash['references'] = ( result_hash['references'].nil? ? [] : result_hash['references']['reference_detail'] )
 
         result_hash
       end
@@ -4098,7 +4098,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['subusers'] = result_hash['subusers']['sub_user_info']
+        result_hash['subusers'] = ( result_hash['subusers'].nil? ? [] : result_hash['subusers']['sub_user_info'] )
 
         result_hash
       end
@@ -4109,7 +4109,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['roles'] = result_hash['roles']['role']
+        result_hash['roles'] = ( result_hash['roles'].nil? ? [] : result_hash['roles']['role'] )
 
         result_hash
       end
@@ -4130,7 +4130,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['subusers'] = result_hash['subusers']['sub_user_info']
+        result_hash['subusers'] = ( result_hash['subusers'].nil? ? [] : result_hash['subusers']['sub_user_info'] )
 
         result_hash
       end
@@ -4141,7 +4141,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['permissions'] = result_hash['permissions']['permission']
+        result_hash['permissions'] = ( result_hash['permissions'].nil? ? [] : result_hash['permissions']['permission'] )
 
         result_hash
       end
@@ -4152,7 +4152,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['article_biz_orders'] = result_hash['article_biz_orders']['article_biz_order']
+        result_hash['article_biz_orders'] = ( result_hash['article_biz_orders'].nil? ? [] : result_hash['article_biz_orders']['article_biz_order'] )
 
         result_hash
       end
@@ -4163,7 +4163,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['article_subs'] = result_hash['article_subs']['article_sub']
+        result_hash['article_subs'] = ( result_hash['article_subs'].nil? ? [] : result_hash['article_subs']['article_sub'] )
 
         result_hash
       end
@@ -4174,7 +4174,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['article_user_subscribes'] = result_hash['article_user_subscribes']['article_user_subscribe']
+        result_hash['article_user_subscribes'] = ( result_hash['article_user_subscribes'].nil? ? [] : result_hash['article_user_subscribes']['article_user_subscribe'] )
 
         result_hash
       end
@@ -4205,7 +4205,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['refund_messages'] = result_hash['refund_messages']['refund_message']
+        result_hash['refund_messages'] = ( result_hash['refund_messages'].nil? ? [] : result_hash['refund_messages']['refund_message'] )
 
         result_hash
       end
@@ -4226,7 +4226,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['refunds'] = result_hash['refunds']['refund']
+        result_hash['refunds'] = ( result_hash['refunds'].nil? ? [] : result_hash['refunds']['refund'] )
 
         result_hash
       end
@@ -4237,7 +4237,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['refunds'] = result_hash['refunds']['refund']
+        result_hash['refunds'] = ( result_hash['refunds'].nil? ? [] : result_hash['refunds']['refund'] )
 
         result_hash
       end
@@ -4248,7 +4248,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['favorite_items'] = result_hash['favorite_items']['favorite_item']
+        result_hash['favorite_items'] = ( result_hash['favorite_items'].nil? ? [] : result_hash['favorite_items']['favorite_item'] )
 
         result_hash
       end
@@ -4259,7 +4259,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['values'] = result_hash['values']['favorite_item']
+        result_hash['values'] = ( result_hash['values'].nil? ? [] : result_hash['values']['favorite_item'] )
 
         result_hash
       end
@@ -4270,7 +4270,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['favorite_items'] = result_hash['favorite_items']['favorite_item']
+        result_hash['favorite_items'] = ( result_hash['favorite_items'].nil? ? [] : result_hash['favorite_items']['favorite_item'] )
 
         result_hash
       end
@@ -4281,7 +4281,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['favorite_shops'] = result_hash['favorite_shops']['favorite_shop']
+        result_hash['favorite_shops'] = ( result_hash['favorite_shops'].nil? ? [] : result_hash['favorite_shops']['favorite_shop'] )
 
         result_hash
       end
@@ -4292,7 +4292,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['favorite_items'] = result_hash['favorite_items']['favorite_item']
+        result_hash['favorite_items'] = ( result_hash['favorite_items'].nil? ? [] : result_hash['favorite_items']['favorite_item'] )
 
         result_hash
       end
@@ -4311,7 +4311,7 @@ module Taobao
         params['method'] = 'taobao.widget.cartpanel.get'
 
         result_hash = Client.execute(params)
-        result_hash['cart_info'] = result_hash['cart_info']['widget_cart_info']
+        result_hash['cart_info'] = ( result_hash['cart_info'].nil? ? [] : result_hash['cart_info']['widget_cart_info'] )
 
         result_hash
       end
@@ -4398,7 +4398,7 @@ module Taobao
         params['method'] = 'alipay.user.account.freeze.get'
 
         result_hash = Client.execute(params)
-        result_hash['freeze_items'] = result_hash['freeze_items']['account_freeze']
+        result_hash['freeze_items'] = ( result_hash['freeze_items'].nil? ? [] : result_hash['freeze_items']['account_freeze'] )
 
         result_hash
       end
@@ -4436,7 +4436,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['trade_records'] = result_hash['trade_records']['trade_record']
+        result_hash['trade_records'] = ( result_hash['trade_records'].nil? ? [] : result_hash['trade_records']['trade_record'] )
 
         result_hash
       end
@@ -4458,10 +4458,10 @@ module Taobao
         raise "#{special_params.inspect} 为应用级特殊参数,具体请查看此API文档" if special_params.size == special_check_result.size
 
         result_hash = Client.execute(params)
-        result_hash['brand_list'] = result_hash['brand_list']['tmall_brand']
-        result_hash['cat_list'] = result_hash['cat_list']['tmall_cat']
-        result_hash['item_list'] = result_hash['item_list']['tmall_search_item']
-        result_hash['minisite_list'] = result_hash['minisite_list']['tmall_minisite']
+        result_hash['brand_list'] = ( result_hash['brand_list'].nil? ? [] : result_hash['brand_list']['tmall_brand'] )
+        result_hash['cat_list'] = ( result_hash['cat_list'].nil? ? [] : result_hash['cat_list']['tmall_cat'] )
+        result_hash['item_list'] = ( result_hash['item_list'].nil? ? [] : result_hash['item_list']['tmall_search_item'] )
+        result_hash['minisite_list'] = ( result_hash['minisite_list'].nil? ? [] : result_hash['minisite_list']['tmall_minisite'] )
 
         result_hash
       end
@@ -4472,7 +4472,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['item_list'] = result_hash['item_list']['selected_item']
+        result_hash['item_list'] = ( result_hash['item_list'].nil? ? [] : result_hash['item_list']['selected_item'] )
 
         result_hash
       end
@@ -4483,7 +4483,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['item_list'] = result_hash['item_list']['tmall_search_tm_item']
+        result_hash['item_list'] = ( result_hash['item_list'].nil? ? [] : result_hash['item_list']['tmall_search_tm_item'] )
 
         result_hash
       end
@@ -4494,7 +4494,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['cat_list'] = result_hash['cat_list']['tmall_tm_cat']
+        result_hash['cat_list'] = ( result_hash['cat_list'].nil? ? [] : result_hash['cat_list']['tmall_tm_cat'] )
 
         result_hash
       end
@@ -4525,7 +4525,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['rds_db_infos'] = result_hash['rds_db_infos']['rds_db_info']
+        result_hash['rds_db_infos'] = ( result_hash['rds_db_infos'].nil? ? [] : result_hash['rds_db_infos']['rds_db_info'] )
 
         result_hash
       end
@@ -4554,7 +4554,7 @@ module Taobao
         params['method'] = 'taobao.caipiao.lotterytypes.get'
 
         result_hash = Client.execute(params)
-        result_hash['results'] = result_hash['results']['lottery_type']
+        result_hash['results'] = ( result_hash['results'].nil? ? [] : result_hash['results']['lottery_type'] )
 
         result_hash
       end
@@ -4565,7 +4565,7 @@ module Taobao
         raise "#{required_check_result.inspect} 为应用级必填参数,不能为空" unless required_check_result.empty?
 
         result_hash = Client.execute(params)
-        result_hash['results'] = result_hash['results']['lottery_wangcai_present']
+        result_hash['results'] = ( result_hash['results'].nil? ? [] : result_hash['results']['lottery_wangcai_present'] )
 
         result_hash
       end
@@ -4574,7 +4574,7 @@ module Taobao
         params['method'] = 'taobao.caipiao.present.stat.get'
 
         result_hash = Client.execute(params)
-        result_hash['results'] = result_hash['results']['lottery_wangcai_present_stat']
+        result_hash['results'] = ( result_hash['results'].nil? ? [] : result_hash['results']['lottery_wangcai_present_stat'] )
 
         result_hash
       end
@@ -4583,7 +4583,7 @@ module Taobao
         params['method'] = 'taobao.caipiao.present.win.items.get'
 
         result_hash = Client.execute(params)
-        result_hash['results'] = result_hash['results']['lottery_wangcai_present']
+        result_hash['results'] = ( result_hash['results'].nil? ? [] : result_hash['results']['lottery_wangcai_present'] )
 
         result_hash
       end

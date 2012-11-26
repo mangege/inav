@@ -30,23 +30,33 @@ class ItemTest < ActiveSupport::TestCase
   end
 
   test "::taobao_has_next? 一次调用result_hash为空应该返回true" do
-    assert Item.taobao_has_next?(nil, :all, {page_no: 1, page_size: 200})
+    call_taobao_has_next do
+      assert Item.taobao_has_next?(nil, :all, {page_no: 1, page_size: 200})
+    end
   end
 
   test "::taobao_has_next? 二次调用result_hash非空且stync_type为one应该返回false" do
-    assert Item.taobao_has_next?({}, :one, {page_no: 1, page_size: 200}) == false
+    call_taobao_has_next do
+      assert Item.taobao_has_next?({}, :one, {page_no: 1, page_size: 200}) == false
+    end
   end
 
   test "::taobao_has_next? 二次调用all,小于应该返回true" do
-    assert Item.taobao_has_next?({'total_results' => 300}, :one, {page_no: 1, page_size: 200}) == false
+    call_taobao_has_next do
+      assert Item.taobao_has_next?({'total_results' => 300}, :one, {page_no: 1, page_size: 200}) == false
+    end
   end
 
   test "::taobao_has_next? 二次调用all,大于应该返回false" do
-    assert Item.taobao_has_next?({'total_results' => 100}, :one, {page_no: 1, page_size: 200}) == false
+    call_taobao_has_next do
+      assert Item.taobao_has_next?({'total_results' => 100}, :one, {page_no: 1, page_size: 200}) == false
+    end
   end
 
   test "::taobao_has_next? 二次调用all,等于应该返回false" do
-    assert Item.taobao_has_next?({'total_results' => 200}, :one, {page_no: 1, page_size: 200}) == false
+    call_taobao_has_next do
+      assert Item.taobao_has_next?({'total_results' => 200}, :one, {page_no: 1, page_size: 200}) == false
+    end
   end
 
   test "::taobao_onsale_sync 不存在的数据应该新建" do
@@ -118,6 +128,13 @@ class ItemTest < ActiveSupport::TestCase
     end
   end
 
+  test "::taobao_list_sync list_type为inventory时应该调用taobao_items_inventory_get" do
+    Taobao::Api.stubs(:taobao_items_onsale_get).returns(mock_taobao_items_onsale_get_result([], 150)).never
+    Taobao::Api.stubs(:taobao_items_inventory_get).returns(mock_taobao_items_onsale_get_result([], 150)).once
+    user = FactoryGirl.create(:user)
+    Item.taobao_inventory_sync(user)
+  end
+
   private
   def mock_taobao_items_onsale_get_result(item, total_results = nil)
     items = []
@@ -134,5 +151,11 @@ class ItemTest < ActiveSupport::TestCase
     end
     
     {'items' => items, 'total_results' => total_results}
+  end
+
+  def call_taobao_has_next
+    Item.public_class_method(:taobao_has_next?)
+    yield
+    Item.private_class_method(:taobao_has_next?)
   end
 end

@@ -2,7 +2,9 @@
 ENV["RAILS_ENV"] = "test"
 
 require 'simplecov'
-SimpleCov.start 'rails'
+SimpleCov.start 'rails' do
+  add_filter "app/models/taobao/api.rb"
+end
 
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'

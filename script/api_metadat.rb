@@ -138,11 +138,11 @@ class ApiMetadat
     case response_param['level']
     when 'Basic Array'
       name = response_param['name']
-      "        result_hash['#{name}'] = result_hash['#{name}'].values.flatten(1)"
+      "        result_hash['#{name}'] = ( result_hash['#{name}'].nil? ? [] : result_hash['#{name}'].values.flatten(1)  )"
     when 'Object Array'
       name = response_param['name']
       type = response_param['type'].underscore
-      "        result_hash['#{name}'] = result_hash['#{name}']['#{type}']"
+      "        result_hash['#{name}'] = ( result_hash['#{name}'].nil? ? [] : result_hash['#{name}']['#{type}'] )"
     end
   end
 

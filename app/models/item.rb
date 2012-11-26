@@ -36,39 +36,11 @@ class Item < ActiveRecord::Base
 
   #sync_type: one, all
   def self.taobao_onsale_sync(user, options = {})
-    sync_type = options[:sync_type] || :all
-
-    params = {}
-    params[:session] = user.access_token
-    params[:fields] = Item.taobao_fields.tap{|f|f.delete 'desc'}.join(',')
-    params[:page_no] = 1
-    params[:page_size] = 200
-
-    params[:page_size] = 1 if sync_type == :one
-
-    result_hash = nil
-    while taobao_has_next?(result_hash, sync_type, params)
-      params[:page_no] += 1 unless result_hash.nil?
-      result_hash = Taobao::Api.taobao_items_onsale_get(params)
-      result_hash['items'].each do |taobao_attrs|
-        taobao_db_update_or_create(taobao_attrs, user) #TODO 删除通过update接口报错处理实现,以后改成主动通知实现
-      end
-    end
-
-    user.items
+    taobao_list_sync(:onsale, user, options)
   end
 
-  def self.taobao_items_inventory_get(access_token)
-    params = {}
-    params[:method] = 'taobao.items.inventory.get'
-    params[:session] = access_token
-    params[:fields] = 'num_iid'
-    params[:page_size] = 200
-
-    result_hash = Taobao::Client.execute(params)
-    num_iids = []
-    num_iids = result_hash['items']['item'].map{|item_hash| item_hash['num_iid']} if result_hash['items']
-    num_iids
+  def self.taobao_inventory_sync(user, options = {})
+    taobao_list_sync(:inventory, user, options)
   end
 
   def self.taobao_items_list_get(num_iids)
@@ -113,4 +85,29 @@ class Item < ActiveRecord::Base
   def self.taobao_has_next?(result_hash, sync_type, params)
     result_hash.nil? || ( sync_type == :all && (params[:page_no]*params[:page_size] < result_hash['total_results']) )
   end
+
+  def self.taobao_list_sync(list_type, user, options = {})
+    sync_type = options[:sync_type] || :all
+    api_method = list_type == :onsale ? :taobao_items_onsale_get : :taobao_items_inventory_get
+
+    params = {}
+    params[:session] = user.access_token
+    params[:fields] = Item.taobao_fields.tap{|f|f.delete 'desc'}.join(',')
+    params[:page_no] = 1
+    params[:page_size] = 200
+
+    params[:page_size] = 1 if sync_type == :one
+
+    result_hash = nil
+    while taobao_has_next?(result_hash, sync_type, params)
+      params[:page_no] += 1 unless result_hash.nil?
+      result_hash = Taobao::Api.send(api_method, params)
+      result_hash['items'].each do |taobao_attrs|
+        taobao_db_update_or_create(taobao_attrs, user) #TODO 删除通过update接口报错处理实现,以后改成主动通知实现
+      end
+    end
+
+    user.items
+  end
+  private_class_method :taobao_has_next?, :taobao_list_sync
 end

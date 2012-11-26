@@ -7,4 +7,10 @@ class ItemTest < RemoteTestCase
       Item.taobao_onsale_sync(default_remote_user)
     end
   end
+
+  test "::taobao_inventory_sync 应该不报错" do
+    assert_nothing_raised do
+      Item.taobao_inventory_sync(default_remote_user)
+    end
+  end
 end
