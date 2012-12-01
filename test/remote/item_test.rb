@@ -19,4 +19,14 @@ class ItemTest < RemoteTestCase
       Item.taobao_desc_sync(default_remote_user)
     end
   end
+
+  test "::taobao_desc_update 应该成功更新desc内容" do
+    user = default_remote_user
+    Item.taobao_onsale_sync(user)
+    #Item.taobao_desc_sync(user)
+    #item = user.items.first
+    #assert_not_nil item
+
+    #TODO 待实现
+  end
 end

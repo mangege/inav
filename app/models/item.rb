@@ -17,6 +17,11 @@ class Item < ActiveRecord::Base
     self.item_desc.content = desc_content
   end
 
+  def new_desc
+    #TODO
+    'hello kitty'
+  end
+
   def detail_url
     "http://item.taobao.com/item.htm?id=#{tb_num_iid}"
   end
@@ -68,16 +73,14 @@ class Item < ActiveRecord::Base
     user.items
   end
 
-  def self.taobao_item_update(access_token, item)
+  def self.taobao_desc_update(user, item)
     params = {}
-    params[:method] = 'taobao.item.update'
-    params[:session] = access_token
+    params[:session] = user.access_token
+    params[:num_iid] = item.tb_num_iid
+    params[:desc] = item.tb_desc
 
-    params[:num_iid] = item.num_iid
-    params[:desc] = item.content
-    result_hash = Taobao::Client.execute(params)
-    #TODO 返回modified,修改item modified和content
-    result_hash['item']
+    result_hash = Taobao::Api.taobao_item_update(params)
+    taobao_db_update_new_desc(item, result_hash['item'])
   end
 
   def self.taobao_db_update_or_create(taobao_attrs, user)
@@ -91,11 +94,15 @@ class Item < ActiveRecord::Base
   def self.taobao_db_update_desc(taobao_attrs)
     desc_modified = taobao_attrs['modified']
     item = find_by_tb_num_iid(taobao_attrs['num_iid'])
-    unless item.nil?
-      item.desc_modified = desc_modified
-      item.tb_desc = taobao_attrs['desc']
-      item.save!
-    end
+    item.desc_modified = desc_modified
+    item.tb_desc = taobao_attrs['desc']
+    item.save!
+  end
+
+  def self.taobao_db_update_new_desc(item, taobao_attrs)
+    item.desc_modified = taobao_attrs['modified']
+    item.tb_desc = item.new_desc
+    item.save!
   end
 
   def self.taobao_has_next?(result_hash, sync_type, params)

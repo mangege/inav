@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 module Taobao
+  TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+
   autoload(:OAuth2, 'taobao/oauth2')
   autoload(:HttpSign, 'taobao/http_sign')
   autoload(:Client, 'taobao/client')

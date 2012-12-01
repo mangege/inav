@@ -195,6 +195,37 @@ class ItemTest < ActiveSupport::TestCase
     Item.taobao_desc_sync(user)
   end
 
+  test "::taobao_desc_update 应该更新desc内容为new_desc,保存new_desc到数据库并修改时间" do
+    body = <<-EOS
+{"item_update_response":{"item":{"iid":"1500024589604","modified":"2012-11-29 23:18:45","num_iid":1500024589604}}}
+    EOS
+    stub_api_post(body)
+
+    user = FactoryGirl.create(:user)
+    item = FactoryGirl.create(:item, user: user, tb_num_iid: 1500024589604)
+    assert_nil item.desc_modified
+
+    Item.taobao_desc_update(user, item)
+    item.reload
+    assert_equal "2012-11-29 23:18:45", item.desc_modified.strftime(Taobao::TIME_FORMAT)
+  end
+
+  test "::taobao_db_update_new_desc 应该更新desc_modified和tb_desc" do
+    moch_taobao_attrs = {"modified"=>"2012-11-29 23:18:45", "num_iid"=>1500024589604}
+    item = FactoryGirl.create(:item, :tb_num_iid => 1500024589604)
+    FactoryGirl.create(:item_desc, item_id: item.id)
+    Item.any_instance.stubs(:new_desc).returns("hello kitty #{Time.now}")
+    item.reload
+
+    assert_nil item.desc_modified
+    assert_not_equal item.new_desc, item.tb_desc
+
+    Item.taobao_db_update_new_desc(item, moch_taobao_attrs)
+    item.reload
+    assert_equal "2012-11-29 23:18:45", item.desc_modified.strftime(Taobao::TIME_FORMAT)
+    assert_equal item.new_desc, item.tb_desc
+  end
+
   private
   def mock_taobao_items_onsale_get_result(item, total_results = nil)
     items = []
