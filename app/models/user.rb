@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class User < ActiveRecord::Base
   has_one :shop
+  has_one :user_extend
   has_many :seller_cats
   has_many :items
 
@@ -10,6 +11,12 @@ class User < ActiveRecord::Base
 
   validates :taobao_user_id, :taobao_user_nick, presence: true
   validates :taobao_user_id, uniqueness: true
+
+  after_create :auto_create_user_extend
+
+  def auto_create_user_extend
+    create_user_extend!
+  end
 
   def self.find_or_create_by_oauth2(hash)
     hash = hash.with_indifferent_access

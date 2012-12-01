@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121121132403) do
+ActiveRecord::Schema.define(:version => 20121201082510) do
 
   create_table "item_descs", :primary_key => "item_id", :force => true do |t|
     t.text "content", :limit => 16777215
@@ -54,6 +54,15 @@ ActiveRecord::Schema.define(:version => 20121121132403) do
     t.integer  "user_id"
     t.datetime "created_at",               :null => false
     t.datetime "updated_at",               :null => false
+  end
+
+  create_table "user_extends", :force => true do |t|
+    t.integer  "user_id"
+    t.text     "settings"
+    t.text     "bread_crumb_template"
+    t.text     "related_cat_template"
+    t.datetime "created_at",           :null => false
+    t.datetime "updated_at",           :null => false
   end
 
   create_table "users", :force => true do |t|

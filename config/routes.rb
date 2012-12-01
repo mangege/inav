@@ -1,6 +1,5 @@
 # -*- encoding : utf-8 -*-
 Inav::Application.routes.draw do
-
   root :to => "main#index"
 
   resources :user_sessions, :only => [:new] do
@@ -16,6 +15,8 @@ Inav::Application.routes.draw do
       put 'update_priorities'
     end
   end
+
+  resource :setting, :only => [:show, :update]
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
