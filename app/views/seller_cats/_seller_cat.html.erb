@@ -1,9 +1,7 @@
 <tr>
-  <td><%= seller_cat.name %></td>
+  <td><%= seller_cat.tb_name %></td>
   <td>
-    <div class="input-control text span2">
-      <%= text_field_tag "priorities[#{seller_cat.id}]", seller_cat.priority %>
-    </div>
+    <%= text_field_tag "priorities[#{seller_cat.id}]", seller_cat.priority, class: 'input-mini' %>
   </td>
   <td>查看</td>
 </tr>

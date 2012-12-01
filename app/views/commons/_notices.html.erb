@@ -1,10 +1,6 @@
 <% unless flash.empty? %>
-  <div class="notice-box">
-    <div class="<%= notice_class %>-bar">
-      <p>
-      <%= render_notice_text %>
-      </p>
-      <button class="place-right">关闭</button>
-    </div>
+  <div class="alert <%= notice_class %>">
+    <button type="button" class="close" data-dismiss="alert">×</button>
+    <%= render_notice_text %>
   </div>
 <% end %>

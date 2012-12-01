@@ -1,15 +1,17 @@
 <%= form_tag(update_priorities_seller_cats_path, method: :put) do %>
-<table class="bordered">
+<table class="table table-striped table-bordered seller-cats-table">
   <tr>
     <td>分类名称</td>
-    <td class="span3">优先级</td>
+    <td class="span2">优先级</td>
     <td class="span2">操作</td>
   </tr>
     <%= render :partial => "seller_cat", :collection => @seller_cats %>
     <tr>
-      <td colspan="3" class="right">
-        <%= link_to "同步", seller_cats_path(force_sync: true), class: 'button default', title: '同步你的淘宝店铺分类' %>
-        <%= submit_tag '更新', title: '更新优先级' %>
+      <td colspan="3">
+        <div class="row-fluid">
+          <span class="span1 offset10"> <%= submit_tag '保存', title: '更新优先级', class: 'btn btn-primary' %> </span>
+          <span class="span1"> <%= link_to "同步", seller_cats_path(force_sync: true), class: 'btn', title: '同步你的淘宝店铺分类' %> </span>
+        </div>
       </td>
     </tr>
 

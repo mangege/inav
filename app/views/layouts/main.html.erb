@@ -13,13 +13,36 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
+    <%= stylesheet_link_tag "main", :media => "all" %>
 
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
 
-    <%= yield %>
+    <div class="container-narrow">
+
+      <div class="masthead">
+        <ul class="nav nav-pills pull-right">
+          <li class="active"><a href="#">首页</a></li>
+          <li><a href="#">关于我们</a></li>
+          <li><a href="#">联系方式</a></li>
+        </ul>
+        <h3 class="muted">111店铺面包屑导航管理</h3>
+      </div>
+
+      <hr>
+
+      <%= yield %>
+
+      <hr>
+
+      <div class="footer">
+        <p>&copy; Cao Xiaohua 2012</p>
+      </div>
+
+    </div> <!-- /container -->
+
 
     <!-- Javascripts
     ================================================== -->

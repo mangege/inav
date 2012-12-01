@@ -14,11 +14,11 @@ module ApplicationHelper
 
   def notice_class
     if flash[:error]
-      'error'
+      'alert-error'
     elsif flash[:alert]
-      'warning'
+      ''
     else
-      'info'
+      'alert-info'
     end
   end
 

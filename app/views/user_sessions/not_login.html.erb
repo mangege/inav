@@ -1,4 +1,13 @@
-<div class="message-dialog bg-color-red fg-color-white">
-  <p><%= @msg %></p>
-  <%= link_to "授权登录", new_user_session_path, class: 'button place-right' %>
+<div class="row-fluid marketing">
+  <div class="span12">
+    <div class="alert alert-block fade in">
+      <h4 class="alert-heading"><%= @msg %></h4>
+      <p>
+      请点击下方的按钮授权登录,点击后将会跳转到淘宝登录页面,请选择授权.
+      </p>
+      <p>
+      <%= link_to "授权登录", new_user_session_path %>
+      </p>
+    </div>
+  </div>
 </div>

@@ -1,5 +1,7 @@
 # -*- encoding : utf-8 -*-
 class SellerCatsController < ApplicationController
+  layout 'management'
+
   def index
     force_sync = params[:force_sync] == 'true'
     @seller_cats = current_user.seller_cats_with_sync(force_sync: force_sync)
