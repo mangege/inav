@@ -25,7 +25,7 @@
 
 
     <!-- Size should be 32 x 32 pixels -->
-    <%= favicon_link_tag 'images/favicon.ico', :rel => 'shortcut icon' %>
+    <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
   </head>
   <body>
 
@@ -55,15 +55,13 @@
     <div class="container-fluid">
       <div class="row-fluid">
         <div class="span2">
-          <div class="sidebar-nav">
-            <ul class="nav nav-tabs nav-stacked">
-              <li class="active"><a href="/">后台首页</a></li>
-              <li><a href="<%= seller_cats_path %>">分类管理</a></li>
-              <li><a href="#">商品管理</a></li>
-              <li><a href="#">高级设置</a></li>
-              <li><a href="#">后台任务</a></li>
-            </ul>
-          </div><!--/.well -->
+          <ul class="nav nav-tabs nav-stacked">
+            <li class="active"><a href="/">后台首页</a></li>
+            <li><a href="<%= seller_cats_path %>">分类管理</a></li>
+            <li><a href="#">商品管理</a></li>
+            <li><a href="<%= setting_path %>">高级设置</a></li>
+            <li><a href="#">后台任务</a></li>
+          </ul>
         </div><!--/span-->
         <div class="span10">
           <%= render 'commons/notices' %>

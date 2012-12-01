@@ -4,3 +4,22 @@
     padding: 0;
   }
 }
+
+form.settings-form {
+  label.radio {
+    margin-left: 10px;
+    display: inline-block;
+    padding-top: 5px;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+  div.control-group {
+    margin-bottom: 0;
+  }
+  span.help-inline {
+    margin-left: 20px;
+    padding-top: 5px;
+    margin-bottom: 0;
+    vertical-align: middle;
+  }
+}

@@ -1,2 +1,25 @@
-<h1>Settings#show</h1>
-<p>Find me in app/views/settings/show.html.erb</p>
+<%= simple_form_for :settings, url: setting_path, method: :put, html: {class: 'form-horizontal settings-form' } do |f| %>
+  <legend>组件选择</legend>
+  <%= f.input :add_bread_crumb, as: :radio_buttons %>
+  <%= f.input :add_related_cat, as: :radio_buttons %>
+
+  <legend>面包屑设置</legend>
+  <%= f.input :show_shop_title, as: :radio_buttons %>
+  <%= f.input :show_item_title, as: :radio_buttons %>
+
+  <legend>相关分类设置</legend>
+  <%= f.input :show_parent_cat, as: :radio_buttons %>
+
+  <legend>模板设置</legend>
+  <%= f.input :bread_crumb_template, as: :text, input_html: {rows: 6, class: 'input-xxlarge'} %>
+  <%= f.input :related_cat_template, as: :text, input_html: {rows: 6, class: 'input-xxlarge'} %>
+
+  <legend>其它设置</legend>
+  <%= f.input :open_blank, as: :radio_buttons %>
+  <%= f.input :logoff_taobao, as: :radio_buttons, hint: '默认退出本系统是不退出淘宝网' %>
+
+  <div class="form-actions">
+    <%= f.button :submit, value: '保存设置', class: 'btn-primary' %>
+    <%= link_to '卸载,删除添加的所有代码', '#', class: 'btn pull-right', confirm: '确认卸载吗?' %>
+  </div>
+<% end %>

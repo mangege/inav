@@ -1,0 +1,36 @@
+zh-CN:
+  simple_form:
+    "yes": '是'
+    "no": '否'
+    required:
+      text: '必填'
+      mark: '*'
+      # You can uncomment the line below if you need to overwrite the whole required html.
+      # When using html, text and mark won't be used.
+      # html: '<abbr title="required">*</abbr>'
+    error_notification:
+      default_message: "表单验证不通过,请检查:"
+    # Labels and hints examples
+    # labels:
+    #   defaults:
+    #     password: 'Password'
+    #   user:
+    #     new:
+    #       email: 'E-mail to sign in.'
+    #     edit:
+    #       email: 'E-mail.'
+    # hints:
+    #   defaults:
+    #     username: 'User name to sign in.'
+    #     password: 'No special characters, please.'
+    labels:
+      settings:
+        add_bread_crumb: "添加面包屑到描述"
+        add_related_cat: "添加相关分类到描述"
+        show_shop_title: "显示店铺标题"
+        show_item_title: "显示商品标题"
+        show_parent_cat: "显示一级分类"
+        bread_crumb_template: "面包屑模板"
+        related_cat_template: "相关分类模板"
+        open_blank: "新窗口打开分类链接"
+        logoff_taobao: "退出时同时退出淘宝"

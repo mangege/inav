@@ -9,8 +9,8 @@
     <tr>
       <td colspan="3">
         <div class="row-fluid">
-          <span class="span1 offset10"> <%= submit_tag '保存', title: '更新优先级', class: 'btn btn-primary' %> </span>
-          <span class="span1"> <%= link_to "同步", seller_cats_path(force_sync: true), class: 'btn', title: '同步你的淘宝店铺分类' %> </span>
+          <%= submit_tag '保存优先级', title: '保存分类优先级', class: 'btn btn-primary offset2' %>
+          <%= link_to "同步分类", seller_cats_path(force_sync: true), class: 'btn pull-right', title: '同步你的淘宝店铺分类' %>
         </div>
       </td>
     </tr>
