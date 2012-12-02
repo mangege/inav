@@ -1,0 +1,57 @@
+<%= content_for :page_head do %>
+  <style type="text/css" media="screen">
+    #editor { 
+      position: relative;
+      height: 300px;
+      border: 1px solid #DDD;
+      border-collapse: separate;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+      -webkit-border-radius: 4px;
+      -moz-border-radius: 4px;
+      border-radius: 4px;
+    }
+  </style>
+<% end %>
+<%= form_tag edit_template_setting_path, method: :put do %>
+  <ul class="nav nav-tabs">
+    <li class="active"> <a href="#">编辑面包屑模板</a> </li>
+    <li> <a href="#">编辑相关分类模板</a> </li>
+  </ul>
+  <div class="row-fluid">
+    <div id="editor" class="span9"><%= File.read('/tmp/a.liquid') %></div>
+    <div class="span3">
+      <p>
+      <ul>
+        <li> <%= link_to "Liquid模板语言语法", 'https://github.com/Shopify/liquid/wiki/Liquid-for-Designers', target: '_blank' %><br /> </li>
+        <li> <%= link_to "ACE编辑器快捷键", 'https://github.com/ajaxorg/ace/wiki/Default-Keyboard-Shortcuts', target: '_blank' %> </li>
+        <li>变量说明:
+        <ul>
+          <li>TODO</li>
+        </ul>
+        </li>
+    </ul>
+      </p>
+    </div>
+    <div class="row-fluid">
+      <div id="html-preview" class="span6">HTML效果</div>
+      <div id="code-preview" class="span6">HTML代码</div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <%= submit_tag '保存模板', class: 'btn-primary' %>
+  </div>
+<% end %>
+
+<%= content_for :page_footer do %>
+  <%= javascript_include_tag "ace" %>
+  <script type="text/javascript" language="javascript" charset="utf-8">
+  //<![CDATA[
+    var editor = ace.edit("editor");
+    editor.getSession().setMode("ace/mode/html");
+    editor.getSession().setMode("ace/mode/liquid");
+  //]]>
+  </script>
+<% end %>

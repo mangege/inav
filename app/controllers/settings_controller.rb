@@ -14,6 +14,14 @@ class SettingsController < ApplicationController
     redirect_to action: :show
   end
 
+  def edit_template
+    @templates = OpenStruct.new
+  end
+
+  def update_template
+    
+  end
+
   private
   def find_user_extned
     @user_extend = current_user.user_extend

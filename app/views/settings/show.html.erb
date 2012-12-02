@@ -10,10 +10,6 @@
   <legend>相关分类设置</legend>
   <%= f.input :show_parent_cat, as: :radio_buttons %>
 
-  <legend>模板设置</legend>
-  <%= f.input :bread_crumb_template, as: :text, input_html: {rows: 6, class: 'input-xxlarge'} %>
-  <%= f.input :related_cat_template, as: :text, input_html: {rows: 6, class: 'input-xxlarge'} %>
-
   <legend>其它设置</legend>
   <%= f.input :open_blank, as: :radio_buttons %>
   <%= f.input :logoff_taobao, as: :radio_buttons, hint: '默认只退出本系统' %>

@@ -30,7 +30,8 @@ zh-CN:
         show_shop_title: "显示店铺标题"
         show_item_title: "显示商品标题"
         show_parent_cat: "显示一级分类"
-        bread_crumb_template: "面包屑模板"
-        related_cat_template: "相关分类模板"
         open_blank: "新窗口打开分类链接"
         logoff_taobao: "退出时同时退出淘宝"
+      templates:
+        bread_crumb_template: "面包屑模板"
+        related_cat_template: "相关分类模板"

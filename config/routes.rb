@@ -16,7 +16,12 @@ Inav::Application.routes.draw do
     end
   end
 
-  resource :setting, :only => [:show, :update]
+  resource :setting, :only => [:show, :update] do
+    member do
+      get 'edit_template'
+      put 'update_template'
+    end
+  end
   # The priority is based upon order of creation:
   # first created -> highest priority.
 
