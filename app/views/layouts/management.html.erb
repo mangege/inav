@@ -13,22 +13,12 @@
     <![endif]-->
 
     <%= stylesheet_link_tag "application", :media => "all" %>
-    <style type="text/css">
-      body {
-        padding-top: 60px;
-        padding-bottom: 40px;
-      }
-      .sidebar-nav {
-        padding: 9px 0;
-      }
-    </style>
-
 
     <!-- Size should be 32 x 32 pixels -->
     <%= favicon_link_tag 'favicon.ico', :rel => 'shortcut icon' %>
     <%= yield :page_head %>
   </head>
-  <body>
+  <body class="management-layout">
 
     <div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">

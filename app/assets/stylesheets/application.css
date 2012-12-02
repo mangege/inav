@@ -10,5 +10,6 @@
  *
  *= require bootstrap_and_overrides
  *= require management
+ *= require main
  *= require_self
  */

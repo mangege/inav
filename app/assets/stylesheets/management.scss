@@ -1,25 +1,34 @@
-.seller-cats-table {
-  .input-mini {
-    margin: 0;
-    padding: 0;
-  }
-}
+body.management-layout {
+  padding-top: 60px;
+  padding-bottom: 40px;
 
-form.settings-form {
-  label.radio {
-    margin-left: 10px;
-    display: inline-block;
-    padding-top: 5px;
-    margin-bottom: 0;
-    vertical-align: middle;
+  .sidebar-nav {
+    padding: 9px 0;
   }
-  div.control-group {
-    margin-bottom: 0;
+
+  .seller-cats-table {
+    .input-mini {
+      margin: 0;
+      padding: 0;
+    }
   }
-  span.help-inline {
-    margin-left: 20px;
-    padding-top: 5px;
-    margin-bottom: 0;
-    vertical-align: middle;
+
+  form.settings-form {
+    label.radio {
+      margin-left: 10px;
+      display: inline-block;
+      padding-top: 5px;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
+    div.control-group {
+      margin-bottom: 0;
+    }
+    span.help-inline {
+      margin-left: 20px;
+      padding-top: 5px;
+      margin-bottom: 0;
+      vertical-align: middle;
+    }
   }
 }
