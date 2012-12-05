@@ -226,6 +226,78 @@ class ItemTest < ActiveSupport::TestCase
     assert_equal item.new_desc, item.tb_desc
   end
 
+  test "#new_desc 根据用户设置应该生成面包屑和相关分类" do
+    #TODO
+  end
+
+  test "#new_desc 只生成面包屑" do
+    #TODO
+  end
+
+  test "#new_desc 只生成相关分类" do
+    #TODO
+  end
+
+  test "#breadcrumb_links 应该不再查询user和shop" do
+    user = mock_normal_user
+    shop = user.shop
+    item = user.items.first
+
+    User.any_instance.stubs(:shop).returns(shop).never
+    Item.any_instance.stubs(:user).returns(user).never
+    SellerCat.any_instance.stubs(:user).returns(user).never
+    item.breadcrumb_links(user: user, shop: shop)
+  end
+
+  test "#breadcrumb_links 默认应该不添加店铺与商品链接" do
+    user = mock_normal_user
+    shop = user.shop
+    user_extend = user.user_extend
+    item = user.items.last
+
+    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    assert links.select{|l| l.url == shop.shop_url}.empty?
+    assert links.select{|l| l.url == item.item_url}.empty?
+
+    user_extend.settings = {show_shop_title: 'true'}
+    user_extend.save!
+    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    assert !links.select{|l| l.url == shop.shop_url}.empty?
+    assert links.select{|l| l.url == item.item_url}.empty?
+
+    user_extend.settings = {show_item_title: 'true'}
+    user_extend.save!
+    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    assert links.select{|l| l.url == shop.shop_url}.empty?
+    assert !links.select{|l| l.url == item.item_url}.empty?
+  end
+
+  test "#breadcrumb_links 应该包含分类链接" do
+    user = mock_normal_user
+    shop = user.shop
+    user_extend = user.user_extend
+    item = user.items.last
+
+    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    assert !links.select{|l| l.url =~ /search/}.empty?
+  end
+
+  test "#seller_cat_links 应该选优先级高的" do
+    user = mock_normal_user
+    seller_cats = user.seller_cats
+    item = FactoryGirl.create(:item, tb_seller_cids: "#{seller_cats.first.tb_cid},#{seller_cats.last.tb_cid}")
+
+    seller_cats.first.update_attribute(:priority, 10)
+    links = item.breadcrumb_links
+    assert !links.select{|l| l.url == seller_cats.first.seller_cat_url}.empty?
+    assert links.select{|l| l.url == seller_cats.last.seller_cat_url}.empty?
+
+    seller_cats.last.update_attribute(:priority, 20)
+    links = item.breadcrumb_links
+    assert links.select{|l| l.url == seller_cats.first.seller_cat_url}.empty?
+    assert !links.select{|l| l.url == seller_cats.last.seller_cat_url}.empty?
+  end
+
   private
   def mock_taobao_items_onsale_get_result(item, total_results = nil)
     items = []
@@ -248,5 +320,15 @@ class ItemTest < ActiveSupport::TestCase
     Item.public_class_method(:taobao_has_next?)
     yield
     Item.private_class_method(:taobao_has_next?)
+  end
+
+  def mock_normal_user
+    user = FactoryGirl.create(:user)
+    FactoryGirl.create(:shop, user: user)
+    FactoryGirl.create_list(:sub_seller_cat, 3, user: user)
+    FactoryGirl.create_list(:item, 3, user: user, tb_seller_cids: user.seller_cats.last.tb_cid.to_s)
+
+    user.reload
+    user
   end
 end

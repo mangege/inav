@@ -19,6 +19,24 @@ class SellerCat < ActiveRecord::Base
     not parent?
   end
 
+  def seller_cat_url(shop = nil)
+    shop = user.shop if shop.nil?
+    "#{shop.shop_url}/search.htm?scid=#{tb_cid}"
+  end
+
+  def seller_cat_link(shop = nil)
+    shop = user.shop if shop.nil?
+    Link.new(tb_name, seller_cat_url(shop))
+  end
+
+  def seller_cat_links(shop = nil)
+    shop = user.shop if shop.nil?
+    links = []
+    links << self.parent_seller_cat.seller_cat_link(shop) if sub?
+    links << self.seller_cat_link(shop)
+    links
+  end
+
   def self.update_priorities(id_priorities, user)
     priority_ids = {}
     id_priorities.each do |id, priority|
@@ -29,6 +47,10 @@ class SellerCat < ActiveRecord::Base
     priority_ids.each do |priority, ids|
       user.seller_cats.where(id: ids.to_a).update_all(priority: priority)
     end
+  end
+
+  def self.max_by_priority(seller_cats)
+    seller_cats.max_by{|s| s.priority}
   end
 
   def self.taobao_list_sync(user)

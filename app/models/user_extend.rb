@@ -24,4 +24,12 @@ class UserExtend < ActiveRecord::Base
     settings = settings.reverse_merge(UserExtend::DEFAULT_SETTINGS)
     write_attribute(:settings, settings)
   end
+
+  def show_shop_title?
+    settings[:show_shop_title] == 'true'
+  end
+
+  def show_item_title?
+    settings[:show_item_title] == 'true'
+  end
 end

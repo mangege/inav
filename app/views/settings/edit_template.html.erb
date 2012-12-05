@@ -1,5 +1,5 @@
 <%= content_for :page_head do %>
-  <style type="text/css" media="screen">
+  <style type="text/css">
     #editor { 
       position: relative;
       height: 300px;
@@ -20,8 +20,8 @@
     <li> <a href="#">编辑相关分类模板</a> </li>
   </ul>
   <div class="row-fluid">
-    <div id="editor" class="span9"><%= File.read('/tmp/a.liquid') %></div>
-    <div class="span3">
+    <div id="editor" class="span7"><%= File.read("#{Rails.root}/tmp/a.liquid") %></div>
+    <div class="span5">
       <p>
       <ul>
         <li> <%= link_to "Liquid模板语言语法", 'https://github.com/Shopify/liquid/wiki/Liquid-for-Designers', target: '_blank' %><br /> </li>

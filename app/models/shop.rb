@@ -8,6 +8,10 @@ class Shop < ActiveRecord::Base
     "http://shop#{tb_sid}.taobao.com"
   end
 
+  def shop_link
+    Link.new(tb_title, shop_url)
+  end
+
   #TODO 6小时更新一次
   def self.taobao_sync(user)
     params = {}

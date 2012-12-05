@@ -17,6 +17,14 @@ class Item < ActiveRecord::Base
     self.item_desc.content = desc_content
   end
 
+  def item_url
+    "http://item.taobao.com/item.htm?id=#{tb_num_iid}"
+  end
+
+  def item_link
+    Link.new(tb_title, item_url)
+  end
+
   def new_desc
     #TODO
     'hello kitty'
@@ -26,9 +34,47 @@ class Item < ActiveRecord::Base
     "http://item.taobao.com/item.htm?id=#{tb_num_iid}"
   end
 
-  def breadcrumbs_html
+  def breadcrumb_html
     #TODO
     'hello kitty'
+  end
+
+  def breadcrumb_links(options = {})
+    user = options[:user] || self.user
+    shop = options[:shop] || user.shop
+    user_extend = options[:user_extend] || user.user_extend
+
+    links = []
+    links << shop.shop_link if user_extend.show_shop_title?
+    links.concat(seller_cat_links(user: user, shop: shop))
+    links << self.item_link if user_extend.show_item_title?
+    links
+  end
+
+  def seller_cat_links(options = {})
+    user = options[:user] || self.user
+    shop = options[:shop] || user.shop
+
+    links = []
+    cids = self.cids
+    return links if cids.empty?
+
+    seller_cats = SellerCat.where(tb_cid: cids)
+    return links if seller_cats.empty?
+    seller_cat = nil
+    if seller_cats.size > 1
+      seller_cat = SellerCat.max_by_priority(seller_cats)
+    else
+      seller_cat = seller_cats.first
+    end
+    seller_cat.seller_cat_links(shop)
+  end
+
+  def cids
+    cids = tb_seller_cids.split(',')
+    cids.delete('')
+    cids.delete('-1')
+    cids
   end
 
   def add_breadcrumbs_to_desc

@@ -53,14 +53,8 @@ class User < ActiveRecord::Base
   def items_with_sync
     #TODO check
     if true
-      num_iids = []
-      num_iids.concat( Item.taobao_items_onsale_get(access_token) )
-      num_iids.concat( Item.taobao_items_inventory_get(access_token) )
-      items = Item.taobao_items_list_get(num_iids)
-      items.each do |item|
-        item.user_id = id
-        item.save!
-      end
+      Item.taobao_onsale_sync(self)
+      Item.taobao_onsale_sync(self)
     end
     self.items
   end
