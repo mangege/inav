@@ -298,6 +298,11 @@ class ItemTest < ActiveSupport::TestCase
     assert !links.select{|l| l.url == seller_cats.last.seller_cat_url}.empty?
   end
 
+  test "#breadcrumb_html 应该返回string" do
+    user = mock_normal_user
+    assert user.items.first.breadcrumb_html.is_a?(String)
+  end
+
   private
   def mock_taobao_items_onsale_get_result(item, total_results = nil)
     items = []

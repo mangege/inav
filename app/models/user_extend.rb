@@ -11,7 +11,20 @@ class UserExtend < ActiveRecord::Base
     show_parent_cat: 'false',
     open_blank: 'false',
     logoff_taobao: 'false'
-  }
+  }.freeze
+
+  DEFAULT_BREAD_CRUMB_TEMPLATE = <<-EOS
+{% for link in links %}
+  <a href="{{link.url}}">{{link.title}}</a> &gt; 
+{% endfor %}
+  EOS
+  DEFAULT_BREAD_CRUMB_TEMPLATE.freeze
+
+  DEFAULT_RELATED_CAT_TEMPLATE = <<-EOS
+TODO
+  EOS
+  DEFAULT_RELATED_CAT_TEMPLATE.freeze
+
 
   def settings
     settings = read_attribute(:settings)
@@ -31,5 +44,15 @@ class UserExtend < ActiveRecord::Base
 
   def show_item_title?
     settings[:show_item_title] == 'true'
+  end
+
+  def bread_crumb_liquid_template
+    @bread_crumb_liquid_template ||= Liquid::Template.parse(
+      bread_crumb_template || UserExtend::DEFAULT_BREAD_CRUMB_TEMPLATE )
+  end
+
+  def related_cat_liquid_template
+    @related_cat_liquid_template ||= Liquid::Template.parse(
+      related_cat_template || UserExtend::DEFAULT_RELATED_CAT_TEMPLATE )
   end
 end

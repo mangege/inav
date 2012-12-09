@@ -34,9 +34,15 @@ class Item < ActiveRecord::Base
     "http://item.taobao.com/item.htm?id=#{tb_num_iid}"
   end
 
-  def breadcrumb_html
-    #TODO
-    'hello kitty'
+  def breadcrumb_html(options = {})
+    user = options[:user] || self.user
+    template = user.user_extend.bread_crumb_liquid_template
+    links = breadcrumb_links(user: user)
+    if links.empty?
+      ''
+    else
+      template.render('links' => links)
+    end
   end
 
   def breadcrumb_links(options = {})
@@ -78,7 +84,7 @@ class Item < ActiveRecord::Base
   end
 
   def add_breadcrumbs_to_desc
-    self.content = "#{breadcrumbs_html}#{content}"
+    self.content = "#{breadcrumb_html}#{content}"
   end
 
   def self.taobao_columns
