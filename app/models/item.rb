@@ -47,19 +47,18 @@ class Item < ActiveRecord::Base
 
   def breadcrumb_links(options = {})
     user = options[:user] || self.user
-    shop = options[:shop] || user.shop
-    user_extend = options[:user_extend] || user.user_extend
+    shop = user.shop
+    user_extend = user.user_extend
 
     links = []
     links << shop.shop_link if user_extend.show_shop_title?
-    links.concat(seller_cat_links(user: user, shop: shop))
+    links.concat(seller_cat_links(user: user))
     links << self.item_link if user_extend.show_item_title?
     links
   end
 
   def seller_cat_links(options = {})
     user = options[:user] || self.user
-    shop = options[:shop] || user.shop
 
     links = []
     cids = self.cids
@@ -73,7 +72,7 @@ class Item < ActiveRecord::Base
     else
       seller_cat = seller_cats.first
     end
-    seller_cat.seller_cat_links(shop)
+    seller_cat.full_links(user: user)
   end
 
   def cids

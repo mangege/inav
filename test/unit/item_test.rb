@@ -238,15 +238,13 @@ class ItemTest < ActiveSupport::TestCase
     #TODO
   end
 
-  test "#breadcrumb_links 应该不再查询user和shop" do
+  test "#breadcrumb_links 应该不再查询user" do
     user = mock_normal_user
-    shop = user.shop
     item = user.items.first
 
-    User.any_instance.stubs(:shop).returns(shop).never
     Item.any_instance.stubs(:user).returns(user).never
     SellerCat.any_instance.stubs(:user).returns(user).never
-    item.breadcrumb_links(user: user, shop: shop)
+    item.breadcrumb_links(user: user)
   end
 
   test "#breadcrumb_links 默认应该不添加店铺与商品链接" do
@@ -285,7 +283,7 @@ class ItemTest < ActiveSupport::TestCase
   test "#seller_cat_links 应该选优先级高的" do
     user = mock_normal_user
     seller_cats = user.seller_cats
-    item = FactoryGirl.create(:item, tb_seller_cids: "#{seller_cats.first.tb_cid},#{seller_cats.last.tb_cid}")
+    item = FactoryGirl.create(:item, tb_seller_cids: "#{seller_cats.first.tb_cid},#{seller_cats.last.tb_cid}", user: user)
 
     seller_cats.first.update_attribute(:priority, 10)
     links = item.breadcrumb_links

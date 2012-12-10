@@ -19,21 +19,22 @@ class SellerCat < ActiveRecord::Base
     not parent?
   end
 
-  def seller_cat_url(shop = nil)
-    shop = user.shop if shop.nil?
+  def seller_cat_url(options = {})
+    l_user = options[:user] || user
+    shop = l_user.shop
     "#{shop.shop_url}/search.htm?scid=#{tb_cid}"
   end
 
-  def seller_cat_link(shop = nil)
-    shop = user.shop if shop.nil?
-    Link.new(tb_name, seller_cat_url(shop))
+  def seller_cat_link(options = {})
+    l_user = options[:user] || user
+    Link.new(tb_name, seller_cat_url(user: l_user))
   end
 
-  def seller_cat_links(shop = nil)
-    shop = user.shop if shop.nil?
+  def full_links(options = {})
+    l_user = options[:user] || user
     links = []
-    links << self.parent_seller_cat.seller_cat_link(shop) if sub?
-    links << self.seller_cat_link(shop)
+    links << self.parent_seller_cat.seller_cat_link(user: l_user) if sub?
+    links << self.seller_cat_link(user: l_user)
     links
   end
 
