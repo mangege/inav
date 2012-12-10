@@ -7,7 +7,7 @@ class Item < ActiveRecord::Base
   scope :desc_expired, where('desc_modified IS NULL OR desc_modified < tb_modified')
 
   extend Enumerize
-  enumerize :tb_approve_status, in: {onsale: 0, instock: 1}
+  enumerize :tb_approve_status, in: %w[onsale instock]
 
   def tb_desc
     item_desc.try(:content)
