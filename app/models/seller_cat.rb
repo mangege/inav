@@ -30,12 +30,33 @@ class SellerCat < ActiveRecord::Base
     Link.new(tb_name, seller_cat_url(user: l_user))
   end
 
-  def full_links(options = {})
+  def breadcrumb_full_links(options = {})
     l_user = options[:user] || user
     links = []
     links << self.parent_seller_cat.seller_cat_link(user: l_user) if sub?
     links << self.seller_cat_link(user: l_user)
     links
+  end
+
+  def related_cat_full_links(options = {})
+    l_user = options[:user] || user
+    user_extend = l_user.user_extend
+    links = []
+    brother_cats.each do |cat|
+      links << cat.parent_seller_cat.seller_cat_link(user: l_user) if user_extend.show_parent_cat?
+      links << cat.seller_cat_link(user: l_user)
+    end
+    links
+  end
+
+  def brother_cats
+    if sub?
+      cats = self.class.where(tb_parent_cid: tb_parent_cid)
+      cats.reject!{|c| c.id == self.id}
+      cats
+    else
+      []
+    end
   end
 
   def self.update_priorities(id_priorities, user)
@@ -51,7 +72,17 @@ class SellerCat < ActiveRecord::Base
   end
 
   def self.max_by_priority(seller_cats)
-    seller_cats.max_by{|s| s.priority}
+    seller_cats.first if seller_cats.size < 2
+
+    l_sub_cats = seller_cats.select{|c| c.sub?}
+    l_parent_cats = seller_cats.select{|c| c.parent?}
+    max_sub_cat = l_sub_cats.max_by{|s| s.priority}
+    max_parent_cat = l_parent_cats.max_by{|s| s.priority}
+    if !max_sub_cat.nil? && !max_parent_cat.nil?
+      max_sub_cat.priority < max_parent_cat.priority ? max_parent_cat : max_sub_cat
+    else
+      max_sub_cat || max_parent_cat
+    end
   end
 
   def self.taobao_list_sync(user)

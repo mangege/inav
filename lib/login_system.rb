@@ -4,6 +4,7 @@ module LoginSystem
     base.send :helper_method, :current_user, :logged_in?
   end
 
+  protected
   def login_user(user)
     @current_user = user
     session[:user_id] = user.id

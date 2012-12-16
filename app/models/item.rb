@@ -34,6 +34,17 @@ class Item < ActiveRecord::Base
     "http://item.taobao.com/item.htm?id=#{tb_num_iid}"
   end
 
+  def related_cat_html(options = {})
+    l_user = options[:user] || self.user
+    template = l_user.user_extend.related_cat_liquid_template
+    cat  = high_priority_cat
+    return '' if cat.nil?
+
+    links = cat.related_cat_full_links(user: l_user)
+    return '' if links.empty?
+    template.render('links' => links)
+  end
+
   def breadcrumb_html(options = {})
     user = options[:user] || self.user
     template = user.user_extend.bread_crumb_liquid_template
@@ -52,27 +63,27 @@ class Item < ActiveRecord::Base
 
     links = []
     links << shop.shop_link if user_extend.show_shop_title?
-    links.concat(seller_cat_links(user: user))
+    links.concat(high_priority_breadcrumb_link(user: user))
     links << self.item_link if user_extend.show_item_title?
     links
   end
 
-  def seller_cat_links(options = {})
+  def high_priority_breadcrumb_link(options = {})
     user = options[:user] || self.user
 
-    links = []
-    cids = self.cids
-    return links if cids.empty?
+    seller_cat = high_priority_cat
+    seller_cat.nil? ? [] : seller_cat.breadcrumb_full_links(user: user)
+  end
 
-    seller_cats = SellerCat.where(tb_cid: cids)
-    return links if seller_cats.empty?
-    seller_cat = nil
+  def high_priority_cat
+    l_cids = cids
+    return if l_cids.nil?
+    seller_cats = SellerCat.where(tb_cid: l_cids)
     if seller_cats.size > 1
-      seller_cat = SellerCat.max_by_priority(seller_cats)
+      SellerCat.max_by_priority(seller_cats)
     else
-      seller_cat = seller_cats.first
+      seller_cats.first
     end
-    seller_cat.full_links(user: user)
   end
 
   def cids
@@ -80,10 +91,6 @@ class Item < ActiveRecord::Base
     cids.delete('')
     cids.delete('-1')
     cids
-  end
-
-  def add_breadcrumbs_to_desc
-    self.content = "#{breadcrumb_html}#{content}"
   end
 
   def self.taobao_columns

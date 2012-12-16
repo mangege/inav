@@ -280,9 +280,9 @@ class ItemTest < ActiveSupport::TestCase
     assert !links.select{|l| l.url =~ /search/}.empty?
   end
 
-  test "#seller_cat_links 应该选优先级高的" do
+  test "#high_priority_breadcrumb_link 应该选优先级高的" do
     user = mock_normal_user
-    seller_cats = user.seller_cats
+    seller_cats = user.seller_cats.sub_cats
     item = FactoryGirl.create(:item, tb_seller_cids: "#{seller_cats.first.tb_cid},#{seller_cats.last.tb_cid}", user: user)
 
     seller_cats.first.update_attribute(:priority, 10)
@@ -296,9 +296,18 @@ class ItemTest < ActiveSupport::TestCase
     assert !links.select{|l| l.url == seller_cats.last.seller_cat_url}.empty?
   end
 
-  test "#breadcrumb_html 应该返回string" do
+  test "#breadcrumb_html 应该返回string且不为空" do
     user = mock_normal_user
-    assert user.items.first.breadcrumb_html.is_a?(String)
+    html = user.items.first.breadcrumb_html
+    assert html.is_a?(String)
+    assert_not_equal '', html
+  end
+
+  test "#related_cat_html 应该返回string且不为空" do
+    user = mock_normal_user
+    html = user.items.first.related_cat_html
+    assert html.is_a?(String)
+    assert_not_equal '', html
   end
 
   private
@@ -328,8 +337,9 @@ class ItemTest < ActiveSupport::TestCase
   def mock_normal_user
     user = FactoryGirl.create(:user)
     FactoryGirl.create(:shop, user: user)
-    FactoryGirl.create_list(:sub_seller_cat, 3, user: user)
-    FactoryGirl.create_list(:item, 3, user: user, tb_seller_cids: user.seller_cats.last.tb_cid.to_s)
+    parent_cat = FactoryGirl.create(:seller_cat, user: user)
+    FactoryGirl.create_list(:sub_seller_cat, 3, user: user, parent_seller_cat: parent_cat)
+    FactoryGirl.create_list(:item, 3, user: user, tb_seller_cids: user.seller_cats.sub_cats.last.tb_cid.to_s)
 
     user.reload
     user

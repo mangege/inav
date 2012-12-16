@@ -21,7 +21,9 @@ class UserExtend < ActiveRecord::Base
   DEFAULT_BREAD_CRUMB_TEMPLATE.freeze
 
   DEFAULT_RELATED_CAT_TEMPLATE = <<-EOS
-TODO
+{% for link in links %}
+  <a href="{{link.url}}">{{link.title}}</a> &gt; 
+{% endfor %}
   EOS
   DEFAULT_RELATED_CAT_TEMPLATE.freeze
 
@@ -44,6 +46,10 @@ TODO
 
   def show_item_title?
     settings[:show_item_title] == 'true'
+  end
+
+  def show_parent_cat?
+    settings[:show_parent_cat] == 'true'
   end
 
   def bread_crumb_liquid_template

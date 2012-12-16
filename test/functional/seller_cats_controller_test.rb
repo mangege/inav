@@ -19,7 +19,7 @@ class SellerCatsControllerTest < ActionController::TestCase
   end
 
   test "#update_priorities 更新成功后应该重定向到index" do
-    seller_cat = FactoryGirl.create(:seller_cat, user: @controller.current_user)
+    seller_cat = FactoryGirl.create(:seller_cat, user: @controller.send(:current_user))
 
     params = {priorities: {seller_cat.id => 1} }
     put :update_priorities, params

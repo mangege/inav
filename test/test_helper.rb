@@ -26,11 +26,11 @@ class ActiveSupport::TestCase
   end
 
   def login(user = nil)
-    @controller.login_user(user || default_user)
+    @controller.send :login_user, (user || default_user)
   end
 
   def logout
-    @controller.logout_user
+    @controller.send :logout_user
   end
 
   #oauth2

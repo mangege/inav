@@ -44,10 +44,10 @@ class UserSessionsControllerTest < ActionController::TestCase
 
   test "#oauth2_expired 应该退出登录且显示登录提示页" do
     login
-    assert @controller.logged_in?
+    assert @controller.send(:logged_in?)
 
     get :oauth2_expired
-    assert !@controller.logged_in?
+    assert !@controller.send(:logged_in?)
     assert_template 'not_login'
   end
 end
