@@ -2,12 +2,12 @@
 module Taobao
   TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-  autoload(:OAuth2, 'taobao/oauth2')
-  autoload(:HttpSign, 'taobao/http_sign')
-  autoload(:Client, 'taobao/client')
-  autoload(:Collection, 'taobao/collection')
-  autoload(:Api, 'taobao/api')
-  autoload(:Field, 'taobao/field')
+  autoload(:OAuth2, 'taobao_lib/oauth2')
+  autoload(:HttpSign, 'taobao_lib/http_sign')
+  autoload(:Client, 'taobao_lib/client')
+  autoload(:Collection, 'taobao_lib/collection')
+  autoload(:Api, 'taobao_lib/api')
+  autoload(:Field, 'taobao_lib/field')
 
   class Error < StandardError ; end
   class ClientError < Error
