@@ -34,21 +34,21 @@ class Item < ActiveRecord::Base
     "http://item.taobao.com/item.htm?id=#{tb_num_iid}"
   end
 
-  def related_cat_html(options = {})
-    l_user = options[:user] || self.user
+  def related_cat_html
+    l_user = self.user
     template = l_user.user_extend.related_cat_liquid_template
     cat  = high_priority_cat
     return '' if cat.nil?
 
-    links = cat.related_cat_full_links(user: l_user)
+    links = cat.related_cat_full_links
     return '' if links.empty?
     template.render('links' => links)
   end
 
-  def breadcrumb_html(options = {})
-    user = options[:user] || self.user
-    template = user.user_extend.bread_crumb_liquid_template
-    links = breadcrumb_links(user: user)
+  def breadcrumb_html
+    l_user = self.user
+    template = l_user.user_extend.bread_crumb_liquid_template
+    links = breadcrumb_links
     if links.empty?
       ''
     else
@@ -56,23 +56,21 @@ class Item < ActiveRecord::Base
     end
   end
 
-  def breadcrumb_links(options = {})
-    user = options[:user] || self.user
-    shop = user.shop
-    user_extend = user.user_extend
+  def breadcrumb_links
+    l_user = self.user
+    shop = l_user.shop
+    user_extend = l_user.user_extend
 
     links = []
     links << shop.shop_link if user_extend.show_shop_title?
-    links.concat(high_priority_breadcrumb_link(user: user))
+    links.concat(high_priority_breadcrumb_link)
     links << self.item_link if user_extend.show_item_title?
     links
   end
 
-  def high_priority_breadcrumb_link(options = {})
-    user = options[:user] || self.user
-
+  def high_priority_breadcrumb_link
     seller_cat = high_priority_cat
-    seller_cat.nil? ? [] : seller_cat.breadcrumb_full_links(user: user)
+    seller_cat.nil? ? [] : seller_cat.breadcrumb_full_links
   end
 
   def high_priority_cat

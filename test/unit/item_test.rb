@@ -238,45 +238,36 @@ class ItemTest < ActiveSupport::TestCase
     #TODO
   end
 
-  test "#breadcrumb_links 应该不再查询user" do
-    user = mock_normal_user
-    item = user.items.first
-
-    Item.any_instance.stubs(:user).returns(user).never
-    SellerCat.any_instance.stubs(:user).returns(user).never
-    item.breadcrumb_links(user: user)
-  end
-
   test "#breadcrumb_links 默认应该不添加店铺与商品链接" do
     user = mock_normal_user
     shop = user.shop
     user_extend = user.user_extend
     item = user.items.last
 
-    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    links = item.breadcrumb_links
     assert links.select{|l| l.url == shop.shop_url}.empty?
     assert links.select{|l| l.url == item.item_url}.empty?
 
     user_extend.settings = {show_shop_title: 'true'}
     user_extend.save!
-    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    item.user.reload
+    links = item.breadcrumb_links
     assert !links.select{|l| l.url == shop.shop_url}.empty?
     assert links.select{|l| l.url == item.item_url}.empty?
 
     user_extend.settings = {show_item_title: 'true'}
     user_extend.save!
-    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    item.user.reload
+    links = item.breadcrumb_links
     assert links.select{|l| l.url == shop.shop_url}.empty?
     assert !links.select{|l| l.url == item.item_url}.empty?
   end
 
   test "#breadcrumb_links 应该包含分类链接" do
     user = mock_normal_user
-    shop = user.shop
-    user_extend = user.user_extend
     item = user.items.last
 
-    links = item.breadcrumb_links(user: user, shop: shop, user_extend: user_extend)
+    links = item.breadcrumb_links
     assert !links.select{|l| l.url =~ /search/}.empty?
   end
 

@@ -19,32 +19,29 @@ class SellerCat < ActiveRecord::Base
     not parent?
   end
 
-  def seller_cat_url(options = {})
-    l_user = options[:user] || user
-    shop = l_user.shop
+  def seller_cat_url
+    shop = user.shop
     "#{shop.shop_url}/search.htm?scid=#{tb_cid}"
   end
 
-  def seller_cat_link(options = {})
-    l_user = options[:user] || user
-    Link.new(tb_name, seller_cat_url(user: l_user))
+  def seller_cat_link
+    Link.new(tb_name, seller_cat_url)
   end
 
-  def breadcrumb_full_links(options = {})
-    l_user = options[:user] || user
+  def breadcrumb_full_links
     links = []
-    links << self.parent_seller_cat.seller_cat_link(user: l_user) if sub?
-    links << self.seller_cat_link(user: l_user)
+    links << self.parent_seller_cat.seller_cat_link if sub?
+    links << self.seller_cat_link
     links
   end
 
-  def related_cat_full_links(options = {})
-    l_user = options[:user] || user
+  def related_cat_full_links
+    l_user = user
     user_extend = l_user.user_extend
     links = []
     brother_cats.each do |cat|
-      links << cat.parent_seller_cat.seller_cat_link(user: l_user) if user_extend.show_parent_cat?
-      links << cat.seller_cat_link(user: l_user)
+      links << cat.parent_seller_cat.seller_cat_link if user_extend.show_parent_cat?
+      links << cat.seller_cat_link
     end
     links
   end
