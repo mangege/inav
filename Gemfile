@@ -44,7 +44,7 @@ gem 'simple_form'
 
 gem "rest-client", "~> 1.6.7"
 gem "oauth2", "~> 0.8.0"
-gem "thin", "~> 1.5.0"
+gem "puma", "~> 1.6.3"
 gem "rails-i18n", "~> 0.7.0"
 gem "enumerize", "~> 0.5.0"
 gem "liquid", "~> 2.4.1"
