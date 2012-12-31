@@ -1,6 +1,6 @@
 # -*- encoding : utf-8 -*-
 namespace :test do
-  desc "连接淘宝API服务吕进行远程测试"
+  desc "连接淘宝API服务器进行远程测试"
   Rails::SubTestTask.new(:remotes => "test:prepare") do |t|
     t.libs << "test"
     t.pattern = 'test/remote/**/*_test.rb'

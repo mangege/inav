@@ -48,6 +48,7 @@ gem "puma", "~> 1.6.3"
 gem "rails-i18n", "~> 0.7.0"
 gem "enumerize", "~> 0.5.0"
 gem "liquid", "~> 2.4.1"
+gem "sidekiq", "~> 2.6.0"
 
 group :development do
   gem "magic_encoding", "~> 0.0.2"
