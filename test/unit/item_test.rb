@@ -202,8 +202,8 @@ class ItemTest < ActiveSupport::TestCase
     stub_api_post(body)
 
     user = FactoryGirl.create(:user)
-    item = FactoryGirl.create(:item, user: user, tb_num_iid: 1500024589604)
-    assert_nil item.desc_modified
+    item = FactoryGirl.create(:item, user: user, tb_num_iid: 1500024589604, desc_modified: Time.now, tb_modified: 1.day.ago)
+    FactoryGirl.create(:item_desc, item_id: item.id)
 
     Item.taobao_desc_update(user, item)
     item.reload
@@ -220,22 +220,32 @@ class ItemTest < ActiveSupport::TestCase
     assert_nil item.desc_modified
     assert_not_equal item.new_desc, item.tb_desc
 
-    Item.taobao_db_update_new_desc(item, moch_taobao_attrs)
+    Item.taobao_db_update_new_desc(item, item.new_desc, moch_taobao_attrs)
     item.reload
     assert_equal "2012-11-29 23:18:45", item.desc_modified.strftime(Taobao::TIME_FORMAT)
     assert_equal item.new_desc, item.tb_desc
   end
 
-  test "#new_desc 根据用户设置应该生成面包屑和相关分类" do
-    #TODO
+  test "#new_desc 不存在则应该添加" do
+    user = mock_normal_user
+    item = user.items.first
+    
+    assert_not_equal item.tb_desc, item.new_desc
   end
 
-  test "#new_desc 只生成面包屑" do
-    #TODO
-  end
+  test "#new_desc 存在则应该更新" do
+    user = mock_normal_user
+    item = user.items.first
 
-  test "#new_desc 只生成相关分类" do
-    #TODO
+    item.tb_desc = item.new_desc
+    item.save!
+    assert item.tb_desc =~ /cat name/
+    assert item.new_desc =~ /cat name/
+
+    item.tb_seller_cids = ""
+    item.save!
+    assert item.tb_desc =~ /cat name/
+    assert !(item.new_desc =~ /cat name/)
   end
 
   test "#breadcrumb_links 默认应该不添加店铺与商品链接" do
@@ -330,7 +340,10 @@ class ItemTest < ActiveSupport::TestCase
     FactoryGirl.create(:shop, user: user)
     parent_cat = FactoryGirl.create(:seller_cat, user: user)
     FactoryGirl.create_list(:sub_seller_cat, 3, user: user, parent_seller_cat: parent_cat)
-    FactoryGirl.create_list(:item, 3, user: user, tb_seller_cids: user.seller_cats.sub_cats.last.tb_cid.to_s)
+    FactoryGirl.create_list(:item, 3, user: user, tb_seller_cids: user.seller_cats.sub_cats.last.tb_cid.to_s, desc_modified: Time.now, tb_modified: 1.day.ago)
+    user.items.each do |item|
+      FactoryGirl.create(:item_desc, item_id: item.id)
+    end
 
     user.reload
     user

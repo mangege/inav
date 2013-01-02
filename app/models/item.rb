@@ -1,5 +1,6 @@
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
+  AREA_SELECTOR = "inav"
   belongs_to :user
   has_one :item_desc, dependent: :destroy, autosave: true
   validates :user_id, :tb_num_iid, :tb_title, :tb_approve_status, presence: true
@@ -28,8 +29,15 @@ class Item < ActiveRecord::Base
   end
 
   def new_desc
-    #TODO
-    'hello kitty'
+    raise "描述已经过期" if desc_expired?
+    doc = Nokogiri::HTML.fragment(tb_desc, 'UTF-8')
+    a_elem = doc.at_css("div > a[name=#{AREA_SELECTOR}]")
+    if a_elem
+      a_elem.parent.replace(area_html)
+      doc.to_html
+    else
+      area_html << tb_desc
+    end
   end
 
   def detail_url
@@ -93,6 +101,10 @@ class Item < ActiveRecord::Base
     cids
   end
 
+  def desc_expired?
+    desc_modified.nil? || desc_modified < tb_modified
+  end
+
   def self.taobao_columns
     columns = super << 'tb_desc'
     yield columns if block_given?
@@ -138,7 +150,7 @@ class Item < ActiveRecord::Base
     params[:desc] = item.new_desc
 
     result_hash = Taobao::Api.taobao_item_update(params)
-    taobao_db_update_new_desc(item, result_hash['item'])
+    taobao_db_update_new_desc(item, params[:desc], result_hash['item'])
   end
 
   def self.taobao_db_update_or_create(taobao_attrs, user)
@@ -157,9 +169,9 @@ class Item < ActiveRecord::Base
     item.save!
   end
 
-  def self.taobao_db_update_new_desc(item, taobao_attrs)
+  def self.taobao_db_update_new_desc(item, p_new_desc, taobao_attrs)
     item.desc_modified = taobao_attrs['modified']
-    item.tb_desc = item.new_desc
+    item.tb_desc = p_new_desc
     item.save!
   end
 
@@ -191,4 +203,15 @@ class Item < ActiveRecord::Base
     user.items
   end
   private_class_method :taobao_has_next?, :taobao_list_sync
+
+  private
+  def area_html
+    html = ""
+    html << "<div><a name=\"#{AREA_SELECTOR}\"></a>"
+
+    html << breadcrumb_html
+    html << related_cat_html
+
+    html << '</div>'
+  end
 end
