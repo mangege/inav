@@ -5,6 +5,8 @@ class Item < ActiveRecord::Base
   validates :user_id, :tb_num_iid, :tb_title, :tb_approve_status, presence: true
 
   scope :desc_expired, where('desc_modified IS NULL OR desc_modified < tb_modified')
+  scope :onsale, where(tb_approve_status: :onsale)
+  scope :instock, where(tb_approve_status: :instock)
 
   extend Enumerize
   enumerize :tb_approve_status, in: %w[onsale instock]
@@ -133,7 +135,7 @@ class Item < ActiveRecord::Base
     params = {}
     params[:session] = user.access_token
     params[:num_iid] = item.tb_num_iid
-    params[:desc] = item.tb_desc
+    params[:desc] = item.new_desc
 
     result_hash = Taobao::Api.taobao_item_update(params)
     taobao_db_update_new_desc(item, result_hash['item'])
