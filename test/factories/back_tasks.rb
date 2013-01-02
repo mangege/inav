@@ -2,7 +2,10 @@
 # Read about factories at https://github.com/thoughtbot/factory_girl
 
 FactoryGirl.define do
-  factory :user_extend do
-    user
+  factory :back_task do
+    task_status "MyString"
+    task_type "MyString"
+    job_id "MyString"
+    user_id 1
   end
 end

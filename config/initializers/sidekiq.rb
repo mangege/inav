@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 Sidekiq.configure_server do |config|
   config.redis = $redis_pool
 end

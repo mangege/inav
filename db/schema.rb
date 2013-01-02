@@ -11,7 +11,15 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121201082510) do
+ActiveRecord::Schema.define(:version => 20130102131922) do
+
+  create_table "back_tasks", :force => true do |t|
+    t.string   "task_status", :default => "pending"
+    t.string   "task_type",                          :null => false
+    t.integer  "user_id",                            :null => false
+    t.datetime "created_at",                         :null => false
+    t.datetime "updated_at",                         :null => false
+  end
 
   create_table "item_descs", :primary_key => "item_id", :force => true do |t|
     t.text "content", :limit => 16777215

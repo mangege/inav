@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class CreateUserExtends < ActiveRecord::Migration
   def change
     create_table :user_extends do |t|

@@ -1,10 +1,7 @@
+# -*- encoding : utf-8 -*-
 module ItemWorker
-  class UpdateOnsale
-    #同步分类
-    #同步商品列表
-    #同步商品描述
-    #更新描述
-    def perform(user_id)
+  class UpdateOnsale < WorkerBase
+    def process(user_id)
       @user = User.find(user_id)
 
       sync_seller_cats
