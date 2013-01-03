@@ -45,7 +45,10 @@ class ShopTest < ActiveSupport::TestCase
     assert_not_nil user.shop
 
     body_hash = MultiJson.load(body)
-    Shop.taobao_columns.each do |field|
+    columns = Shop.taobao_columns
+    columns.delete('tb_modified')
+    columns.delete('tb_created')
+    columns.each do |field|
       assert_not_nil shop.send(field), field
       assert_equal shop.send(field), body_hash['shop_get_response']['shop'][field[3..-1]]
     end

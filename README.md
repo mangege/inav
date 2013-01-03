@@ -27,3 +27,5 @@ TODO
 * 提取淘宝相关功能代码为gem包,根据[metadata](http://api.taobao.com/myresources/standardSdk.htm?spm=0.0.0.40.rebfKc)生成SDK
 * 用户任务锁,同一时间用户只能进行一个任务.比如在同时分类时就不能同步商品.根据线上情况和用户容忍度再决定
 * thread 25,AR pool, redis pool, puma, sidekiq
+* api测试及依赖api测试,根据不同参数返回不同值
+* api返回结果时间类型与数据库比较的转换

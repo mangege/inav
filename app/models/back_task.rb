@@ -17,7 +17,7 @@ class BackTask < ActiveRecord::Base
 
     TASK_TYPE_NAMES[:update_onsale_items] = "更新出售中的商品"
     def update_onsale_items(user)
-      add_task(user, __method__, ItemWorker::UpdateOnsale, user.id)
+      add_task(user, __method__, ItemWorker::UpdateOnsale)
     end
 
     TASK_TYPE_NAMES[:update_inventory_items] = "更新库存中的商品"
@@ -30,7 +30,7 @@ class BackTask < ActiveRecord::Base
 
     TASK_TYPE_NAMES[:sync_shop] = "同步店铺信息"
     def sync_shop(user)
-      add_task(user, __method__, ShopWorker::Sync, user.id)
+      add_task(user, __method__, ShopWorker::Sync)
     end
 
     TASK_TYPE_NAMES[:sync_seller_cats] = "同步店铺分类"
@@ -44,7 +44,7 @@ class BackTask < ActiveRecord::Base
     end
 
     private
-    def add_task(user, task_type, task_klass, *task_args)
+    def add_task(user, task_type, task_klass)
       if BackTask.in_progress.exists?(user_id: user.id, task_type: task_type)
         false
       else
@@ -53,7 +53,7 @@ class BackTask < ActiveRecord::Base
         task.task_type = task_type
         task.user_id = user.id
         task.save!
-        task_klass.perform_async(*task_args, task.id)
+        task_klass.perform_async(user.id, task.id)
         true
       end
     end

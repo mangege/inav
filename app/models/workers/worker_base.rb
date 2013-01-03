@@ -2,12 +2,11 @@
 class WorkerBase
   include Sidekiq::Worker
 
-  def perform(*args)
-    @task_id = args.last
-    @task_args = args[0..-2]
+  def perform(user_id, task_id)
+    @task_id = task_id
     pre_process
     begin
-      process(*@task_args)
+      process(user_id)
       @task_result = :success
     rescue
       #TODO 异常邮件通知
