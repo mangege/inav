@@ -12,7 +12,10 @@ class Shop < ActiveRecord::Base
     Link.new(tb_title, shop_url)
   end
 
-  #TODO 6小时更新一次
+  def taobao_expired?
+    updated_at.nil? || updated_at < 6.hour.ago
+  end
+
   def self.taobao_sync(user)
     params = {}
     params[:fields] = taobao_fields.join(',')

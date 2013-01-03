@@ -3,6 +3,10 @@ class MainController < ApplicationController
   layout 'management'
 
   def index
-    @shop = Shop.taobao_sync(current_user)
+    if current_user.shop.nil? || current_user.shop.taobao_expired?
+      @shop = Shop.taobao_sync(current_user)
+    else
+      @shop = current_user.shop
+    end
   end
 end

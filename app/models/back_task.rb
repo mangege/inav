@@ -26,7 +26,7 @@ class BackTask < ActiveRecord::Base
 
     TASK_TYPE_NAMES[:sync_shop] = "同步店铺信息"
     def sync_shop(user)
-
+      add_task(user, __method__, ShopWorker::Sync, user.id)
     end
 
     TASK_TYPE_NAMES[:sync_seller_cats] = "同步店铺分类"
@@ -36,11 +36,6 @@ class BackTask < ActiveRecord::Base
 
     TASK_TYPE_NAMES[:sync_items] = "同步商品"
     def sync_items(user)
-
-    end
-
-    #用户任务
-    def user_tasks(user)
 
     end
 

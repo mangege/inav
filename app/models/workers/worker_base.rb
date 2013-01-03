@@ -1,3 +1,4 @@
+# -*- encoding : utf-8 -*-
 class WorkerBase
   include Sidekiq::Worker
 
@@ -16,11 +17,19 @@ class WorkerBase
   end
 
   private
+  def find_back_task
+    BackTask.find(@task_id)
+  end
+
   def pre_process
-    BackTask.update(@task_id, task_status: :processing)
+    task = find_back_task
+    task.task_status = :processing
+    task.save!
   end
 
   def post_process
-    BackTask.update(@task_id, task_status: @task_result)
+    task = find_back_task
+    task.task_status = @task_result
+    task.save!
   end
 end

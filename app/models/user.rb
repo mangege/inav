@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_one :user_extend
   has_many :seller_cats
   has_many :items
+  has_many :back_tasks
 
   TAOBAO_KEYS = %w[taobao_user_id taobao_user_nick access_token refresh_token
     expires_in re_expires_in r1_expires_in r2_expires_in w1_expires_in w2_expires_in oauth2_updated_at]
