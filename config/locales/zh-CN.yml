@@ -1,2 +1,16 @@
 zh-CN:
   hello: "你好,世界"
+  enumerize:
+    back_task:
+      task_status:
+        pending: "等待中"
+        processing: "处理中"
+        success: "成功"
+        fail: "失败"
+  views:
+    pagination:
+      first: "&laquo; 第一页"
+      last: "最后页 &raquo;"
+      previous: "&lsaquo; 上一页"
+      next: "下一页 &rsaquo;"
+      truncate: "..."

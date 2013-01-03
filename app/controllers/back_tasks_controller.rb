@@ -4,7 +4,7 @@ class BackTasksController < ApplicationController
   before_filter :check_params, only: :index
 
   def index
-    @back_tasks = current_user.back_tasks
+    @back_tasks = current_user.back_tasks.order('id DESC').page(params[:page]).per(10)
   end
 
   def create

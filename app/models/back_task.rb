@@ -6,6 +6,10 @@ class BackTask < ActiveRecord::Base
 
   scope :in_progress, where(task_status: %w[pending processing])
 
+  def task_type_text
+    TASK_TYPE_NAMES[task_type.to_sym]
+  end
+
   class << self
     TASK_TYPE_NAMES[:update_one_item] = "更新一个商品"
     def update_one_item(user)
