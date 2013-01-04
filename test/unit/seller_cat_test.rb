@@ -121,21 +121,6 @@ class SellerCatTest < ActiveSupport::TestCase
     assert_equal Set.new(ids), Set.new( user.seller_cats.reload.map(&:id) )
   end
 
-  test "#seller_cats_with_sync 同步数据不存在数据库里应该创建" do
-    user = FactoryGirl.create(:user)
-    FactoryGirl.create_list(:seller_cat, 3, user: user)
-    new_seller_cat = FactoryGirl.build(:seller_cat, user: nil)
-    new_cid = new_seller_cat.tb_cid
-    mock_result_hash = mock_sellercats_list_get_result(user.seller_cats.dup.push(new_seller_cat))
-    Taobao::Api.stubs(:taobao_sellercats_list_get).returns(mock_result_hash)
-
-    assert !user.seller_cats.reload.map(&:tb_cid).include?(new_cid)
-    assert_difference "SellerCat.count", 1 do
-      user.seller_cats_with_sync
-    end
-    assert user.seller_cats.reload.map(&:tb_cid).include?(new_cid)
-  end
-
   private
   def mock_sellercats_list_get_result(seller_cat)
     seller_cats = []

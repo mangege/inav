@@ -35,7 +35,7 @@ class BackTask < ActiveRecord::Base
 
     TASK_TYPE_NAMES[:sync_seller_cats] = "同步店铺分类"
     def sync_seller_cats(user)
-
+      add_task(user, __method__, SellerCatWorker::Sync)
     end
 
     TASK_TYPE_NAMES[:sync_items] = "同步商品"

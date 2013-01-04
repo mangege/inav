@@ -18,7 +18,7 @@
   </tr>
 </table>
 <div>
-  <%= link_to "同步店铺信息", back_tasks_path(task_type: :sync_shop), method: :post, class: 'btn' %>
+  <%= add_back_task_link("同步店铺信息", :sync_shop, class: 'btn', title: "同步您的淘宝店铺标题等信息") %>
 </div>
 <hr />
 <h4>更新商品描述</h4>

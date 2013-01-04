@@ -25,4 +25,11 @@ module ApplicationHelper
   def render_notice_text
     flash[:error] || flash[:alert] || flash[:notice]
   end
+
+  def add_back_task_link(link_name, task_type, link_options = {})
+    options = {}
+    options[:method] = :post
+    options.merge!(link_options)
+    link_to(link_name, back_tasks_path(task_type: task_type), options)
+  end
 end

@@ -82,62 +82,6 @@ class UserTest < ActiveSupport::TestCase
     assert !user.oauth2_expired?
   end
 
-  test "#seller_cats_with_sync 默认不强制同步" do
-    user = FactoryGirl.create(:user, seller_cats_updated_at: Time.now)
-    SellerCat.expects(:taobao_list_sync).never
-    user.seller_cats_with_sync
-  end
-
-  test "#seller_cats_with_sync force_sync为true时强制同步" do
-    user = FactoryGirl.create(:user, seller_cats_updated_at: Time.now)
-    SellerCat.expects(:taobao_list_sync).returns([]).once
-    user.seller_cats_with_sync(force_sync: true)
-  end
-
-  test "#seller_cats_with_sync seller_cats_updated_at为空则进行同步" do
-    user = FactoryGirl.create(:user, seller_cats_updated_at: nil)
-    SellerCat.expects(:taobao_list_sync).returns([]).once
-    user.seller_cats_with_sync
-  end
-
-  test "#seller_cats_with_sync seller_cats_updated_at在6小时前则进行同步" do
-    user = FactoryGirl.create(:user, seller_cats_updated_at: 7.hour.ago)
-    SellerCat.expects(:taobao_list_sync).returns([]).once
-    user.seller_cats_with_sync
-  end
-
-  test "#seller_cats_with_sync seller_cats_updated_at在6小时内则不进行同步" do
-    user = FactoryGirl.create(:user, seller_cats_updated_at: 5.hour.ago)
-    SellerCat.expects(:taobao_list_sync).returns([]).never
-    user.seller_cats_with_sync
-  end
-
-  test "#seller_cats_with_sync 同步完成后应该更新seller_cats_updated_at" do
-    user = FactoryGirl.create(:user)
-    assert_nil user.seller_cats_updated_at
-
-    SellerCat.stubs(:taobao_list_sync).returns([])
-    user.seller_cats_with_sync
-    user.reload
-    assert 1.minute > (Time.now - user.seller_cats_updated_at)
-
-    #old_time = user.seller_cats_updated_at
-    #user.seller_cats_with_sync(force_sync: true)
-    #assert user.seller_cats_updated_at.to_i > old_time.to_i
-  end
-
-  test "#seller_cats_with_sync 返回结果应该都是父分类" do
-    user = FactoryGirl.create(:user, seller_cats_updated_at: Time.now)
-    parent_seller_cat = FactoryGirl.create(:seller_cat, user: user)
-    FactoryGirl.create_list(:sub_seller_cat, 3, parent_seller_cat: parent_seller_cat, user: user)
-    user.reload
-
-    assert user.seller_cats_with_sync.count > 0
-    user.seller_cats_with_sync.each do |seller_cat|
-      assert seller_cat.parent?
-    end
-  end
-
   private
   def default_keys
     keys = [:taobao_user_id]

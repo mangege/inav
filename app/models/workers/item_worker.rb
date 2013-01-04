@@ -11,6 +11,7 @@ module ItemWorker
     end
 
     private
+    #TODO use SellerCatWorker
     def sync_seller_cats
       SellerCat.taobao_list_sync(@user)
     end

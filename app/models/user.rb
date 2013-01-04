@@ -39,18 +39,6 @@ class User < ActiveRecord::Base
     oauth2_updated_at + expires_in < Time.now
   end
 
-  def seller_cats_with_sync(options = {})
-    force_sync = options[:force_sync] || false
-    if force_sync || seller_cats_updated_at.nil? || seller_cats_updated_at < 6.hour.ago
-      User.transaction do
-        SellerCat.taobao_list_sync(self)
-        self.seller_cats_updated_at = Time.now
-        save!
-      end
-    end
-    self.seller_cats.parent_cats.include_sub_seller_cats.taobao_order
-  end
-
   def items_with_sync
     #TODO check
     if true

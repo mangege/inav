@@ -3,9 +3,7 @@ class SellerCatsController < ApplicationController
   layout 'management'
 
   def index
-    force_sync = params[:force_sync] == 'true'
-    @seller_cats = current_user.seller_cats_with_sync(force_sync: force_sync)
-    flash.now.notice = "同步你的淘宝店铺分类成功" if force_sync
+    @seller_cats = current_user.seller_cats.parent_cats.include_sub_seller_cats.taobao_order
   end
 
   def update_priorities

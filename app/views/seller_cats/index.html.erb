@@ -10,7 +10,7 @@
       <td colspan="3">
         <div class="row-fluid">
           <%= submit_tag '保存优先级', title: '保存分类优先级', class: 'btn btn-primary offset2' %>
-          <%= link_to "同步分类", seller_cats_path(force_sync: true), class: 'btn pull-right', title: '同步你的淘宝店铺分类' %>
+          <%= add_back_task_link("同步分类", :sync_seller_cats, class: 'btn pull-right', title: "同步你的淘宝店铺分类") %>
         </div>
       </td>
     </tr>

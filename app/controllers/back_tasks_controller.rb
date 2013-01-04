@@ -19,7 +19,7 @@ class BackTasksController < ApplicationController
 
   private
   def check_params
-    if %w[sync_shop].include?(params[:task_type])
+    if %w[sync_shop sync_seller_cats].include?(params[:task_type])
       flash.alert = "参数有误,请重试"
       redirect_to root_path
     end
