@@ -8,6 +8,7 @@ class Item < ActiveRecord::Base
   scope :desc_expired, where('desc_modified IS NULL OR desc_modified < tb_modified')
   scope :onsale, where(tb_approve_status: :onsale)
   scope :instock, where(tb_approve_status: :instock)
+  scope :inventory, where(tb_approve_status: :instock)
 
   extend Enumerize
   enumerize :tb_approve_status, in: %w[onsale instock]

@@ -23,8 +23,7 @@
 <hr />
 <h4>更新商品描述</h4>
 <div>
-  <%= link_to "全部商品", '', class: 'btn' %>
-  <%= link_to "出售中的商品", '', class: 'btn btn-primary' %>
-  <%= link_to "库存中的商品", '', class: 'btn' %>
-  <%= link_to "更新一个看效果", '', class: 'btn' %>
+  <%= add_back_task_link("全部商品", :update_all_items, class: 'btn') %>
+  <%= add_back_task_link("出售中的商品", :update_onsale_items, class: 'btn') %>
+  <%= add_back_task_link("库车中的商品", :update_inventory_items, class: 'btn') %>
 </div>

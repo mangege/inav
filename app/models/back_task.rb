@@ -13,6 +13,7 @@ class BackTask < ActiveRecord::Base
   class << self
     TASK_TYPE_NAMES[:update_one_item] = "更新一个商品"
     def update_one_item(user)
+      #TODO 暂时砍掉,等后期根据需求再决定是否添加
     end
 
     TASK_TYPE_NAMES[:update_onsale_items] = "更新出售中的商品"
@@ -22,10 +23,12 @@ class BackTask < ActiveRecord::Base
 
     TASK_TYPE_NAMES[:update_inventory_items] = "更新库存中的商品"
     def update_inventory_items(user)
+      add_task(user, __method__, ItemWorker::UpdateInventory)
     end
 
     TASK_TYPE_NAMES[:update_all_items] = "更新所有商品"
     def update_all_items(user)
+      add_task(user, __method__, ItemWorker::UpdateAll)
     end
 
     TASK_TYPE_NAMES[:sync_shop] = "同步店铺信息"
@@ -40,17 +43,17 @@ class BackTask < ActiveRecord::Base
 
     TASK_TYPE_NAMES[:sync_all_items] = "同步全部商品"
     def sync_all_items(user)
-      add_task(user, __method__, ItemWorker::SyncAllItems)
+      add_task(user, __method__, ItemWorker::SyncAll)
     end
 
     TASK_TYPE_NAMES[:sync_onsale_items] = "同步出售中的商品"
     def sync_onsale_items(user)
-      add_task(user, __method__, ItemWorker::SyncOnsaleItems)
+      add_task(user, __method__, ItemWorker::SyncOnsale)
     end
 
     TASK_TYPE_NAMES[:sync_inventory_items] = "同步库存中商品"
     def sync_inventory_items(user)
-      add_task(user, __method__, ItemWorker::SyncInventoryItems)
+      add_task(user, __method__, ItemWorker::SyncInventory)
     end
 
     private

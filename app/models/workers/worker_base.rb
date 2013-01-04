@@ -10,6 +10,7 @@ class WorkerBase
       @task_result = :success
     rescue
       #TODO 异常邮件通知
+      puts $!.inspect
       @task_result = :fail
     end
     post_process
