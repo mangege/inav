@@ -6,9 +6,9 @@ module ApplicationHelper
 
   def render_page_title
     if @page_title
-      "#{@page_title} - iNav"
+      "#{@page_title} - 111掌柜小助手"
     else
-      "iNav"
+      "111掌柜小助手"
     end
   end
 
@@ -31,5 +31,13 @@ module ApplicationHelper
     options[:method] = :post
     options.merge!(link_options)
     link_to(link_name, back_tasks_path(task_type: task_type), options)
+  end
+
+  def nav_link(name, link)
+    li_options = {}
+    li_options[:class] = "active" if current_page?(link)
+    content_tag(:li, li_options) do
+      link_to(name, link)
+    end
   end
 end

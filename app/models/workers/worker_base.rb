@@ -9,7 +9,7 @@ class WorkerBase
       process(user_id)
       @task_result = :success
     rescue
-      #TODO 异常邮件通知
+      #FIXME 异常邮件通知
       puts $!.inspect
       @task_result = :fail
     end

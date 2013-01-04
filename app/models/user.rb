@@ -38,13 +38,4 @@ class User < ActiveRecord::Base
   def oauth2_expired?
     oauth2_updated_at + expires_in < Time.now
   end
-
-  def items_with_sync
-    #TODO check
-    if true
-      Item.taobao_onsale_sync(self)
-      Item.taobao_onsale_sync(self)
-    end
-    self.items
-  end
 end
