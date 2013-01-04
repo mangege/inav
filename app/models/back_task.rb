@@ -38,9 +38,19 @@ class BackTask < ActiveRecord::Base
       add_task(user, __method__, SellerCatWorker::Sync)
     end
 
-    TASK_TYPE_NAMES[:sync_items] = "同步商品"
-    def sync_items(user)
+    TASK_TYPE_NAMES[:sync_all_items] = "同步全部商品"
+    def sync_all_items(user)
+      add_task(user, __method__, ItemWorker::SyncAllItems)
+    end
 
+    TASK_TYPE_NAMES[:sync_onsale_items] = "同步出售中的商品"
+    def sync_onsale_items(user)
+      add_task(user, __method__, ItemWorker::SyncOnsaleItems)
+    end
+
+    TASK_TYPE_NAMES[:sync_inventory_items] = "同步库存中商品"
+    def sync_inventory_items(user)
+      add_task(user, __method__, ItemWorker::SyncInventoryItems)
     end
 
     private

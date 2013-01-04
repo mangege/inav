@@ -1,7 +1,7 @@
 # -*- encoding : utf-8 -*-
 class BackTasksController < ApplicationController
   layout 'management'
-  before_filter :check_params, only: :index
+  before_filter :check_params, only: :create
 
   def index
     @back_tasks = current_user.back_tasks.order('id DESC').page(params[:page]).per(10)
@@ -19,9 +19,9 @@ class BackTasksController < ApplicationController
 
   private
   def check_params
-    if %w[sync_shop sync_seller_cats].include?(params[:task_type])
+    unless BackTask::TASK_TYPE_NAMES.keys.include?(params[:task_type].to_sym)
       flash.alert = "参数有误,请重试"
-      redirect_to root_path
+      redirect_to action: :index
     end
   end
 end

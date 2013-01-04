@@ -3,6 +3,7 @@ Inav::Application.routes.draw do
   root :to => "main#index"
 
   resources :back_tasks, :only => [:create, :index]
+  resources :items, :only => [:index]
 
   resources :user_sessions, :only => [:new] do
     collection do

@@ -30,4 +30,29 @@ module ItemWorker
       end
     end
   end
+
+  class SyncAllItems < WorkerBase
+    def process(user_id)
+      user = User.find(user_id)
+      Item.taobao_onsale_sync(user)
+      Item.taobao_inventory_sync(user)
+      Item.taobao_desc_sync(user)
+    end
+  end
+
+  class SyncOnsaleItems < WorkerBase
+    def process(user_id)
+      user = User.find(user_id)
+      Item.taobao_onsale_sync(user)
+      Item.taobao_desc_sync(user)
+    end
+  end
+
+  class SyncInventoryItems < WorkerBase
+    def process(user_id)
+      user = User.find(user_id)
+      Item.taobao_inventory_sync(user)
+      Item.taobao_desc_sync(user)
+    end
+  end
 end
