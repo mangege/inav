@@ -3,6 +3,5 @@
   <td>
     <%= text_field_tag "priorities[#{seller_cat.id}]", seller_cat.priority, class: 'input-mini' %>
   </td>
-  <td>查看</td>
 </tr>
 <%= render :partial => "sub_seller_cat", :collection => seller_cat.sub_seller_cats %>

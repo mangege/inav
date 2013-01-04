@@ -1,4 +1,7 @@
-<h3><%= current_user.taobao_user_nick %>,欢迎使用111店铺面包屑导航管理</h3>
+<div>
+  <span><%= current_user.taobao_user_nick %>,欢迎使用111店铺面包屑导航管理</span>
+  <%= add_back_task_link("同步店铺信息", :sync_shop, class: 'btn btn-mini pull-right', title: "同步您的淘宝店铺标题等信息") %>
+</div>
 <table class="table table-striped table-bordered">
   <tr>
     <td>店铺地址</td>
@@ -17,13 +20,10 @@
     <td><%= l @shop.tb_created %></td>
   </tr>
 </table>
-<div>
-  <%= add_back_task_link("同步店铺信息", :sync_shop, class: 'btn', title: "同步您的淘宝店铺标题等信息") %>
-</div>
-<hr />
+
 <h4>更新商品描述</h4>
-<div>
+<div class="form-actions">
   <%= add_back_task_link("全部商品", :update_all_items, class: 'btn') %>
-  <%= add_back_task_link("出售中的商品", :update_onsale_items, class: 'btn') %>
+  <%= add_back_task_link("出售中的商品", :update_onsale_items, class: 'btn btn-primary') %>
   <%= add_back_task_link("库车中的商品", :update_inventory_items, class: 'btn') %>
 </div>

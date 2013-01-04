@@ -3,17 +3,11 @@
   <tr>
     <td>分类名称</td>
     <td class="span2">优先级</td>
-    <td class="span2">操作</td>
   </tr>
-    <%= render @seller_cats %>
-    <tr>
-      <td colspan="3">
-        <div class="row-fluid">
-          <%= submit_tag '保存优先级', title: '保存分类优先级', class: 'btn btn-primary offset2' %>
-          <%= add_back_task_link("同步分类", :sync_seller_cats, class: 'btn pull-right', title: "同步你的淘宝店铺分类") %>
-        </div>
-      </td>
-    </tr>
-
+  <%= render @seller_cats %>
 </table>
+<div class="form-actions">
+  <%= submit_tag '保存优先级', title: '保存分类优先级', class: 'btn btn-primary' %>
+  <%= add_back_task_link("同步分类", :sync_seller_cats, class: 'btn', title: "同步你的淘宝店铺分类") %>
+</div>
 <% end %>

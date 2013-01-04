@@ -5,15 +5,10 @@
     <td>当前二级分类</td>
     <td>面包屑分类</td>
   </tr>
-    <%= render @items %>
-    <tr>
-      <td colspan="3">
-        <div class="row-fluid">
-          <%= add_back_task_link("同步全部商品", :sync_all_items, class: 'btn') %>
-          <%= add_back_task_link("同步出售中的商品", :sync_onsale_items, class: 'btn') %>
-          <%= add_back_task_link("同步库车中的商品", :sync_inventory_items, class: 'btn') %>
-        </div>
-      </td>
-    </tr>
-
+  <%= render @items %>
 </table>
+<div class="form-actions">
+  <%= add_back_task_link("同步全部商品", :sync_all_items, class: 'btn') %>
+  <%= add_back_task_link("同步出售中的商品", :sync_onsale_items, class: 'btn btn-primary') %>
+  <%= add_back_task_link("同步库车中的商品", :sync_inventory_items, class: 'btn') %>
+</div>
