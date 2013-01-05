@@ -56,6 +56,11 @@ class BackTask < ActiveRecord::Base
       add_task(user, __method__, ItemWorker::SyncInventory)
     end
 
+    TASK_TYPE_NAMES[:bye_all_items] = "卸载所有商品代码"
+    def bye_all_items(user)
+      add_task(user, __method__, ItemWorker::ByeAll)
+    end
+
     private
     def add_task(user, task_type, task_klass)
       if BackTask.in_progress.exists?(user_id: user.id, task_type: task_type)

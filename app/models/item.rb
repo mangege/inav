@@ -41,6 +41,18 @@ class Item < ActiveRecord::Base
     end
   end
 
+  def original_desc
+    raise "描述已经过期" if desc_expired?
+    doc = Nokogiri::HTML.fragment(tb_desc, 'UTF-8')
+    a_elem = doc.at_css("div > a[name=#{AREA_SELECTOR}]")
+    if a_elem
+      a_elem.parent.remove
+      doc.to_html
+    else
+      tb_desc
+    end
+  end
+
   def detail_url
     "http://item.taobao.com/item.htm?id=#{tb_num_iid}"
   end
@@ -148,11 +160,17 @@ class Item < ActiveRecord::Base
     user.items
   end
 
-  def self.taobao_desc_update(user, item)
+  #desc_type: new, original
+  def self.taobao_desc_update(user, item, options = {})
+    desc_type = options[:desc_type] || :new
     params = {}
     params[:session] = user.access_token
     params[:num_iid] = item.tb_num_iid
-    params[:desc] = item.new_desc
+    if desc_type == :new
+      params[:desc] = item.new_desc
+    else
+      params[:desc] = item.original_desc
+    end
 
     result_hash = Taobao::Api.taobao_item_update(params)
     taobao_db_update_new_desc(item, params[:desc], result_hash['item'])

@@ -7,6 +7,18 @@ module ItemWorker
     end
   end
 
+  class ByeAll < WorkerBase
+    include UpdateBase
+    def process(user_id)
+      @user = User.find(user_id)
+      pre_sync
+      ItemWorker::SyncAll.new.process(@user.id)
+      @user.items.find_each do |item|
+        Item.taobao_desc_update(@user, item, desc_type: :original)
+      end
+    end
+  end
+
   class UpdateAll < WorkerBase
     include UpdateBase
     def process(user_id)

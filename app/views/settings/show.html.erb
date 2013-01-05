@@ -16,6 +16,6 @@
 
   <div class="form-actions">
     <%= f.button :submit, value: '保存设置', class: 'btn-primary' %>
-    <%= link_to '卸载,删除添加的所有代码', '#', class: 'btn', confirm: '确认卸载吗?' %>
+    <%= add_back_task_link("卸载,删除添加的所有代码", :bye_all_items, class: 'btn', confirm: '确认卸载吗?') %>
   </div>
 <% end %>
