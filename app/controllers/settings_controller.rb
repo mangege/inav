@@ -36,6 +36,7 @@ class SettingsController < ApplicationController
     if params[:template].blank?
       flash.now.alert = "模板不能为空"
       render action: :edit_template
+      return
     end
 
     begin
@@ -46,13 +47,16 @@ class SettingsController < ApplicationController
         Liquid::Template.parse(params[:template]).render('links' => MOCK_RELATED_CAT_LINKS)
         @user_extend.related_cat_template = params[:template]
       end
-      @user_extend.save!
-      flash.notice = "模板保存成功"
-      redirect_to edit_template_setting_path(t: params[:t])
     rescue Liquid::Error
+      @template = params[:template]
       flash.now.alert = "Liquid模板错误,请检查. #{$!.inspect}"
       render action: :edit_template
+      return
     end
+
+    @user_extend.save!
+    flash.notice = "模板保存成功"
+    redirect_to edit_template_setting_path(t: params[:t])
   end
 
   private
