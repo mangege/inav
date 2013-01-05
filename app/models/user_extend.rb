@@ -14,15 +14,20 @@ class UserExtend < ActiveRecord::Base
   }.freeze
 
   DEFAULT_BREAD_CRUMB_TEMPLATE = <<-EOS
+当前分类:
 {% for link in links %}
-  <a href="{{link.url}}">{{link.title}}</a> &gt; 
+  <a href="{{link.url}}" target="_blank">{{link.title}}</a>
+  {% unless forloop.last %} &gt; {% endunless %}
 {% endfor %}
   EOS
   DEFAULT_BREAD_CRUMB_TEMPLATE.freeze
 
   DEFAULT_RELATED_CAT_TEMPLATE = <<-EOS
+<br />
+相关分类:
 {% for link in links %}
-  <a href="{{link.url}}">{{link.title}}</a> &gt; 
+  <a href="{{link.url}}" target="_blank">{{link.title}}</a>
+  {% unless forloop.last %} | {% endunless %}
 {% endfor %}
   EOS
   DEFAULT_RELATED_CAT_TEMPLATE.freeze
@@ -53,12 +58,18 @@ class UserExtend < ActiveRecord::Base
   end
 
   def bread_crumb_liquid_template
-    @bread_crumb_liquid_template ||= Liquid::Template.parse(
-      bread_crumb_template || UserExtend::DEFAULT_BREAD_CRUMB_TEMPLATE )
+    @bread_crumb_liquid_template ||= Liquid::Template.parse(get_bread_crumb_template)
+  end
+
+  def get_bread_crumb_template
+    bread_crumb_template || UserExtend::DEFAULT_BREAD_CRUMB_TEMPLATE 
   end
 
   def related_cat_liquid_template
-    @related_cat_liquid_template ||= Liquid::Template.parse(
-      related_cat_template || UserExtend::DEFAULT_RELATED_CAT_TEMPLATE )
+    @related_cat_liquid_template ||= Liquid::Template.parse(get_related_cat_template)
+  end
+
+  def get_related_cat_template
+    related_cat_template || UserExtend::DEFAULT_RELATED_CAT_TEMPLATE
   end
 end

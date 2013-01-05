@@ -3,6 +3,16 @@ class SettingsController < ApplicationController
   layout 'management'
   before_filter :find_user_extned
 
+  MOCK_BREAD_CRUMB_LINKS = [
+    Link.new("简简单数码配件店", "http://ijianjiandan.taobao.com"),
+    Link.new("苹果", "http://ijianjiandan.taobao.com/search.htm?scid=628179484"),
+    Link.new("iPhone5", "http://ijianjiandan.taobao.com/search.htm?scid=628179485")
+  ]
+  MOCK_RELATED_CAT_LINKS = [
+    Link.new("iPhone4", "http://ijianjiandan.taobao.com/search.htm?scid=628179487"),
+    Link.new("iPhone4s", "http://ijianjiandan.taobao.com/search.htm?scid=628179486")
+  ]
+
   def show
     @settings = OpenStruct.new( @user_extend.settings )
   end
@@ -15,11 +25,34 @@ class SettingsController < ApplicationController
   end
 
   def edit_template
-    @templates = OpenStruct.new
+    if bread_crumb?
+      @template = @user_extend.get_bread_crumb_template
+    else
+      @template = @user_extend.get_related_cat_template
+    end
   end
 
   def update_template
-    
+    if params[:template].blank?
+      flash.now.alert = "模板不能为空"
+      render action: :edit_template
+    end
+
+    begin
+      if bread_crumb?
+        Liquid::Template.parse(params[:template]).render('links' => MOCK_BREAD_CRUMB_LINKS)
+        @user_extend.bread_crumb_template = params[:template]
+      else
+        Liquid::Template.parse(params[:template]).render('links' => MOCK_RELATED_CAT_LINKS)
+        @user_extend.related_cat_template = params[:template]
+      end
+      @user_extend.save!
+      flash.notice = "模板保存成功"
+      redirect_to edit_template_setting_path(t: params[:t])
+    rescue Liquid::Error
+      flash.now.alert = "Liquid模板错误,请检查. #{$!.inspect}"
+      render action: :edit_template
+    end
   end
 
   private
@@ -31,5 +64,9 @@ class SettingsController < ApplicationController
     settings = params[:settings]
     settings = {} unless settings.is_a?(Hash)
     settings
+  end
+
+  def bread_crumb?
+    params[:t] == 'related_cat' ? false : true
   end
 end

@@ -14,13 +14,15 @@
     }
   </style>
 <% end %>
-<%= form_tag edit_template_setting_path, method: :put do %>
+<%= form_tag update_template_setting_path, method: :put, id: :edit_template_form do %>
+  <%= hidden_field_tag(:t, params[:t]) %>
+  <%= hidden_field_tag(:template, @template) %>
   <ul class="nav nav-tabs">
-    <li class="active"> <a href="#">编辑面包屑模板</a> </li>
-    <li> <a href="#">编辑相关分类模板</a> </li>
+    <%= nav_link('编辑面包屑模板', edit_template_setting_path(t: 'bread_crumb')) %>
+    <%= nav_link('编辑相关分类模板', edit_template_setting_path(t: 'related_cat')) %>
   </ul>
   <div class="row-fluid">
-    <div id="editor" class="span7"><%= File.read("#{Rails.root}/tmp/a.liquid") %></div>
+    <div id="editor" class="span7"><%= @template %></div>
     <div class="span5">
       <p>
       <ul>
@@ -52,6 +54,10 @@
     var editor = ace.edit("editor");
     editor.getSession().setMode("ace/mode/html");
     editor.getSession().setMode("ace/mode/liquid");
+
+    $('#edit_template_form').submit(function(){
+      $('#template').val( editor.getValue() );
+    });
   //]]>
   </script>
 <% end %>
