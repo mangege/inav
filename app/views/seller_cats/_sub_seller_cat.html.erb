@@ -1,5 +1,6 @@
 <tr>
-  <td><i class="icon-minus"></i>&nbsp;&nbsp;<%= sub_seller_cat.tb_name %></td>
+  <td><i class="icon-minus"></i>&nbsp;&nbsp;<%= sub_seller_cat.tb_cid %></td>
+  <td><%= sub_seller_cat.tb_name %></td>
   <td>
     <%= text_field_tag "priorities[#{sub_seller_cat.id}]", sub_seller_cat.priority, class: 'input-mini' %>
   </td>

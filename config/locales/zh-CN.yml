@@ -7,6 +7,11 @@ zh-CN:
         processing: "处理中"
         success: "成功"
         fail: "失败"
+    item:
+      tb_approve_status:
+        onsale: "出售中"
+        instock: "库存中"
+
   views:
     pagination:
       first: "&laquo; 第一页"

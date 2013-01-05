@@ -85,9 +85,7 @@ class Item < ActiveRecord::Base
   end
 
   def high_priority_cat
-    l_cids = cids
-    return if l_cids.nil?
-    seller_cats = SellerCat.where(tb_cid: l_cids)
+    seller_cats = cats_by_cids
     if seller_cats.size > 1
       SellerCat.max_by_priority(seller_cats)
     else
@@ -100,6 +98,12 @@ class Item < ActiveRecord::Base
     cids.delete('')
     cids.delete('-1')
     cids
+  end
+
+  def cats_by_cids
+    l_cids = cids
+    return [] if l_cids.nil? || l_cids.empty?
+    SellerCat.where(tb_cid: cids)
   end
 
   def desc_expired?

@@ -1,6 +1,8 @@
 <tr>
-  <td><%= item.tb_title %></td>
-  <td></td>
-  <td></td>
-  <td></td>
+  <td><%= item.tb_num_iid %></td>
+  <td><%= link_to item.tb_title, item.item_url, target: '_blank' %></td>
+  <td><%= item.tb_approve_status_text %></td>
+  <td><%= render_cats(item) %></td>
+  <td><%= item.high_priority_cat.try(:tb_name) %></td>
+  <td><%=l item.tb_modified %></td>
 </tr>
