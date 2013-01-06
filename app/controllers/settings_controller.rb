@@ -59,6 +59,25 @@ class SettingsController < ApplicationController
     redirect_to edit_template_setting_path(t: params[:t])
   end
 
+  def preview_template
+    begin
+      if bread_crumb?
+        html_result = Liquid::Template.parse(params[:template]).render('links' => MOCK_BREAD_CRUMB_LINKS)
+      else
+        html_result = Liquid::Template.parse(params[:template]).render('links' => MOCK_RELATED_CAT_LINKS)
+      end
+    rescue Liquid::Error
+      render json: {ok: false, msg: "Liquid模板错误,请检查. #{$!.inspect}"}
+      return
+    end
+
+    json_result = {}
+    json_result[:ok] = true
+    json_result[:escapeResult] = ERB::Util.html_escape(html_result)
+    json_result[:sanitizeResult] = ActionController::Base.helpers.sanitize(html_result)
+    render json: json_result
+  end
+
   private
   def find_user_extned
     @user_extend = current_user.user_extend

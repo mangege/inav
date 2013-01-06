@@ -14,7 +14,7 @@
     }
   </style>
 <% end %>
-<%= form_tag update_template_setting_path, method: :put, id: :edit_template_form do %>
+<%= form_tag update_template_setting_path, method: :put, 'id' => 'edit-template-form' do %>
   <%= hidden_field_tag(:t, params[:t]) %>
   <%= hidden_field_tag(:template, @template) %>
   <ul class="nav nav-tabs">
@@ -37,27 +37,17 @@
       </p>
     </div>
     <div class="row-fluid">
-      <div id="html-preview" class="span6">HTML效果</div>
       <div id="code-preview" class="span6">HTML代码</div>
+      <div id="html-preview" class="span6">HTML效果</div>
     </div>
   </div>
 
   <div class="form-actions">
-    <%= submit_tag '保存模板', class: 'btn-primary' %>
+    <%= submit_tag '保存模板', class: 'btn btn-primary' %>
+    <%= button_tag '预览', class: 'btn', type: :button, 'id' => 'preview-template-btn', 'data-preview-url' => preview_template_setting_path %>
   </div>
 <% end %>
 
 <%= content_for :page_footer do %>
   <%= javascript_include_tag "ace" %>
-  <script type="text/javascript" language="javascript" charset="utf-8">
-  //<![CDATA[
-    var editor = ace.edit("editor");
-    editor.getSession().setMode("ace/mode/html");
-    editor.getSession().setMode("ace/mode/liquid");
-
-    $('#edit_template_form').submit(function(){
-      $('#template').val( editor.getValue() );
-    });
-  //]]>
-  </script>
 <% end %>

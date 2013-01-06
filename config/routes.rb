@@ -23,6 +23,7 @@ Inav::Application.routes.draw do
     member do
       get 'edit_template'
       put 'update_template'
+      post 'preview_template'
     end
   end
 end
