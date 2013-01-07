@@ -17,6 +17,7 @@ gem "liquid", "~> 2.4.1"
 gem "sidekiq", "~> 2.6.0"
 gem "nokogiri", "~> 1.5.6"
 gem "kaminari", "~> 0.14.1"
+gem "settingslogic", "~> 2.0.9"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

@@ -36,7 +36,7 @@ production:
   encoding: utf8
   reconnect: false
   database: inav_production
-  pool: <%= APP_CONFIG['concurrency'] rescue 5 %>
+  pool: <%= AppConfig.concurrency rescue 5 %>
   username: <%= ENV['MYSQL_USERNAME'] %>
   password: <%= ENV['MYSQL_PASSWORD'] %>
   host: localhost
