@@ -5,6 +5,8 @@ default: &default
   site_domain: "test.111.0x6f.com:3000"
   site_name: "111掌柜小助手"
   test_user_nick: "sandbox_inav"
+  smtp_user: "noreply@mangege.com"
+  smtp_pass: "your_pass"
 
 development:
   <<: *default

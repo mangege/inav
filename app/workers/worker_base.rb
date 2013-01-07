@@ -9,9 +9,8 @@ class WorkerBase
       process(user_id)
       @task_result = :success
     rescue
-      #FIXME 异常邮件通知
-      puts $!.inspect
       @task_result = :fail
+      ExceptionNotifier::Notifier.background_exception_notification($!).deliver
     end
     post_process
   end
