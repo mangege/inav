@@ -36,15 +36,28 @@
     </ul>
       </p>
     </div>
-    <div class="row-fluid">
-      <div id="code-preview" class="span6">HTML代码</div>
-      <div id="html-preview" class="span6">HTML效果</div>
-    </div>
   </div>
 
   <div class="form-actions">
     <%= submit_tag '保存模板', class: 'btn btn-primary' %>
     <%= button_tag '预览', class: 'btn', type: :button, 'id' => 'preview-template-btn', 'data-preview-url' => preview_template_setting_path %>
+  </div>
+
+  <div class="row-fluid hide preview-area">
+    <div id="code-preview" class="span6">
+      <h4>HTML代码</h4>
+      <div></div>
+    </div>
+    <div id="html-preview" class="span6">
+      <h4>HTML效果</h4>
+      <div></div>
+      <hr />
+      <p class="text-warning">
+        注意: 因样式和标签过滤问题,导致没办法和淘宝效果完全一致,本预览仅供参考,为保险起见,你可以手动复制HTML代码插入到商品描述看效果
+      </p>
+    </div>
+    <div id="preview-msg" class="text-error span12">
+    </div>
   </div>
 <% end %>
 

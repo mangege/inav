@@ -74,7 +74,8 @@ class SettingsController < ApplicationController
     json_result = {}
     json_result[:ok] = true
     json_result[:escapeResult] = ERB::Util.html_escape(html_result)
-    json_result[:sanitizeResult] = ActionController::Base.helpers.sanitize(html_result)
+    allow_attrs = ["href", "src", "width", "height", "alt", "cite", "datetime", "title", "class", "name", "xml:lang", "abbr", "target"]
+    json_result[:sanitizeResult] = ActionController::Base.helpers.sanitize(html_result, attributes: allow_attrs)
     render json: json_result
   end
 

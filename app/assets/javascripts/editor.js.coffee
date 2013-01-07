@@ -8,6 +8,7 @@ $( ->
     true
   $('#edit-template-form').submit(setHiddenValue)
 
+  #预览
   handlePreview = (e) ->
     return false if this.disabled
     this.disabled = true
@@ -19,11 +20,20 @@ $( ->
       if data.ok
         codeBlock = $('<pre></pre>')
         codeBlock.append(data.escapeResult)
-        $('#code-preview').html(codeBlock)
-        $('#html-preview').html(data.sanitizeResult)
+        $('#code-preview div').html(codeBlock)
+        $('#html-preview div').html(data.sanitizeResult)
+        $('#code-preview').show()
+        $('#html-preview').show()
+        $('#preview-msg').hide()
       else
-        alert(data.msg)
-    ).complete( -> btn.disabled = false )
+        $('#preview-msg').text(data.msg)
+        $('#code-preview').hide()
+        $('#html-preview').hide()
+        $('#preview-msg').show()
+    ).complete( ->
+      btn.disabled = false
+      $('div.preview-area').show()
+    )
   $('#preview-template-btn').click( handlePreview )
 
   true
