@@ -3,8 +3,6 @@ default: &default
   app_secret: <%= ENV['TBOP_APP_SECRET'] %>
   oauth2_site: <%= ENV['TBOP_OAUTH2_SITE'] || 'https://oauth.tbsandbox.com' %>
   api_site: <%= ENV['TBOP_API_SITE'] || 'http://gw.api.tbsandbox.com/router/rest' %>
-  main_domain: <%= ENV['INAV_DOMAIN'] || 'test.inav.sdapp.cn:3000' %>
-  test_user_nick: <%= ENV['INAV_TEST_USER_NICK'] || 'sandbox_c_1' %>
 
 development:
   <<: *default
@@ -16,4 +14,3 @@ production:
   <<: *default
   oauth2_site: <%= ENV['TBOP_OAUTH2_SITE'] || 'https://oauth.taobao.com' %>
   api_site: <%= ENV['TBOP_API_SITE'] || 'http://gw.api.taobao.com/router/rest' %>
-  main_domain: <%= ENV['INAV_DOMAIN'] || 'inav.sdapp.cn' %>

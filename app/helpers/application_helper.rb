@@ -6,9 +6,9 @@ module ApplicationHelper
 
   def render_page_title
     if @page_title
-      "#{@page_title} - 111掌柜小助手"
+      "#{@page_title} - #{AppConfig.site_name}"
     else
-      "111掌柜小助手"
+      AppConfig.site_name
     end
   end
 
