@@ -23,7 +23,7 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     EOS
     stub_api_get(body)
     Taobao::Client.execute(params)
-    url_reg = Regexp.new( Regexp.escape(TAOBAO_CONFIG[:api_site]) + ".*", 'i')
+    url_reg = Regexp.new( Regexp.escape(TaobaoConfig.api_site) + ".*", 'i')
     assert_requested :get, url_reg
 
   end
@@ -43,7 +43,7 @@ class Taobao::ClientTest < ActiveSupport::TestCase
     EOS
     stub_api_post(body)
     Taobao::Client.execute(params)
-    url = TAOBAO_CONFIG[:api_site]
+    url = TaobaoConfig.api_site
     assert_requested :post, url
   end
 

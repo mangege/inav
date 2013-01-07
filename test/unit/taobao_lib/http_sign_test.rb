@@ -12,7 +12,7 @@ class Taobao::HttpSignTest < ActiveSupport::TestCase
     assert_equal hash[:sign_method], 'md5'
     assert_equal hash[:v], '2.0'
     assert_equal hash[:format], 'json'
-    assert_equal hash[:app_key], TAOBAO_CONFIG[:app_key]
+    assert_equal hash[:app_key], TaobaoConfig.app_key
     assert_equal hash[:app_secret], nil
     assert( Time.now - Time.parse(hash[:timestamp]) < 60 )
   end

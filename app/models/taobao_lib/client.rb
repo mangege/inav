@@ -6,9 +6,9 @@ module Taobao
       api_name = params[:method].split('.')[1..-1]
       sign_params = HttpSign.sign(params)
       if api_name.last == 'get'
-        body = RestClient.get(TAOBAO_CONFIG[:api_site], :params => sign_params)
+        body = RestClient.get(TaobaoConfig.api_site, :params => sign_params)
       else
-        body = RestClient.post(TAOBAO_CONFIG[:api_site], sign_params)
+        body = RestClient.post(TaobaoConfig.api_site, sign_params)
       end
       result_hash = MultiJson.load(body)
       response_key = "#{api_name.join('_')}_response"

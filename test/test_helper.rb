@@ -35,7 +35,7 @@ class ActiveSupport::TestCase
 
   #oauth2
   def stub_oauth2_token
-    stub_request(:post, "#{TAOBAO_CONFIG[:oauth2_site]}/token").to_return(body: default_oauth2_hash.to_json, status: 200,
+    stub_request(:post, "#{TaobaoConfig.oauth2_site}/token").to_return(body: default_oauth2_hash.to_json, status: 200,
                                                                          headers: {'Content-Type' => 'application/json'})
   end
 
@@ -48,12 +48,12 @@ class ActiveSupport::TestCase
   end
 
   def stub_api_get_request
-    url_reg = Regexp.new( Regexp.escape(TAOBAO_CONFIG[:api_site]) + ".*", 'i')
+    url_reg = Regexp.new( Regexp.escape(TaobaoConfig.api_site) + ".*", 'i')
     stub_request(:get, url_reg)
   end
 
   def stub_api_post_request
-    url = TAOBAO_CONFIG[:api_site]
+    url = TaobaoConfig.api_site
     stub_request(:post, url)
   end
 
