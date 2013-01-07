@@ -1,6 +1,7 @@
 # -*- encoding : utf-8 -*-
 class Item < ActiveRecord::Base
-  AREA_SELECTOR = "inav"
+  INAV_START = "inav-start"
+  INAV_END = "inav-end"
   belongs_to :user
   has_one :item_desc, dependent: :destroy, autosave: true
   validates :user_id, :tb_num_iid, :tb_title, :tb_approve_status, presence: true
@@ -32,21 +33,21 @@ class Item < ActiveRecord::Base
   def new_desc
     raise "描述已经过期" if desc_expired?
     doc = Nokogiri::HTML.fragment(tb_desc, 'UTF-8')
-    a_elem = doc.at_css("div > a[name=#{AREA_SELECTOR}]")
-    if a_elem
-      a_elem.parent.replace(area_html)
+    div_elem = exist_inav_html?(doc)
+    if div_elem
+      div_elem.replace(inav_html)
       doc.to_html
     else
-      area_html << tb_desc
+      inav_html << tb_desc
     end
   end
 
   def original_desc
     raise "描述已经过期" if desc_expired?
     doc = Nokogiri::HTML.fragment(tb_desc, 'UTF-8')
-    a_elem = doc.at_css("div > a[name=#{AREA_SELECTOR}]")
-    if a_elem
-      a_elem.parent.remove
+    div_elem = exist_inav_html?(doc)
+    if div_elem
+      div_elem.remove
       doc.to_html
     else
       tb_desc
@@ -228,13 +229,46 @@ class Item < ActiveRecord::Base
   private_class_method :taobao_has_next?, :taobao_list_sync
 
   private
-  def area_html
+  def inav_html
     html = ""
-    html << "<div><a name=\"#{AREA_SELECTOR}\"></a>"
+    html << "<div><a name=\"#{INAV_START}\"></a>"
 
     html << breadcrumb_html
     html << related_cat_html
 
-    html << '</div>'
+    html << "<a name=\"#{INAV_END}\"></a></div>"
+  end
+
+  #TODO unit test
+  #存在则返回div,否则返回false
+  def exist_inav_html?(doc)
+    a_elem = doc.at_css("div > a[name=#{INAV_START}]")
+    return false if a_elem.nil?
+
+    div_elem = a_elem.parent
+    elems = div_elem.children
+
+    #第一个元素节点应该是a[name=inav-start]
+    #最后一个元素节点应该是a[name=inav-end]
+    #<div>
+    #<a name="inav-start"></a>
+    # new content ...
+    #<a name="inav-end"></a>
+    #</div>
+    start_ok = end_ok = false
+    elems.each do |element|
+      if element.element?
+        start_ok = element.name == "a" && element['name'] == 'inav-start'
+        break
+      end
+    end
+    elems.reverse.each do |element|
+      if element.element?
+        end_ok = element.name == "a" && element['name'] == 'inav-end'
+        break
+      end
+    end if start_ok
+
+    start_ok && end_ok ? div_elem : false
   end
 end
