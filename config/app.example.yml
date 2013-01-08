@@ -1,0 +1,21 @@
+default: &default
+  app_concurrency: 5
+  sidekiq_concurrency: 5
+  redis_url: "redis://127.0.0.1:6379/0"
+  site_domain: "test.111.0x6f.com:3000"
+  site_name: "111掌柜小助手"
+  test_user_nick: "sandbox_inav"
+  smtp_user: "noreply@mangege.com"
+  smtp_pass: "your_pass"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default
+  app_concurrency: 16
+  sidekiq_concurrency: 25
+  site_domain: "111.0x6f.com"

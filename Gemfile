@@ -1,5 +1,4 @@
 source 'https://rubygems.org'
-#source 'http://ruby.taobao.org'
 
 gem 'rails', '3.2.10'
 
@@ -19,6 +18,7 @@ gem "nokogiri", "~> 1.5.6"
 gem "kaminari", "~> 0.14.1"
 gem "settingslogic", "~> 2.0.9"
 gem "exception_notification", "~> 3.0.0"
+gem "capistrano", "~> 2.13.5"
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
