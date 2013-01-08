@@ -22,7 +22,7 @@ role :db,  "h-jm.mangege.com", :primary => true # This is where Rails migrations
 namespace :deploy do
   task :start, :roles => :app do
     desc "start puma"
-    run "exec #{current_path}/config/puma.sh"
+    run "cd #{current_path}; rvmsudo -u #{app_user} bundle exec puma -e production -b 'unix://#{shared_path}/tmp/sockets/puma.sock' -S #{shared_path}/tmp/sockets/puma.state --control 'unix://#{shared_path}/tmp/sockets/pumactl.sock' >> #{shared_path}/log/puma.log 2>&1 &", :pty => false
   end
 
   desc "stop puma"
