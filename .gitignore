@@ -17,3 +17,7 @@
 /script/kitty.rb
 /coverage
 /TaskList.md
+
+/config/app.yml
+/config/database.yml
+/config/taobao.yml
