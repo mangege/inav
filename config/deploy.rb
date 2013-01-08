@@ -1,4 +1,5 @@
 require "bundler/capistrano"
+require 'sidekiq/capistrano'
 
 set :application, "inav"
 set :app_user, "inav"
