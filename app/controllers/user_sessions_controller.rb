@@ -38,4 +38,18 @@ class UserSessionsController < ApplicationController
     @msg = '登录已经过期'
     render 'not_login'
   end
+
+  private
+  def check_seller_and_sync_shop(user)
+    if user.shop.nil?
+      Shop.taobao_sync(current_user)
+    end
+  rescue ResponseError
+    if $!.sub_code == "isv.invalid-parameter:user-without-shop"
+      @msg = "对不起,你的帐号没有开通店铺,无法为你服务,请使用你的店铺帐号登录"
+      render 'not_login'
+    else
+      raise $!
+    end
+  end
 end

@@ -19,6 +19,10 @@ module Taobao
       super("淘宝远程调用响应出错 #{error_response.inspect}")
       @data = error_response
     end
+
+    %[code msg sub_code sub_msg].each do |name|
+      define_method name {@data[name]}
+    end
   end
   class UnknownError < ClientError
     def initialize(body)
