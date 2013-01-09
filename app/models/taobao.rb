@@ -1,13 +1,14 @@
 # -*- encoding : utf-8 -*-
 module Taobao
+  extend ::ActiveSupport::Autoload
   TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
-  autoload(:OAuth2, 'taobao_lib/oauth2')
-  autoload(:HttpSign, 'taobao_lib/http_sign')
-  autoload(:Client, 'taobao_lib/client')
-  autoload(:Collection, 'taobao_lib/collection')
-  autoload(:Api, 'taobao_lib/api')
-  autoload(:Field, 'taobao_lib/field')
+  autoload(:OAuth2)
+  autoload(:HttpSign)
+  autoload(:Client)
+  autoload(:Collection)
+  autoload(:Api)
+  autoload(:Field)
 
   class Error < StandardError ; end
   class ClientError < Error

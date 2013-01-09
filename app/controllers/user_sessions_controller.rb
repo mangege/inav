@@ -5,7 +5,7 @@ class UserSessionsController < ApplicationController
 
   def new
     if session[:user_id].nil?
-      redirect_to Taobao::OAuth2.authorize_url
+      redirect_to ::Taobao::OAuth2.authorize_url
     else
       redirect_to '/'
     end
@@ -20,7 +20,7 @@ class UserSessionsController < ApplicationController
     end
     result = Taobao::OAuth2.result(params[:code])
     user = User.find_or_create_by_oauth2(result)
-    return unless check_seller_and_sync_shop
+    return unless check_seller_and_sync_shop(user)
     login_user(user)
     redirect_back_or_default
   end
