@@ -14,6 +14,7 @@ class RemoteTestCase < ActiveSupport::TestCase
       user = User.new(@default_remote_user_attrs, without_protection: true)
       user.save!
     end
+    create_user_shop(user)
     user
   end
 

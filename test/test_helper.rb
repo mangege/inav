@@ -22,7 +22,9 @@ class ActiveSupport::TestCase
   # Add more helper methods to be used by all tests here...
 
   def default_user
-    User.find_or_create_by_oauth2(default_oauth2_hash)
+    u = User.find_or_create_by_oauth2(default_oauth2_hash)
+    create_user_shop(u)
+    u
   end
 
   def login(user = nil)
@@ -87,5 +89,10 @@ class ActiveSupport::TestCase
   def read_mock_data(filename)
     fullpath = File.join(Rails.root, '/test/mocks/', filename)
     File.read(fullpath)
+  end
+
+  def create_user_shop(u)
+    FactoryGirl.create(:shop, user: u) if u.shop.nil?
+    u.reload
   end
 end

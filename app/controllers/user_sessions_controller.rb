@@ -44,10 +44,10 @@ class UserSessionsController < ApplicationController
   #有异常则返回false
   def check_seller_and_sync_shop(user)
     if user.shop.nil?
-      Shop.taobao_sync(current_user)
+      Shop.taobao_sync(user)
     end
     true
-  rescue ResponseError
+  rescue Taobao::ResponseError
     if $!.sub_code == "isv.invalid-parameter:user-without-shop"
       @msg = "对不起,你的帐号没有开通店铺,无法为你服务,请使用你的店铺帐号登录"
       render 'not_login'

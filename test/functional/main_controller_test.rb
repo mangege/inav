@@ -7,9 +7,6 @@ class MainControllerTest < ActionController::TestCase
   end
 
   test "should get index" do
-    shop = FactoryGirl.build(:shop, user: nil)
-    Shop.expects(:taobao_sync).returns(shop)
-
     get :index
     assert_response :success
   end

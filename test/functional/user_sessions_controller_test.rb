@@ -27,6 +27,7 @@ class UserSessionsControllerTest < ActionController::TestCase
   end
 
   test "#callback 授权成功应该重定向" do
+    @controller.expects(:check_seller_and_sync_shop).returns(true)
     get :callback, code: 1
     assert_response :redirect
   end
