@@ -14,8 +14,10 @@ module Taobao
       def result(code)
         client = oauth2_client
         token = client.auth_code.get_token(code, :redirect_uri => "http://#{AppConfig.site_domain}/user_sessions/callback")
-        token.params.merge( {'access_token' => token.token, 'refresh_token' => token.refresh_token, 'oauth2_updated_at' => Time.now,
+        params = token.params.merge( {'access_token' => token.token, 'refresh_token' => token.refresh_token, 'oauth2_updated_at' => Time.now,
                            :expires_in => token.expires_in} )
+        params['taobao_user_nick'] = URI.unescape(params['taobao_user_nick']) unless params['taobao_user_nick'].empty?
+        params
       end
     end
   end

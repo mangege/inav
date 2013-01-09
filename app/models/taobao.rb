@@ -20,8 +20,8 @@ module Taobao
       @data = error_response
     end
 
-    %[code msg sub_code sub_msg].each do |name|
-      define_method name {@data[name]}
+    %w[code msg sub_code sub_msg].each do |name|
+      define_method(name){@data[name]}
     end
   end
   class UnknownError < ClientError

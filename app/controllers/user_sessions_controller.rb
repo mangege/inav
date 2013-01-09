@@ -20,6 +20,7 @@ class UserSessionsController < ApplicationController
     end
     result = Taobao::OAuth2.result(params[:code])
     user = User.find_or_create_by_oauth2(result)
+    return unless check_seller_and_sync_shop
     login_user(user)
     redirect_back_or_default
   end
@@ -40,14 +41,17 @@ class UserSessionsController < ApplicationController
   end
 
   private
+  #有异常则返回false
   def check_seller_and_sync_shop(user)
     if user.shop.nil?
       Shop.taobao_sync(current_user)
     end
+    true
   rescue ResponseError
     if $!.sub_code == "isv.invalid-parameter:user-without-shop"
       @msg = "对不起,你的帐号没有开通店铺,无法为你服务,请使用你的店铺帐号登录"
       render 'not_login'
+      false
     else
       raise $!
     end
