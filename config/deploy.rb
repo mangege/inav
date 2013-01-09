@@ -58,20 +58,29 @@ task :set_home_acl, :roles => :app do
   run "setfacl -m u:#{nginx_user}:x /home/#{deploy_user}"
 end
 
+#设置app user和deploy user所拥有的文件的权限
+def _set_dir_acl(dir, dir_cmd, file_cmd)
+  run "find #{dir} -user #{deploy_user} -type d -print0 | xargs --no-run-if-empty -0 #{dir_cmd}"
+  run "find #{dir} -user #{deploy_user} -type f -print0 | xargs --no-run-if-empty -0 #{file_cmd}"
+  run "rvmsudo -u #{app_user} sh -c \"cd #{dir}; find #{dir} -user #{app_user} -type d -print0 | xargs --no-run-if-empty -0 #{dir_cmd}\""
+  run "rvmsudo -u #{app_user} sh -c \"cd #{dir}; find #{dir} -user #{app_user} -type f -print0 | xargs --no-run-if-empty -0 #{file_cmd}\""
+end
+#sudo运行服务前后需要设置权限
 task :set_app_acl, :roles => :app do
-  #disable other user access
-  run "find #{deploy_to} -user #{deploy_user} -type d -print0 | xargs -0 chmod o-rwx"
-  run "find #{deploy_to} -user #{deploy_user} -type f -print0 | xargs -0 chmod o-rwx"
+  #app user,rw
+  _set_dir_acl(deploy_to, "setfacl -m u:#{app_user}:rwx", "xargs -0 setfacl -m u:#{app_user}:rw")
 
-  #thin
-  run "find #{deploy_to} -user #{deploy_user} -type d -print0 | xargs -0 setfacl -m u:#{app_user}:rwx"
-  run "find #{deploy_to} -user #{deploy_user} -type f -print0 | xargs -0 setfacl -m u:#{app_user}:rw"
-  #exec file
-  run "find #{deploy_to}/shared/bundle/ruby/1.9.1/bin -user #{deploy_user} -type f -print0 | xargs -0 setfacl -m u:#{app_user}:rwx"
+  #deploy user,rw
+  _set_dir_acl(deploy_to, "setfacl -m u:#{deploy_user}:rwx", "xargs -0 setfacl -m u:#{deploy_user}:rw")
 
-  #nginx
-  run "find #{deploy_to} -user #{deploy_user} -type d -print0 | xargs -0 setfacl -m u:#{nginx_user}:rx"
-  run "find #{deploy_to} -user #{deploy_user} -type f -print0 | xargs -0 setfacl -m u:#{nginx_user}:r"
+  #nginx user,r
+  _set_dir_acl(deploy_to, "setfacl -m u:#{nginx_user}:rx", "xargs -0 setfacl -m u:#{nginx_user}:r")
+
+  #app user, x
+  _set_dir_acl("#{deploy_to}/shared/bundle/ruby/1.9.1/bin", "> /dev/null", "setfacl -m u:#{app_user}:rwx")
+
+  #other user, -rwx
+  _set_dir_acl(deploy_to, "chmod o-rwx", "chmod o-rwx")
 end
 
 desc "upload assets"
@@ -79,7 +88,10 @@ task :upload_assets_to_oss, :roles => :app do
   run "cd #{latest_release}; bundle exec rake assets:oss:upload"
 end
 
+["deploy:start", "deploy:stop", "deploy:restart"].each do |p_name|
+  before p_name, :set_app_acl
+  after p_name, :set_app_acl
+end
 after "deploy:setup", :init_shared_path, :set_home_acl
 before "deploy:assets:precompile", :link_shared_files #after deploy:update_code
-after "deploy:finalize_update", :set_app_acl
 #after "deploy:assets:precompile", :upload_assets_to_oss
