@@ -40,6 +40,18 @@ class UserSessionsController < ApplicationController
     render 'not_login'
   end
 
+  def destroy
+    user = current_user
+    logout_user
+    @msg = '退出登录成功'
+    if user
+      taobao_logoff_url = "https://oauth.taobao.com/logoff?client_id=#{TaobaoConfig.app_key}&redirect_uri=#{AppConfig.site_url}"
+      redirect_to taobao_logoff_url
+    else
+      render 'not_login'
+    end
+  end
+
   private
   #有异常则返回false
   def check_seller_and_sync_shop(user)

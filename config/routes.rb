@@ -5,7 +5,7 @@ Inav::Application.routes.draw do
   resources :back_tasks, :only => [:create, :index]
   resources :items, :only => [:index]
 
-  resources :user_sessions, :only => [:new] do
+  resources :user_sessions, :only => [:new, :destroy] do
     collection do
       match 'callback'
       get 'not_login'

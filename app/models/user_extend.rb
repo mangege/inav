@@ -45,16 +45,10 @@ class UserExtend < ActiveRecord::Base
     write_attribute(:settings, settings)
   end
 
-  def show_shop_title?
-    settings[:show_shop_title] == 'true'
-  end
-
-  def show_item_title?
-    settings[:show_item_title] == 'true'
-  end
-
-  def show_parent_cat?
-    settings[:show_parent_cat] == 'true'
+  ['show_shop_title?', 'show_item_title?', 'show_parent_cat?', 'logoff_taobao?'].each do |p_name|
+     define_method(p_name) do
+       settings[p_name.to_sym] == 'true'
+     end
   end
 
   def bread_crumb_liquid_template

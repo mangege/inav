@@ -31,7 +31,7 @@
           <a class="brand" href="<%= AppConfig.site_url %>"><%= AppConfig.site_name %></a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Logged in as <a href="#" class="navbar-link">Username</a>
+              <%= current_user.taobao_user_nick %><%= link_to "退出", user_session_path(0), method: :delete, class: 'navbar-link logout-link' %>
             </p>
             <ul class="nav">
               <li><a href="#">前台首页</a></li>
