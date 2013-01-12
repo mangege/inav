@@ -6,7 +6,8 @@ notification :terminal_title
 
 test_paths = ['test/unit', 'test/functional', 'test/integration'] #default not run remote test
 guard :test, :test_paths => test_paths do
-  watch(%r{^lib/(.+)\.rb$})     { |m| "test/#{m[1]}_test.rb" }
+  watch(%r{^lib/(.+)\.rb$})     { |m| "test/unit/#{m[1]}_test.rb" }
+  watch(%r{^extras/(.+)\.rb$})     { |m| "test/unit/#{m[1]}_test.rb" }
   watch(%r{^test/.+_test\.rb$})
   watch('test/test_helper.rb')  { "test" }
 

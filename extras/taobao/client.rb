@@ -2,9 +2,8 @@
 module Taobao
   class Client
     def self.execute(params)
-      params = params.with_indifferent_access
-      api_name = params[:method].split('.')[1..-1]
-      sign_params = HttpSign.sign(params)
+      sign_params = Param.new(params).to_param
+      api_name = sign_params[:method].split('.')[1..-1]
       if api_name.last == 'get'
         body = RestClient.get(TaobaoConfig.api_site, :params => sign_params)
       else

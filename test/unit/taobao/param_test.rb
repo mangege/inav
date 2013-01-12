@@ -1,14 +1,14 @@
 # -*- encoding : utf-8 -*-
 require 'test_helper'
 
-class Taobao::HttpSignTest < ActiveSupport::TestCase
+class Taobao::ParamTest < ActiveSupport::TestCase
   #taobao oauth2 doc http://open.taobao.com/doc/detail.htm?spm=0.0.0.35.eeb26a&id=111
   setup do
     @hash = default_hash
   end
 
-  test "::sign 应该有默认参数" do
-    hash = Taobao::HttpSign.sign({})
+  test "应该有默认参数" do
+    hash = Taobao::Param.new({}).to_param
     assert_equal hash[:sign_method], 'md5'
     assert_equal hash[:v], '2.0'
     assert_equal hash[:format], 'json'
@@ -17,9 +17,9 @@ class Taobao::HttpSignTest < ActiveSupport::TestCase
     assert( Time.now - Time.parse(hash[:timestamp]) < 60 )
   end
 
-  test "::sign 应该可以覆盖默认参数" do
+  test "应该可以覆盖默认参数" do
     hash_dup = @hash.dup
-    hash = Taobao::HttpSign.sign(hash_dup)
+    hash = Taobao::Param.new(hash_dup).to_param
     assert_equal hash[:method], @hash[:method]
     assert_equal hash[:timestamp], @hash[:timestamp]
     assert_equal hash[:format], @hash[:format]
@@ -30,25 +30,25 @@ class Taobao::HttpSignTest < ActiveSupport::TestCase
     assert_equal hash[:nick], @hash[:nick]
   end
 
-  test "::sign 签名结果应该正确,和淘宝文档示例值相同" do
-    hash = Taobao::HttpSign.sign(@hash)
+  test "签名结果应该正确,和淘宝文档示例值相同" do
+    hash = Taobao::Param.new(@hash).to_param
     assert_equal hash[:sign], '5029C3055D51555112B60B33000122D5'
   end
 
   test "::sign 结果应该不包含app_secret" do
-    hash = Taobao::HttpSign.sign(@hash)
+    hash = Taobao::Param.new(@hash).to_param
     assert !hash.key?(:app_secret)
     assert !hash.key?('app_secret')
 
     hash = default_hash.tap{|h| h.delete(:app_secret)}
-    hash = Taobao::HttpSign.sign(hash)
+    hash = Taobao::Param.new(hash).to_param
     assert !hash.key?(:app_secret)
     assert !hash.key?('app_secret')
   end
 
   test "::sign 签名前应该删除sign" do
     @hash[:sign] = 'test'
-    hash = Taobao::HttpSign.sign(@hash)
+    hash = Taobao::Param.new(@hash).to_param
     assert_equal hash[:sign], '5029C3055D51555112B60B33000122D5'
   end
   
