@@ -47,7 +47,7 @@ class UserExtend < ActiveRecord::Base
 
   ['show_shop_title?', 'show_item_title?', 'show_parent_cat?', 'logoff_taobao?'].each do |p_name|
      define_method(p_name) do
-       settings[p_name.to_sym] == 'true'
+       settings[p_name[0..-2].to_sym] == 'true'
      end
   end
 

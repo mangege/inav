@@ -3,6 +3,7 @@ default: &default
   app_secret: <%= ENV['TBOP_APP_SECRET'] %>
   oauth2_site: <%= ENV['TBOP_OAUTH2_SITE'] || 'https://oauth.tbsandbox.com' %>
   api_site: <%= ENV['TBOP_API_SITE'] || 'http://gw.api.tbsandbox.com/router/rest' %>
+  stream_site: "http://stream.api.tbsandbox.com/stream"
 
 development:
   <<: *default
@@ -14,3 +15,4 @@ production:
   <<: *default
   oauth2_site: <%= ENV['TBOP_OAUTH2_SITE'] || 'https://oauth.taobao.com' %>
   api_site: <%= ENV['TBOP_API_SITE'] || 'http://gw.api.taobao.com/router/rest' %>
+  stream_site: "http://stream.api.taobao.com/stream"
