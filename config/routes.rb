@@ -2,6 +2,8 @@
 Inav::Application.routes.draw do
   root :to => "main#index"
 
+  get '/about' => 'main#about'
+
   resources :back_tasks, :only => [:create, :index]
   resources :items, :only => [:index]
 

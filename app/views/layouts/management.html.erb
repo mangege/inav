@@ -34,9 +34,8 @@
               <%= current_user.taobao_user_nick %><%= link_to "退出", user_session_path(0), method: :delete, class: 'navbar-link logout-link' %>
             </p>
             <ul class="nav">
-              <li><a href="#">前台首页</a></li>
-              <li><a href="#about">关于我们</a></li>
-              <li><a href="#contact">联系方式</a></li>
+              <%= nav_link("前台首页", root_path) %>
+              <%= nav_link("关于我们", about_path) %>
             </ul>
           </div><!--/.nav-collapse -->
         </div>

@@ -23,9 +23,8 @@
 
       <div class="masthead">
         <ul class="nav nav-pills pull-right">
-          <li class="active"><a href="#">首页</a></li>
-          <li><a href="#">关于我们</a></li>
-          <li><a href="#">联系方式</a></li>
+          <%= nav_link("首页", root_path) %>
+          <%= nav_link("关于", about_path) %>
         </ul>
         <h3 class="muted"><%= AppConfig.site_name %></h3>
       </div>
