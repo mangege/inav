@@ -7,6 +7,7 @@ default: &default
   test_user_nick: "sandbox_inav"
   smtp_user: "noreply@mangege.com"
   smtp_pass: "your_pass"
+  docs_url: "http://111-docs.0x6f.com/inav/build/index.html"
 
 development:
   <<: *default
