@@ -17,7 +17,7 @@ module Taobao
       @hash[:format] = 'json' unless @hash.key?(:format)
       @hash[:app_key] = TaobaoConfig.app_key unless @hash.key?(:app_key)
       @hash[:app_secret] = TaobaoConfig.app_secret unless @hash.key?(:app_secret)
-      @hash[:timestamp] = Time.now.strftime(TIME_FORMAT) unless @hash.key?(:timestamp)
+      @hash[:timestamp] = Taobao::Util.now_taobao_time unless @hash.key?(:timestamp)
     end
 
   end
