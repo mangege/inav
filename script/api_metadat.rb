@@ -6,7 +6,7 @@ API代码生成器,生成的方法主要功能
 =end
 class ApiMetadat
   def read_file
-    @file = read_relative_path('/tmp/ApiMetadat.xml')
+    @file = read_relative_path('/tmp/ApiMetadata.xml')
   end
 
   def parse_file
@@ -68,7 +68,7 @@ class ApiMetadat
     erb_file = read_relative_path('/script/templates/api.rb.erb')
     template = ERB.new(erb_file)
     result =  template.result(binding)
-    File.write('/tmp/api.rb', result)
+    File.write("#{Rails.root}/extras/taobao/api.rb", result)
   end
 
   private
@@ -138,11 +138,11 @@ class ApiMetadat
     case response_param['level']
     when 'Basic Array'
       name = response_param['name']
-      "        result_hash['#{name}'] = ( result_hash['#{name}'].nil? ? [] : result_hash['#{name}'].values.flatten(1)  )"
+      "        result_hash['#{name}'] = ( result_hash['#{name}'].blank? ? [] : result_hash['#{name}'].values.flatten(1)  )"
     when 'Object Array'
       name = response_param['name']
       type = response_param['type'].underscore
-      "        result_hash['#{name}'] = ( result_hash['#{name}'].nil? ? [] : result_hash['#{name}']['#{type}'] )"
+      "        result_hash['#{name}'] = ( result_hash['#{name}'].blank? ? [] : result_hash['#{name}']['#{type}'] )"
     end
   end
 
