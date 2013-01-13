@@ -15,6 +15,8 @@ module IncrementWorker
         item = Item.where(tb_num_iid: notify_item['num_iid']).first
         item.destroy unless item.nil?
       end
+    rescue
+      ExceptionNotifier::Notifier.background_exception_notification($!).deliver
     end
   end
 end

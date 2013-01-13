@@ -11,5 +11,7 @@ class LostWorker
     result_hash['discard_info_list'].each do |discard_info|
       IncrementWorker::ItemDelete.perform_async(discard_info['nick'], begin_time, end_time)
     end
+  rescue
+    ExceptionNotifier::Notifier.background_exception_notification($!).deliver
   end
 end

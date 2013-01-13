@@ -13,6 +13,8 @@ class WorkerBase
       ExceptionNotifier::Notifier.background_exception_notification($!).deliver
     end
     post_process
+  rescue
+    ExceptionNotifier::Notifier.background_exception_notification($!).deliver
   end
 
   private
