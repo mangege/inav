@@ -62,5 +62,10 @@ module Inav
 
     # Version of your assets, change this if you want to expire all your assets
     config.assets.version = '1.0'
+
+    Inav::Application.config.middleware.use ExceptionNotifier,
+      :email_prefix => "[Inav] ",
+      :sender_address => %{"noreply" <noreply@mangege.com>},
+      :exception_recipients => %w{mr.mangege+notifier@gmail.com}
   end
 end

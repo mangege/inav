@@ -67,8 +67,4 @@ Inav::Application.configure do
   # with SQLite, MySQL, and PostgreSQL)
   # config.active_record.auto_explain_threshold_in_seconds = 0.5
 
-  Inav::Application.config.middleware.use ExceptionNotifier,
-    :email_prefix => "[Inav] ",
-    :sender_address => %{"noreply" <noreply@mangege.com>},
-    :exception_recipients => %w{mr.mangege+notifier@gmail.com}
 end

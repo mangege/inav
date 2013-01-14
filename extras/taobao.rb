@@ -1,14 +1,10 @@
 # -*- encoding : utf-8 -*-
-module Taobao
-  extend ::ActiveSupport::Autoload
-  TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
+Dir[File.dirname(__FILE__) + "/taobao/*.rb"].each do |file|
+  require file
+end
 
-  autoload(:OAuth2)
-  autoload(:HttpSign)
-  autoload(:Client)
-  autoload(:Collection)
-  autoload(:Api)
-  autoload(:Field)
+module Taobao
+  TIME_FORMAT = '%Y-%m-%d %H:%M:%S'
 
   class Error < StandardError ; end
   class ClientError < Error
