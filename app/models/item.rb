@@ -175,6 +175,12 @@ class Item < ActiveRecord::Base
 
     result_hash = Taobao::Api.taobao_item_update(params)
     taobao_db_update_new_desc(item, params[:desc], result_hash['item'])
+  rescue Taobao::ResponseError
+    if $!.sub_code == 'isv.item-is-delete:invalid-numIid-or-iid'
+      item.destroy
+    else
+      raise $!
+    end
   end
 
   def self.taobao_db_update_or_create(taobao_attrs, user)
