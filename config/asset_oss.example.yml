@@ -1,0 +1,14 @@
+default: &default
+  host: 'oss.aliyuncs.com'
+  access_key_id: 'MY_ACCESS_KEY'
+  secret_access_key: 'MY_ACCESS_SECRET'
+  bucket: "111-assets"
+
+development:
+  <<: *default
+
+test:
+  <<: *default
+
+production:
+  <<: *default

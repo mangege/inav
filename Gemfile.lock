@@ -29,7 +29,14 @@ GEM
       i18n (~> 0.6)
       multi_json (~> 1.0)
     addressable (2.3.2)
+    aliyun-oss (0.7.0.1349333720)
+      builder
+      mime-types
+      xml-simple
     arel (3.0.2)
+    asset_oss (0.3.1349530724)
+      aliyun-oss
+      mime-types
     builder (3.0.4)
     capistrano (2.13.5)
       highline
@@ -234,11 +241,13 @@ GEM
     webmock (1.8.11)
       addressable (>= 2.2.7)
       crack (>= 0.1.7)
+    xml-simple (1.1.2)
 
 PLATFORMS
   ruby
 
 DEPENDENCIES
+  asset_oss
   capistrano (~> 2.13.5)
   coffee-rails (~> 3.2.1)
   enumerize (~> 0.5.0)

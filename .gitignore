@@ -21,3 +21,4 @@
 /config/app.yml
 /config/database.yml
 /config/taobao.yml
+/config/asset_oss.yml

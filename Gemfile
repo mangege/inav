@@ -20,6 +20,7 @@ gem "settingslogic", "~> 2.0.9"
 gem "exception_notification", "~> 3.0.0"
 gem "capistrano", "~> 2.13.5"
 gem "httpclient", "~> 2.3.2"
+gem 'asset_oss'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
