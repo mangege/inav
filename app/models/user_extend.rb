@@ -9,7 +9,6 @@ class UserExtend < ActiveRecord::Base
     show_shop_title: 'false',
     show_item_title: 'false',
     show_parent_cat: 'false',
-    open_blank: 'false',
     logoff_taobao: 'false'
   }.freeze
 
