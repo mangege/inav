@@ -44,7 +44,7 @@ class UserSessionsController < ApplicationController
     user = current_user
     logout_user
     @msg = '退出登录成功'
-    if user
+    if user.user_extend.logoff_taobao?
       taobao_logoff_url = "https://oauth.taobao.com/logoff?client_id=#{TaobaoConfig.app_key}&redirect_uri=#{AppConfig.site_url}"
       redirect_to taobao_logoff_url
     else
