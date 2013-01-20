@@ -12,6 +12,6 @@ class LostWorker
       IncrementWorker::ItemDelete.perform_async(discard_info['nick'], begin_time, end_time)
     end
   rescue
-    ExceptionNotifier::Notifier.background_exception_notification($!).deliver
+    Util.log_exception($!)
   end
 end

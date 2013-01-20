@@ -81,7 +81,7 @@ module Taobao
     def process_unknown
       Rails.logger.warn "#@packet\n#{caller.join("\n")}"
       e = RuntimeError.new(@packet)
-      ExceptionNotifier::Notifier.background_exception_notification(e).deliver
+      Util.log_exception(e)
     end
 
     def self.execute

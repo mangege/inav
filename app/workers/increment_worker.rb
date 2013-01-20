@@ -16,7 +16,7 @@ module IncrementWorker
         item.destroy unless item.nil?
       end
     rescue
-      ExceptionNotifier::Notifier.background_exception_notification($!).deliver
+      Util.log_exception($!)
     end
   end
 end

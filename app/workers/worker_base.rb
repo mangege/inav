@@ -10,11 +10,11 @@ class WorkerBase
       @task_result = :success
     rescue
       @task_result = :fail
-      ExceptionNotifier::Notifier.background_exception_notification($!).deliver
+      Util.log_exception($!)
     end
     post_process
   rescue
-    ExceptionNotifier::Notifier.background_exception_notification($!).deliver
+    Util.log_exception($!)
   end
 
   private
