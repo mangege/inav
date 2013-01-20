@@ -40,4 +40,12 @@ module ApplicationHelper
       link_to(name, link)
     end
   end
+
+  def manage_link
+    if logged_in?
+      link_to('管理', root_path)
+    else
+      link_to('登录', new_user_session_path)
+    end
+  end
 end
