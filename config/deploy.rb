@@ -94,4 +94,4 @@ end
 end
 after "deploy:setup", :init_shared_path, :set_home_acl
 before "deploy:assets:precompile", :link_shared_files #after deploy:update_code
-#after "deploy:assets:precompile", :upload_assets_to_oss
+after "deploy:assets:precompile", :upload_assets_to_oss
