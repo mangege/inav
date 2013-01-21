@@ -2,7 +2,6 @@
 class MainController < ApplicationController
   layout 'management'
   skip_before_filter :login_required, only: [:about, :index]
-  caches_page :about
 
   def index
     if logged_in? && admin_index?
