@@ -50,7 +50,7 @@ end
 group :test do
   gem 'simplecov', :require => false
   gem "webmock", "~> 1.8.11"
-  gem "mocha", "~> 0.12.7", :require => false
+  gem "mocha", :require => false
 end
 
 group :development, :test do
